@@ -1,2 +1,6 @@
-console.log("hello world!");
-let name = "hasan";
+let firstname = "hasan",
+  lastname = "ali";
+
+const info = `Hello, 
+my name is ${firstname} ${lastname}`;
+console.log(info);
