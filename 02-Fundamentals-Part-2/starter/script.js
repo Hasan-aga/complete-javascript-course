@@ -33,6 +33,6 @@
 // objectName.key6();
 // console.log(objectName.key7);
 
-for (let index = 0; index < 10; index++) {
-  console.log(`I am on the ${index} index`);
-}
+// for (let index = 0; index < 10; index++) {
+//   console.log(`I am on the ${index} index`);
+// }
