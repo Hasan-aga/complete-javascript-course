@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="myStyle.css" />
 
     <title>DEMO: Guess My Number</title>
@@ -12,14 +19,13 @@
   <body>
     <header class="header centered">
       <button class="button button-again">Again!</button>
-      <p class="header-range">Between 1 and 20</p>
-    </header>
-    <section class="score centered">
+      <p class="header-range">(Between 1 and 20)</p>
       <h1 class="title">Guess My Number!</h1>
-      <div class="display centered">display input</div>
-    </section>
+      <div class="display centered">?</div>
+    </header>
+    <section class="score centered"></section>
     <section class="ui centered">
-      <div class="right-ui centered">
+      <div class="left-ui centered">
         <input class="user-input" />
         <button class="button button-check">Check!</button>
       </div>
