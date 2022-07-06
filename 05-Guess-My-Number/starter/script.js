@@ -4,12 +4,20 @@ const writeToUser = function (message) {
   document.querySelector(".result-hint").textContent = message;
 };
 let score = 20;
+let scores = [0];
 
 const logScore = (playerCondition) =>
   (document.querySelector(".result-score").textContent =
     playerCondition !== "lost" ? `Score: ${score--}` : `Score: 0`);
 
+function logHighestScore() {
+  document.querySelector(
+    ".result-highscore"
+  ).textContent = `Highscore: ${Math.max(...scores)}`;
+}
+
 logScore();
+logHighestScore();
 
 let correctNumber = Math.trunc(Math.random() * 20) + 1;
 
@@ -23,6 +31,10 @@ check.addEventListener("click", function () {
     if (!guess) {
       writeToUser("Pick a number!");
     } else if (guess === correctNumber) {
+      // implementing highscores
+      scores.push(score);
+      logHighestScore();
+      // change page style
       writeToUser("Correct!!!");
       document.querySelector("body").style.backgroundColor = "#80B918";
       document.querySelector(".display").style.width = "20rem";
@@ -40,7 +52,6 @@ check.addEventListener("click", function () {
 });
 
 const playAgain = document.querySelector(".button-again");
-
 playAgain.addEventListener("click", function () {
   correctNumber = Math.trunc(Math.random() * 20) + 1;
   score = 20;
