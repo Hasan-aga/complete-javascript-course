@@ -100,7 +100,7 @@ html {
   font-size: 4rem;
   width: 15rem;
   padding: 1rem 0;
-  background-color: #222;
+  background-color: inherit;
   color: #f7f7f7;
   border: solid 3px #f7f7f7;
 }
