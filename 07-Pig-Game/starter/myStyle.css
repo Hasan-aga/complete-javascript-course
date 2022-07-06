@@ -1,20 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
+  color: #333;
+  font-family: sans-serif;
+  position: relative;
   background-image: linear-gradient(
-    to top,
-    #ab3428,
-    #bd5a31,
-    #cc7d40,
-    #da9f55,
-    #e6c171,
-    #ebca77,
-    #efd27e,
-    #f4db85,
-    #f4cd74,
-    #f4be64,
-    #f4ae57,
-    #f49e4c
+    to right,
+    #001d3d,
+    #113865,
+    #245591,
+    #3674bf,
+    #4895ef
   );
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  font-size: 1.8rem;
 }
+
+.centered {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.button {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.803);
+  border-radius: 50rem;
+  font-size: 1.8rem;
+  padding: 1rem 2.4rem;
+}
+
+.arena {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.middle-position {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.new-game {
+  top: 10%;
+}
+
+.roll {
+  bottom: 30%;
+}
+
+.hold {
+  bottom: 20%;
+}
+
+.players-space {
+  height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player2,
+.player1 {
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  height: 100%;
+  background-color: red;
+  text-align: center;
+}
+
+.player1 {
+  background-color: #ffc300;
+}
+.player2 {
+  background-color: #ffd60a;
+}
+
+/* 
+---- 01 TYPOGRAPHY SYSTEM
+
+FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+
+Font weight:
+default: 400
+
+Line height:
+default: 1
+
+----02 colors:
+    primary: #e67e22
+    tints:
+    shades:
+    accents:
+    greys: #555
+
+----- 03 shadows
+
+----- 04 border-radius
+
+-----05 whitespace
+ SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+*/
