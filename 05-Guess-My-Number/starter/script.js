@@ -24,7 +24,8 @@ check.addEventListener("click", function () {
       writeToUser("Pick a number!");
     } else if (guess === correctNumber) {
       writeToUser("Correct!!!");
-      document.querySelector("body").style.backgroundColor = "#2A9D8F";
+      document.querySelector("body").style.backgroundColor = "#80B918";
+      document.querySelector(".display").style.width = "20rem";
     } else if (guess < correctNumber) {
       writeToUser("Too low");
     } else writeToUser("Too high");
