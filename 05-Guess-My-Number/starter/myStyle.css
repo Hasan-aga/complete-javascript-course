@@ -14,7 +14,7 @@ body {
 }
 
 .centered {
-  max-width: 80rem;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -50,6 +50,7 @@ html {
 
 .title {
   color: #f7f7f7;
+  width: 100%;
   font-size: 5rem;
   line-height: 1.5;
   text-align: center;

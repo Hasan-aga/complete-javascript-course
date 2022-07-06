@@ -20,6 +20,8 @@ logScore();
 
 const correctNumber = Math.trunc(Math.random() * 20) + 1;
 
+console.log(correctNumber);
+
 const check = document.querySelector(".button-check");
 const userInput = document.querySelector(".user-input");
 check.addEventListener("click", function () {
