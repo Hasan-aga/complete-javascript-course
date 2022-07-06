@@ -39,11 +39,15 @@ check.addEventListener("click", function () {
       document.querySelector("body").style.backgroundColor = "#80B918";
       document.querySelector(".display").style.width = "20rem";
       document.querySelector(".display").textContent = correctNumber;
+      //   start celebration animation
+      document.querySelector(".celebrate-animation").classList.add("celebrate");
     } else if (guess < correctNumber) {
       writeToUser("Too low");
-    } else writeToUser("Too high");
-
-    logScore();
+      logScore();
+    } else {
+      writeToUser("Too high");
+      logScore();
+    }
   } else {
     writeToUser("You LOST!");
     logScore("lost");
