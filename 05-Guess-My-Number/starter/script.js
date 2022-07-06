@@ -3,12 +3,13 @@
 const writeToUser = function (message) {
   document.querySelector(".result-hint").textContent = message;
 };
-let score = 20;
+const originalScore = 21;
+let score = originalScore;
 let scores = [0];
 
 const logScore = (playerCondition) =>
   (document.querySelector(".result-score").textContent =
-    playerCondition !== "lost" ? `Score: ${score--}` : `Score: 0`);
+    playerCondition !== "lost" ? `Score: ${--score}` : `Score: 0`);
 
 function logHighestScore() {
   document.querySelector(
@@ -68,7 +69,7 @@ document
 const playAgain = document.querySelector(".button-again");
 const resetGame = function () {
   correctNumber = Math.trunc(Math.random() * 20) + 1;
-  score = 20;
+  score = originalScore;
   logScore();
   writeToUser("Start guessing");
   document.querySelector("body").style.backgroundColor = "#222";
