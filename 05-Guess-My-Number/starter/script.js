@@ -1,12 +1,5 @@
 "use strict";
 
-// console.log(document.querySelector(".result-hint").textContent);
-// document.querySelector(".result-hint").textContent = "Start guessing...";
-
-// document.querySelector(".display").textContent = 1;
-
-// console.log(document.querySelector(".user-input").value);
-
 const writeToUser = function (message) {
   document.querySelector(".result-hint").textContent = message;
 };
@@ -31,6 +24,7 @@ check.addEventListener("click", function () {
       writeToUser("Pick a number!");
     } else if (guess === correctNumber) {
       writeToUser("Correct!!!");
+      document.querySelector("body").style.backgroundColor = "#2A9D8F";
     } else if (guess < correctNumber) {
       writeToUser("Too low");
     } else writeToUser("Too high");
@@ -39,5 +33,6 @@ check.addEventListener("click", function () {
   } else {
     writeToUser("You LOST!");
     logScore("lost");
+    document.querySelector("body").style.backgroundColor = "#E76F51";
   }
 });
