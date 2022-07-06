@@ -11,7 +11,7 @@ const logScore = (playerCondition) =>
 
 logScore();
 
-const correctNumber = Math.trunc(Math.random() * 20) + 1;
+let correctNumber = Math.trunc(Math.random() * 20) + 1;
 
 console.log(correctNumber);
 
@@ -26,6 +26,7 @@ check.addEventListener("click", function () {
       writeToUser("Correct!!!");
       document.querySelector("body").style.backgroundColor = "#80B918";
       document.querySelector(".display").style.width = "20rem";
+      document.querySelector(".display").textContent = correctNumber;
     } else if (guess < correctNumber) {
       writeToUser("Too low");
     } else writeToUser("Too high");
@@ -36,4 +37,17 @@ check.addEventListener("click", function () {
     logScore("lost");
     document.querySelector("body").style.backgroundColor = "#E76F51";
   }
+});
+
+const playAgain = document.querySelector(".button-again");
+
+playAgain.addEventListener("click", function () {
+  correctNumber = Math.trunc(Math.random() * 20) + 1;
+  score = 20;
+  logScore();
+  writeToUser("Start guessing");
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".display").style.width = "auto";
+  document.querySelector(".display").textContent = "?";
+  document.querySelector(".user-input").value = "";
 });
