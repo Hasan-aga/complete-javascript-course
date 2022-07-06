@@ -25,7 +25,9 @@ console.log(correctNumber);
 
 const check = document.querySelector(".button-check");
 const userInput = document.querySelector(".user-input");
-check.addEventListener("click", function () {
+
+const checkNumber = function () {
+  console.log();
   const guess = Number(userInput.value);
   if (score > 0) {
     if (!guess) {
@@ -53,10 +55,18 @@ check.addEventListener("click", function () {
     logScore("lost");
     document.querySelector("body").style.backgroundColor = "#E76F51";
   }
-});
+};
+
+check.addEventListener("click", checkNumber);
+document
+  .querySelector(".user-input")
+  .addEventListener("keypress", function (e) {
+    console.log(e.key);
+    if (e.key === "Enter") checkNumber();
+  });
 
 const playAgain = document.querySelector(".button-again");
-playAgain.addEventListener("click", function () {
+const resetGame = function () {
   correctNumber = Math.trunc(Math.random() * 20) + 1;
   score = 20;
   logScore();
@@ -65,4 +75,6 @@ playAgain.addEventListener("click", function () {
   document.querySelector(".display").style.width = "auto";
   document.querySelector(".display").textContent = "?";
   document.querySelector(".user-input").value = "";
-});
+  document.querySelector(".celebrate-animation").classList.remove("celebrate");
+};
+playAgain.addEventListener("click", resetGame);
