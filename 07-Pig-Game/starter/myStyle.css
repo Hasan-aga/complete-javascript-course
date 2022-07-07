@@ -1,16 +1,9 @@
 :root {
-  --dark-bg: linear-gradient(
-    to right,
-    #001d3d,
-    #113865,
-    #245591,
-    #3674bf,
-    #4895ef
-  );
+  --bg: linear-gradient(to right, #001d3d, #113865, #245591, #3674bf, #4895ef);
 
   --active-player-color: #ffc300;
   --standby-player-color: #ffd60a;
-  --dark-color: #003566;
+  --color: #003566;
   --normal-button-color: #f7f7f7;
 }
 
@@ -25,10 +18,10 @@ html {
 }
 
 body {
-  color: var(--dark-color);
+  color: var(--color);
   font-family: sans-serif;
   position: relative;
-  background-image: var(--light-bg, var(--dark-bg));
+  background-image: var(--light-bg, var(--bg));
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -134,8 +127,60 @@ body {
   text-transform: uppercase;
   padding: 2.4rem;
   width: min-content;
-  background-color: var(--dark-color);
+  background-color: var(--color);
   color: var(--normal-button-color);
+}
+
+/* *********************************************************** */
+/* theme switch */
+/* *********************************************************** */
+.theme-switch {
+  position: relative;
+  padding: 1rem;
+}
+.checkbox {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.label {
+  width: 50px;
+  height: 26px;
+  background-color: #111;
+  display: flex;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  transform: scale(1.5);
+}
+
+.ball {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+/*  target the elemenent after the label*/
+.checkbox:checked + .label .ball {
+  transform: translateX(24px);
+}
+
+.fa-moon {
+  color: pink;
+}
+
+.fa-sun {
+  color: yellow;
 }
 
 /* 
