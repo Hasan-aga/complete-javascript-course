@@ -22,6 +22,11 @@ function switchActivePlayer() {
   currentActivePlayerID = newActivePlayerID;
 }
 
+function resetCurrentScore() {
+  currentScore = 0;
+  displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
+}
+
 // reset
 const score0Element = document.querySelector('.player0 .score');
 const score1Element = document.querySelector('.player1 .score');
@@ -57,8 +62,7 @@ rollButton.addEventListener('click', function () {
     displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
   } else {
     // reset current score
-    currentScore = 0;
-    displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
+    resetCurrentScore();
     // switch player
     switchActivePlayer();
   }
@@ -73,10 +77,15 @@ holdButton.addEventListener('click', function () {
     totalScores[currentActivePlayerID]
   );
 
+  //   reset current score
+  resetCurrentScore();
+
   //   if total score > 100 player wins
   if (totalScores[currentActivePlayerID] >= 100) {
     console.log('win');
   } else {
+    // switch player
+    switchActivePlayer();
   }
 });
 
