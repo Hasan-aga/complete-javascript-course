@@ -7,6 +7,8 @@
   --shade: #aaaaaa;
   --normal-button-color: #f7f7f7;
   --glow: rgba(255, 242, 0, 0.81);
+  --winner-bg: #e63946;
+  --winner-color: #1d3557;
 }
 
 * {
@@ -30,6 +32,13 @@ body {
   font-size: 1.8rem;
 }
 
+.winner {
+  background-color: var(--winner-bg);
+  color: var(--winner-color);
+  font-weight: 700;
+  font-size: 110%;
+}
+
 ion-icon {
   width: 1.8rem;
   height: 1.8rem;
@@ -45,16 +54,21 @@ ion-icon {
 }
 
 .button {
-  border: none;
+  border: 1px solid var(--color);
   background-color: rgba(255, 255, 255, 0.803);
   border-radius: 50rem;
   font-size: 1.8rem;
   padding: 1rem 2.4rem;
+  transition: all ease-in-out 100ms;
 }
 
 .button:hover {
   cursor: pointer;
   background-color: #f7f7f7;
+}
+
+.button:active {
+  transform: translateY(10%) translate(-50%);
 }
 
 .arena {
