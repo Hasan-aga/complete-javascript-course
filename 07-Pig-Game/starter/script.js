@@ -14,8 +14,12 @@ const rollButton = document.querySelector('.roll');
 const holdButton = document.querySelector('.hold');
 const player0Element = document.getElementById('player0');
 const player1Element = document.getElementById('player1');
+let totalScores = {
+  player0: 0,
+  player1: 0,
+};
 let currentScore = 0;
-
+let currentActivePlayerID = document.querySelector('.active-player').id;
 score0Element.textContent = 0;
 score1Element.textContent = 0;
 diceElement.classList.add('hidden');
@@ -37,8 +41,8 @@ rollButton.addEventListener('click', function () {
   } else {
     // switch player
 
-    // id current active player
-    const currentActivePlayerID = document.querySelector('.active-player').id;
+    // id new active player
+    console.log(currentActivePlayerID);
     const newActivePlayerID =
       currentActivePlayerID === 'player0' ? 'player1' : 'player0';
 
@@ -47,10 +51,14 @@ rollButton.addEventListener('click', function () {
       .getElementById(currentActivePlayerID)
       .classList.remove('active-player');
     document.getElementById(newActivePlayerID).classList.add('active-player');
+
+    currentActivePlayerID = newActivePlayerID;
   }
 });
 
+// ///////////////////////////////////////////////////////
 // switch theme
+// ///////////////////////////////////////////////////////
 const lightColor = '#9b5de5';
 const darkColor = '#003566';
 
