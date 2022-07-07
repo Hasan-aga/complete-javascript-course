@@ -1,8 +1,8 @@
 :root {
   --bg: linear-gradient(to right, #001d3d, #113865, #245591, #3674bf, #4895ef);
 
-  --active-player-color: #ffc300;
-  --standby-player-color: #ffd60a;
+  --standby-player-color: #ffc300;
+  --active-player-color: #ffd60a;
   --color: #003566;
   --normal-button-color: #f7f7f7;
   --glow: rgba(255, 242, 0, 0.81);
@@ -81,13 +81,13 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
+  background-color: var(--standby-player-color);
   -webkit-box-shadow: 0px 0px 218px 27px var(--glow);
   -moz-box-shadow: 0px 0px 218px 27px var(--glow);
   box-shadow: 0px 0px 218px 27px var(--glow);
 }
 
-.player2,
-.player1 {
+.player {
   padding: 6.4rem;
   display: flex;
   flex-direction: column;
@@ -98,13 +98,10 @@ body {
   text-align: center;
 }
 
-.player1 {
-  border-radius: 12px 0 0 12px;
+.active-player {
   background-color: var(--active-player-color);
-}
-.player2 {
-  border-radius: 0 12px 12px 0;
-  background-color: var(--standby-player-color);
+  outline: 1px solid #f7f7f7a4;
+  border-radius: 12px 0 0 12px;
 }
 
 .title {
