@@ -78,6 +78,61 @@ function resetGame() {
   score1Element.textContent = 0;
 }
 
+function winnerExists() {
+  const isWinner = document
+    .getElementById(currentActivePlayerID)
+    .classList.contains('winner');
+
+  return isWinner;
+}
+
+function handleRoll() {
+  // check if game is already won
+  if (!winnerExists()) {
+    // create a random roll
+    const roll = Math.trunc(Math.random() * 6) + 1;
+
+    // display roll
+    diceElement.classList.remove('hidden');
+    diceElement.src = `dice-${roll}.png`;
+
+    // if roll = 1, switch player else add to score
+    if (roll !== 1) {
+      // add roll to total score
+      currentScore += roll;
+      displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
+    } else {
+      // reset current score
+      resetCurrentScore();
+      // switch player
+      switchActivePlayer();
+    }
+  }
+}
+
+const handleHold = function () {
+  // check if game is already won
+  if (!winnerExists()) {
+    // add current score to total
+    totalScores[currentActivePlayerID] += currentScore;
+    displayTotalScoreOfPlayer(
+      currentActivePlayerID,
+      totalScores[currentActivePlayerID]
+    );
+
+    //   reset current score
+    resetCurrentScore();
+
+    //   if total score > 100 player wins
+    if (totalScores[currentActivePlayerID] >= 10) {
+      document.getElementById(currentActivePlayerID).classList.add('winner');
+    } else {
+      // switch player
+      switchActivePlayer();
+    }
+  }
+};
+
 // reset
 const score0Element = document.querySelector('.player0 .score');
 const score1Element = document.querySelector('.player1 .score');
@@ -98,47 +153,10 @@ score1Element.textContent = 0;
 diceElement.classList.add('hidden');
 
 // roll dice
-rollButton.addEventListener('click', function () {
-  // create a random roll
-  const roll = Math.trunc(Math.random() * 6) + 1;
-
-  // display roll
-  diceElement.classList.remove('hidden');
-  diceElement.src = `dice-${roll}.png`;
-
-  // if roll = 1, switch player else add to score
-  if (roll !== 1) {
-    // add roll to total score
-    currentScore += roll;
-    displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
-  } else {
-    // reset current score
-    resetCurrentScore();
-    // switch player
-    switchActivePlayer();
-  }
-});
+rollButton.addEventListener('click', handleRoll);
 
 // hold
-holdButton.addEventListener('click', function () {
-  // add current score to total
-  totalScores[currentActivePlayerID] += currentScore;
-  displayTotalScoreOfPlayer(
-    currentActivePlayerID,
-    totalScores[currentActivePlayerID]
-  );
-
-  //   reset current score
-  resetCurrentScore();
-
-  //   if total score > 100 player wins
-  if (totalScores[currentActivePlayerID] >= 10) {
-    document.getElementById(currentActivePlayerID).classList.add('winner');
-  } else {
-    // switch player
-    switchActivePlayer();
-  }
-});
+holdButton.addEventListener('click', handleHold);
 
 // reset game
 newGameButton.addEventListener('click', function () {
