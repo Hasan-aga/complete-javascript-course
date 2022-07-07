@@ -29,6 +29,11 @@ body {
   font-size: 1.8rem;
 }
 
+ion-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
 .centered {
   width: 60%;
   margin: 0 auto;
@@ -179,11 +184,11 @@ body {
   transform: translateX(24px);
 }
 
-.fa-moon {
+.moon-icon {
   color: pink;
 }
 
-.fa-sun {
+.sun-icon {
   color: yellow;
 }
 

@@ -19,7 +19,7 @@
         <button class="button hold middle-position">hold</button>
       </div>
       <div class="players-space">
-        <div class="player player0 active-player">
+        <div class="player player0 active-player" id="player0">
           <h2 class="title">player 1</h2>
           <p class="score">0</p>
           <button class="current">
@@ -27,7 +27,7 @@
             <span class="current-score">0</span>
           </button>
         </div>
-        <div class="player player1">
+        <div class="player player1" id="player1">
           <h2 class="title">player 2</h2>
           <p class="score">0</p>
           <div class="current">
@@ -41,12 +41,25 @@
       <div>
         <input type="checkbox" class="checkbox" id="checkbox" />
         <label for="checkbox" class="label">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon">
+            <ion-icon class="moon-icon" name="moon-outline"></ion-icon>
+          </i>
+          <i class="fas fa-sun">
+            <ion-icon class="sun-icon" name="sunny-outline"></ion-icon>
+          </i>
           <div class="ball"></div>
         </label>
       </div>
     </section>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
 
     <script src="script.js" defer></script>
   </body>
