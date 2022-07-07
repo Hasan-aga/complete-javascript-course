@@ -12,6 +12,8 @@ const diceElement = document.querySelector('.dice');
 const newGameButton = document.querySelector('.new-game');
 const rollButton = document.querySelector('.roll');
 const holdButton = document.querySelector('.hold');
+const player0Element = document.getElementById('player0');
+const player1Element = document.getElementById('player1');
 let currentScore = 0;
 
 score0Element.textContent = 0;
@@ -33,7 +35,18 @@ rollButton.addEventListener('click', function () {
     currentScore += roll;
     displayCurrentScoreOfPlayer('player0', currentScore);
   } else {
-    // TODO: switch user
+    // switch player
+
+    // id current active player
+    const currentActivePlayerID = document.querySelector('.active-player').id;
+    const newActivePlayerID =
+      currentActivePlayerID === 'player0' ? 'player1' : 'player0';
+
+    // add active-player class to other player
+    document
+      .getElementById(currentActivePlayerID)
+      .classList.remove('active-player');
+    document.getElementById(newActivePlayerID).classList.add('active-player');
   }
 });
 

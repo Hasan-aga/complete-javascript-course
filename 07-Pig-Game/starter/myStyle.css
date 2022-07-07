@@ -110,12 +110,11 @@ ion-icon {
   width: 50%;
   height: 100%;
   text-align: center;
+  border-radius: inherit;
 }
 
 .active-player {
   background-color: var(--active-player-color);
-  outline: 1px solid #f7f7f7a4;
-  border-radius: 12px 0 0 12px;
 }
 
 .title {
