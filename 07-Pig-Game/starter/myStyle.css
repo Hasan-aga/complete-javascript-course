@@ -111,6 +111,7 @@ ion-icon {
   height: 100%;
   text-align: center;
   border-radius: inherit;
+  transition: all 1s;
 }
 
 .active-player {
