@@ -33,10 +33,15 @@ body {
 }
 
 .winner {
-  background-color: var(--winner-bg);
-  color: var(--winner-color);
+  background-color: var(--winner-bg) !important;
+  color: var(--winner-color) !important;
   font-weight: 700;
-  font-size: 110%;
+  font-size: 120%;
+}
+.winner::after {
+  content: 'WINNER';
+  font-size: 4rem;
+  color: var(--active-player-color);
 }
 
 ion-icon {
