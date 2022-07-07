@@ -5,6 +5,10 @@ function displayCurrentScoreOfPlayer(player, score) {
   document.querySelector(`.${player} .current-score`).textContent = score;
 }
 
+function displayTotalScoreOfPlayer(player, score) {
+  document.querySelector(`.${player} .score`).textContent = score;
+}
+
 // reset
 const score0Element = document.querySelector('.player0 .score');
 const score1Element = document.querySelector('.player1 .score');
@@ -37,12 +41,15 @@ rollButton.addEventListener('click', function () {
   if (roll !== 1) {
     // add roll to total score
     currentScore += roll;
-    displayCurrentScoreOfPlayer('player0', currentScore);
+    displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
   } else {
     // switch player
 
+    // reset current score
+    currentScore = 0;
+    displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
+
     // id new active player
-    console.log(currentActivePlayerID);
     const newActivePlayerID =
       currentActivePlayerID === 'player0' ? 'player1' : 'player0';
 
