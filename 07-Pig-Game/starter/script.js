@@ -9,6 +9,19 @@ function displayTotalScoreOfPlayer(player, score) {
   document.querySelector(`.${player} .score`).textContent = score;
 }
 
+function switchActivePlayer() {
+  const newActivePlayerID =
+    currentActivePlayerID === 'player0' ? 'player1' : 'player0';
+
+  // add active-player class to other player
+  document
+    .getElementById(currentActivePlayerID)
+    .classList.remove('active-player');
+  document.getElementById(newActivePlayerID).classList.add('active-player');
+
+  currentActivePlayerID = newActivePlayerID;
+}
+
 // reset
 const score0Element = document.querySelector('.player0 .score');
 const score1Element = document.querySelector('.player1 .score');
@@ -43,23 +56,27 @@ rollButton.addEventListener('click', function () {
     currentScore += roll;
     displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
   } else {
-    // switch player
-
     // reset current score
     currentScore = 0;
     displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
+    // switch player
+    switchActivePlayer();
+  }
+});
 
-    // id new active player
-    const newActivePlayerID =
-      currentActivePlayerID === 'player0' ? 'player1' : 'player0';
+// hold
+holdButton.addEventListener('click', function () {
+  // add current score to total
+  totalScores[currentActivePlayerID] += currentScore;
+  displayTotalScoreOfPlayer(
+    currentActivePlayerID,
+    totalScores[currentActivePlayerID]
+  );
 
-    // add active-player class to other player
-    document
-      .getElementById(currentActivePlayerID)
-      .classList.remove('active-player');
-    document.getElementById(newActivePlayerID).classList.add('active-player');
-
-    currentActivePlayerID = newActivePlayerID;
+  //   if total score > 100 player wins
+  if (totalScores[currentActivePlayerID] >= 100) {
+    console.log('win');
+  } else {
   }
 });
 
