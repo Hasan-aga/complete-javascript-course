@@ -1,3 +1,19 @@
+:root {
+  --dark-bg: linear-gradient(
+    to right,
+    #001d3d,
+    #113865,
+    #245591,
+    #3674bf,
+    #4895ef
+  );
+
+  --active-player-color: #ffc300;
+  --standby-player-color: #ffd60a;
+  --dark-color: #003566;
+  --normal-button-color: #f7f7f7;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,17 +25,10 @@ html {
 }
 
 body {
-  color: #003566;
+  color: var(--dark-color);
   font-family: sans-serif;
   position: relative;
-  background-image: linear-gradient(
-    to right,
-    #001d3d,
-    #113865,
-    #245591,
-    #3674bf,
-    #4895ef
-  );
+  background-image: var(--light-bg, var(--dark-bg));
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -97,11 +106,11 @@ body {
 
 .player1 {
   border-radius: 12px 0 0 12px;
-  background-color: #ffc300;
+  background-color: var(--active-player-color);
 }
 .player2 {
   border-radius: 0 12px 12px 0;
-  background-color: #ffd60a;
+  background-color: var(--standby-player-color);
 }
 
 .title {
@@ -125,8 +134,8 @@ body {
   text-transform: uppercase;
   padding: 2.4rem;
   width: min-content;
-  background-color: #003566;
-  color: #f7f7f7;
+  background-color: var(--dark-color);
+  color: var(--normal-button-color);
 }
 
 /* 
@@ -143,7 +152,7 @@ Line height:
 default: 1
 
 ----02 colors:
-    primary: #e67e22
+    primary: 
     tints:
     shades:
     accents:
