@@ -5,6 +5,7 @@
   --standby-player-color: #ffd60a;
   --color: #003566;
   --normal-button-color: #f7f7f7;
+  --glow: rgba(255, 242, 0, 0.81);
 }
 
 * {
@@ -80,9 +81,9 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  -webkit-box-shadow: 0px 0px 218px 27px rgba(255, 242, 0, 0.81);
-  -moz-box-shadow: 0px 0px 218px 27px rgba(255, 242, 0, 0.81);
-  box-shadow: 0px 0px 218px 27px rgba(255, 242, 0, 0.81);
+  -webkit-box-shadow: 0px 0px 218px 27px var(--glow);
+  -moz-box-shadow: 0px 0px 218px 27px var(--glow);
+  box-shadow: 0px 0px 218px 27px var(--glow);
 }
 
 .player2,
