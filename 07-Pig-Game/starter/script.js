@@ -1,5 +1,33 @@
 'use strict';
 
+// reset
+
+const score0Element = document.querySelector('.player0 .score');
+const score1Element = document.querySelector('.player1 .score');
+const diceElement = document.querySelector('.dice');
+const newGameButton = document.querySelector('.new-game');
+const rollButton = document.querySelector('.roll');
+const holdButton = document.querySelector('.hold');
+
+score0Element.textContent = 0;
+score1Element.textContent = 0;
+diceElement.classList.add('hidden');
+
+// roll dice
+rollButton.addEventListener('click', function () {
+  // create a random roll
+  const roll = Math.trunc(Math.random() * 6) + 1;
+
+  // display roll
+  diceElement.classList.remove('hidden');
+  diceElement.src = `dice-${roll}.png`;
+
+  // if roll = 1, switch player
+  if (roll === 1) {
+    // TODO: switch user
+  }
+});
+
 // switch theme
 const lightColor = '#9b5de5';
 const darkColor = '#003566';
