@@ -1,9 +1,10 @@
 :root {
   --bg: linear-gradient(to right, #001d3d, #113865, #245591, #3674bf, #4895ef);
 
-  --standby-player-color: #ffc300;
+  --standby-player-color: #fff3cc;
   --active-player-color: #ffd60a;
   --color: #003566;
+  --shade: #aaaaaa;
   --normal-button-color: #f7f7f7;
   --glow: rgba(255, 242, 0, 0.81);
 }
@@ -121,10 +122,12 @@ ion-icon {
 .title {
   font-size: 4rem;
   text-transform: capitalize;
+  color: var(--shade);
 }
 
 .score {
   font-size: 6.4rem;
+  color: var(--shade);
 }
 
 .current {
@@ -139,10 +142,19 @@ ion-icon {
   text-transform: uppercase;
   padding: 2.4rem;
   width: min-content;
-  background-color: var(--color);
+  background-color: var(--shade);
   color: var(--normal-button-color);
 }
 
+.active-player .title,
+.active-player .score {
+  color: var(--color);
+}
+
+.active-player .current {
+  color: var(--normal-button-color);
+  background-color: var(--color);
+}
 /* *********************************************************** */
 /* theme switch */
 /* *********************************************************** */

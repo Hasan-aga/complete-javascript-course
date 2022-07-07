@@ -27,6 +27,13 @@ function resetCurrentScore() {
   displayCurrentScoreOfPlayer(currentActivePlayerID, currentScore);
 }
 
+function resetGame() {
+  displayCurrentScoreOfPlayer('player1', 0);
+  displayCurrentScoreOfPlayer('player0', 0);
+  score0Element.textContent = 0;
+  score1Element.textContent = 0;
+}
+
 // reset
 const score0Element = document.querySelector('.player0 .score');
 const score1Element = document.querySelector('.player1 .score');
@@ -89,6 +96,11 @@ holdButton.addEventListener('click', function () {
   }
 });
 
+// reset game
+newGameButton.addEventListener('click', function () {
+  resetGame();
+});
+
 // ///////////////////////////////////////////////////////
 // switch theme
 // ///////////////////////////////////////////////////////
@@ -98,8 +110,8 @@ const darkColor = '#003566';
 const lightActivePlayerColor = '#ff99c8';
 const darkActivePlayerColor = '#ffc300';
 
-const lightStandbyPlayerColor = '#e4c1f9';
-const darkStandbyPlayerColor = '#ffd60a';
+const lightStandbyPlayerColor = '#ffd6e9';
+const darkStandbyPlayerColor = '#fff3cc';
 
 const lightGlow = 'rgba(252, 246, 189, 0.747)';
 const darkGlow = 'rgba(255, 242, 0, 0.81)';
