@@ -1,13 +1,18 @@
 'use strict';
 
-// reset
+// helper functions
+function displayCurrentScoreOfPlayer(player, score) {
+  document.querySelector(`.${player} .current-score`).textContent = score;
+}
 
+// reset
 const score0Element = document.querySelector('.player0 .score');
 const score1Element = document.querySelector('.player1 .score');
 const diceElement = document.querySelector('.dice');
 const newGameButton = document.querySelector('.new-game');
 const rollButton = document.querySelector('.roll');
 const holdButton = document.querySelector('.hold');
+let currentScore = 0;
 
 score0Element.textContent = 0;
 score1Element.textContent = 0;
@@ -22,8 +27,12 @@ rollButton.addEventListener('click', function () {
   diceElement.classList.remove('hidden');
   diceElement.src = `dice-${roll}.png`;
 
-  // if roll = 1, switch player
-  if (roll === 1) {
+  // if roll = 1, switch player else add to score
+  if (roll !== 1) {
+    // add roll to total score
+    currentScore += roll;
+    displayCurrentScoreOfPlayer('player0', currentScore);
+  } else {
     // TODO: switch user
   }
 });
