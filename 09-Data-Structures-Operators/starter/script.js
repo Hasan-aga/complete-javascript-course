@@ -34,14 +34,44 @@ const restaurant = {
 
 // console.log(a, b, c);
 
-let { name: restaurantName } = restaurant;
+// let { name: restaurantName } = restaurant;
 
-// let openingHours;
-// ({ openingHours } = restaurant);
+// // let openingHours;
+// // ({ openingHours } = restaurant);
 
-let {
-  openingHours: {
-    fri: { open: fridayOpeningHour },
-  },
-} = restaurant;
-console.log(fridayOpeningHour);
+// let {
+//   openingHours: {
+//     fri: { open: fridayOpeningHour },
+//   },
+// } = restaurant;
+// console.log(fridayOpeningHour);
+
+// function passArgumentsUsingSpreadOperator(first, second, third) {
+//   console.log(`hello ${first}, hi ${second}, hi ${third}`);
+// }
+
+// let names = ['hasan', 'john', 'ali'];
+// passArgumentsUsingSpreadOperator(...names);
+
+// let firstArray = [1, 2];
+// let secondArray = [...firstArray, 3, 4];
+
+// let firstArrayCopy = [...firstArray];
+// let mergeFirstAndScondArrays = [...firstArray, ...secondArray];
+// console.log(secondArray);
+
+// let restaurantCopy = { ...restaurant };
+
+// const numbers = [1, 2, 3, 4, 5, 6];
+// const [first, second, ...otherNumbers] = numbers;
+
+// function add(...params) {
+//   let sum = 0;
+//   for (let index = 0; index < params.length; index++) {
+//     sum += params[index];
+//   }
+//   return sum;
+// }
+
+// console.log(add(1, 2));
+// console.log(add(1, 2, 3, 4, 5, 6));
