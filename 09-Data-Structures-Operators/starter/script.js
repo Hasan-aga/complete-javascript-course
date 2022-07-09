@@ -28,8 +28,20 @@ const restaurant = {
   },
 };
 
-let [a, b, c] = [1, 2, 3];
+// let [a, b, c] = [1, 2, 3];
 
-[a, b] = [b, a];
+// [a, b] = [b, a];
 
-console.log(a, b, c);
+// console.log(a, b, c);
+
+let { name: restaurantName } = restaurant;
+
+// let openingHours;
+// ({ openingHours } = restaurant);
+
+let {
+  openingHours: {
+    fri: { open: fridayOpeningHour },
+  },
+} = restaurant;
+console.log(fridayOpeningHour);
