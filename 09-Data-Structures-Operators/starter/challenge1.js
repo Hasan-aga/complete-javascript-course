@@ -41,27 +41,27 @@ const game = {
 // ///////////////////////////////////
 // solution
 // ///////////////////////////////////
-let players1 = game.players[0];
-let players2 = game.players[1];
+// let players1 = game.players[0];
+// let players2 = game.players[1];
 
-const [gk, ...fieldPlayers] = players1;
-const allPlayers = [...players1, ...players2];
+// const [gk, ...fieldPlayers] = players1;
+// const allPlayers = [...players1, ...players2];
 
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
 
-const {
-  odds: { team1, x: draw, team2 },
-} = game;
+// const {
+//   odds: { team1, x: draw, team2 },
+// } = game;
 
-function printGoals(...players) {
-  for (const player of players) {
-    console.log(`${player} had scored`);
-  }
-}
+// function printGoals(...players) {
+//   for (const player of players) {
+//     console.log(`${player} had scored`);
+//   }
+// }
 
-printGoals(...game.scored);
+// printGoals(...game.scored);
 
-(game.odds.team1 > game.odds.team2 &&
-  console.log(`${game.team1} is more likely to win`)) ||
-  (game.odds.team1 < game.odds.team2 &&
-    console.log(`${game.team2} is more likely to win`));
+// (game.odds.team1 > game.odds.team2 &&
+//   console.log(`${game.team1} is more likely to win`)) ||
+//   (game.odds.team1 < game.odds.team2 &&
+//     console.log(`${game.team2} is more likely to win`));
