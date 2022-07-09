@@ -54,9 +54,8 @@ const {
 } = game;
 
 function printGoals(...players) {
-  for (let i = 0; i < players.length; i++) {
-    const player = players[i];
-    console.log(`${player} scored`);
+  for (const player of players) {
+    console.log(`${player} had scored`);
   }
 }
 
