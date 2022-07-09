@@ -75,3 +75,9 @@ const restaurant = {
 
 // console.log(add(1, 2));
 // console.log(add(1, 2, 3, 4, 5, 6));
+
+// default values
+// restaurant.numGuests = 0;
+// const guests = restaurant.numGuests || 10;
+// const guests2 = restaurant.numGuests ? restaurant.numGuests : 10;
+// const correctGuests = restaurant.numGuests ?? 10;
