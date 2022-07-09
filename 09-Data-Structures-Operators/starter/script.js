@@ -27,3 +27,9 @@ const restaurant = {
     },
   },
 };
+
+let [a, b, c] = [1, 2, 3];
+
+[a, b] = [b, a];
+
+console.log(a, b, c);
