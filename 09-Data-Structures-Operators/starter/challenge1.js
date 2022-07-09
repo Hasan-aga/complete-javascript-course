@@ -65,3 +65,31 @@ const game = {
 //   console.log(`${game.team1} is more likely to win`)) ||
 //   (game.odds.team1 < game.odds.team2 &&
 //     console.log(`${game.team2} is more likely to win`));
+
+// second challenge
+
+const scored = game.scored;
+
+for (const [goal, player] of game.scored.entries())
+  console.log(`Goal ${goal + 1}: ${player}`);
+
+const { odds } = game;
+
+let sum = 0;
+let count = 0;
+for (odd of Object.values(odds)) {
+  sum += odd;
+  count++;
+}
+
+const avg = sum / count;
+console.log(avg);
+
+// Odd of victory Bayern Munich: 1.33
+// Odd of draw: 3.25
+// Odd of victory Borrussia Dortmund: 6.5
+
+for ([team, odd] of Object.entries(odds)) {
+  const term = game[team] ? 'victory' : 'draw';
+  console.log(`Odd of ${game[team]} ${term} is ${odd}`);
+}
