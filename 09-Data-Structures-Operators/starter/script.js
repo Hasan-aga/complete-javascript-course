@@ -143,3 +143,28 @@ const restaurant = {
 // const ans = Number(prompt());
 
 // console.log(`${question.get(ans === question.get('correct'))}`);
+
+// working with strings
+const airline = 'Iraq airlines';
+const plane = 'B52';
+
+// console.log(plane[0]);
+// console.log(airline.length);
+
+// console.log(airline.indexOf('airline'));
+
+// console.log(airline.slice(0, airline.indexOf(' ')));
+
+// console.log(airline.slice(-1));
+
+// console.log(' hello world '.trim().replace(/o/g, 'O'));
+
+// console.log(airline.startsWith('Iraq'));
+// console.log(airline.includes('Iraq'));
+// console.log(airline.endsWith('Iraq'));
+
+// const [country, company] = 'Iraq airlines'.split(' ');
+// const logo = ['🛩', country, company].join(' ');
+// console.log(logo);
+
+console.log('hello world'.padStart(20, '+').repeat(4));

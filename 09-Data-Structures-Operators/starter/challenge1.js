@@ -95,36 +95,64 @@ const game = {
 // }
 
 // challenge 3
-const gameEvents = new Map([
-  [17, '⚽ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽ GOAL'],
-  [80, '⚽ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+// const gameEvents = new Map([
+//   [17, '⚽ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽ GOAL'],
+//   [80, '⚽ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
 
-// 1
-const uniqueEvents = new Set([...gameEvents.values()]);
-console.log(uniqueEvents);
+// // 1
+// const uniqueEvents = new Set([...gameEvents.values()]);
+// console.log(uniqueEvents);
 
-// 2
-gameEvents.delete(64);
+// // 2
+// gameEvents.delete(64);
 
-// console.log(gameEvents);
+// // console.log(gameEvents);
 
-// 3
-const avgEventInterval = 90 / gameEvents.size;
-console.log(`An event happened, on average, every ${avgEventInterval} minutes`);
+// // 3
+// const avgEventInterval = 90 / gameEvents.size;
+// console.log(`An event happened, on average, every ${avgEventInterval} minutes`);
 
-// 4
-for (const [time, event] of gameEvents) {
-  console.log(
-    `${time <= 45 ? '[FIRST HALF]' : '[SECOND HALF]'} ${time}: ${event}`
-  );
+// // 4
+// for (const [time, event] of gameEvents) {
+//   console.log(
+//     `${time <= 45 ? '[FIRST HALF]' : '[SECOND HALF]'} ${time}: ${event}`
+//   );
+// }
+
+//challenge 4
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+const textArea = document.querySelector('textArea');
+const button = document.querySelector('button');
+
+function turnToCamelCase(params) {
+  const paramsArray = params.split('\n');
+  for (const [index, element] of paramsArray.entries()) {
+    const underscoreIndex = element.indexOf('_') + 1;
+    let fixed =
+      element.trim().slice(0, underscoreIndex).replace('_', '') +
+      element[underscoreIndex].toUpperCase() +
+      element.slice(underscoreIndex + 1);
+
+    fixed = fixed.padEnd(18, ' ');
+
+    console.log(`${fixed} ${'✅'.repeat(index + 1)}`);
+  }
 }
+
+button.addEventListener('click', function () {
+  const inputData = textArea.value;
+
+  turnToCamelCase(inputData);
+});
