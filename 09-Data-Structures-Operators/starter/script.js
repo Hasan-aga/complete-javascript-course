@@ -92,3 +92,10 @@ const restaurant = {
 //   const open = restaurant.openingHours[day]?.open ?? 'never';
 //   console.log(`on ${day} we are open at ${open}`);
 // }
+
+// set
+
+// const uniqueOrders = new Set(['cheese', 'rice', 'rice']);
+// console.log(uniqueOrders.has('rice'));
+// const uniqueArray = [...uniqueOrders];
+// console.log(uniqueArray);
