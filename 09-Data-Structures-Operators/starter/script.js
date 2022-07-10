@@ -99,3 +99,47 @@ const restaurant = {
 // console.log(uniqueOrders.has('rice'));
 // const uniqueArray = [...uniqueOrders];
 // console.log(uniqueArray);
+
+// maps
+
+// const restMap = new Map();
+
+// restMap.set('name', 'abu khalid');
+
+// console.log(restMap.set(1, 'dergezliyye'));
+
+// restMap
+//   .set('open', 10)
+//   .set('closed', 0)
+//   .set(true, 'we are open')
+//   .set(false, 'sorry, we are closed');
+
+// console.log(restMap.get('name'));
+
+// console.log(restMap.has('name'));
+// console.log(restMap.delete('name'));
+// console.log(restMap.has('name'));
+
+// const question = new Map([
+//   ['question', 'what is the best programming language?'],
+//   [1, 'Java'],
+//   [2, 'JavaScript'],
+//   ['correct', 2],
+//   [true, 'correct!'],
+//   [false, 'you are mistaken!'],
+// ]);
+// let { openingHours } = restaurant;
+
+// console.log(openingHours);
+// console.log(Object.entries(openingHours));
+
+// const openHourMap = new Map(Object.entries(openingHours));
+
+// console.log(`${question.get('question')}`);
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') console.log(`${key}: ${value}`);
+// }
+
+// const ans = Number(prompt());
+
+// console.log(`${question.get(ans === question.get('correct'))}`);
