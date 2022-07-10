@@ -86,9 +86,9 @@ const restaurant = {
 // restaurant.openingHours.mon.open; // error since mon is underfined and undefined.open throws error
 // restaurant.openingHours.mon?.open; // not error, it throws undefined when mon is read
 
-const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-for (const day of days) {
-  const open = restaurant.openingHours[day]?.open ?? 'never';
-  console.log(`on ${day} we are open at ${open}`);
-}
+// for (const day of days) {
+//   const open = restaurant.openingHours[day]?.open ?? 'never';
+//   console.log(`on ${day} we are open at ${open}`);
+// }
