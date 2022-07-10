@@ -68,28 +68,63 @@ const game = {
 
 // second challenge
 
-const scored = game.scored;
+// const scored = game.scored;
 
-for (const [goal, player] of game.scored.entries())
-  console.log(`Goal ${goal + 1}: ${player}`);
+// for (const [goal, player] of game.scored.entries())
+//   console.log(`Goal ${goal + 1}: ${player}`);
 
-const { odds } = game;
+// const { odds } = game;
 
-let sum = 0;
-let count = 0;
-for (odd of Object.values(odds)) {
-  sum += odd;
-  count++;
-}
+// let sum = 0;
+// let count = 0;
+// for (odd of Object.values(odds)) {
+//   sum += odd;
+//   count++;
+// }
 
-const avg = sum / count;
-console.log(avg);
+// const avg = sum / count;
+// console.log(avg);
 
-// Odd of victory Bayern Munich: 1.33
-// Odd of draw: 3.25
-// Odd of victory Borrussia Dortmund: 6.5
+// // Odd of victory Bayern Munich: 1.33
+// // Odd of draw: 3.25
+// // Odd of victory Borrussia Dortmund: 6.5
 
-for ([team, odd] of Object.entries(odds)) {
-  const term = game[team] ? 'victory' : 'draw';
-  console.log(`Odd of ${game[team]} ${term} is ${odd}`);
+// for ([team, odd] of Object.entries(odds)) {
+//   const term = game[team] ? 'victory' : 'draw';
+//   console.log(`Odd of ${game[team]} ${term} is ${odd}`);
+// }
+
+// challenge 3
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+// 1
+const uniqueEvents = new Set([...gameEvents.values()]);
+console.log(uniqueEvents);
+
+// 2
+gameEvents.delete(64);
+
+// console.log(gameEvents);
+
+// 3
+const avgEventInterval = 90 / gameEvents.size;
+console.log(`An event happened, on average, every ${avgEventInterval} minutes`);
+
+// 4
+for (const [time, event] of gameEvents) {
+  console.log(
+    `${time <= 45 ? '[FIRST HALF]' : '[SECOND HALF]'} ${time}: ${event}`
+  );
 }
