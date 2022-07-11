@@ -142,3 +142,20 @@
 // (function () {
 //   console.log('this only runs once');
 // })();
+
+// // closure
+// const secureBooking = function () {
+//   let passengerCount = 0;
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers exist.`);
+//   };
+// };
+
+// const booker = secureBooking();
+
+// let passengerCount = 100;
+// booker();
+// booker();
+
+// console.dir(booker);
