@@ -45,3 +45,21 @@
 // checkIn(flight, passenger);
 // console.log(flight);
 // console.log({ ...passenger });
+
+// function oneWord(str) {
+//   return str.toLowerCase().replaceAll(' ', '');
+// }
+
+// const capitalizeFirstWord = function (str) {
+//   const [first, ...rest] = str.split(' ');
+//   return [first.toUpperCase(), ...rest].join(' ');
+// };
+
+// function transform(str, func) {
+//   console.log(`Original: ${str}`);
+//   console.log(`New: ${func(str)}`);
+//   console.log(`Transformed by: ${func.name}`);
+// }
+
+// transform('js is good!', capitalizeFirstWord);
+// transform('js is good!', oneWord);
