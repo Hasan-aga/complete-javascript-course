@@ -115,3 +115,24 @@ const bookEW = book.bind(eurowings);
 bookEW('jack sparrow', 19);
 
 // with event listner
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  this.planes++;
+  console.log(`${this.airline} has ${this.planes} plane`);
+};
+
+// will not work since 'this' points to DOM element
+// document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane);
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+//   partial application of bind
+function greet(greeting, fullname) {
+  console.log(`${greeting} ${fullname}`);
+}
+
+const greetHello = greet.bind(null, 'hello');
+
+greetHello('hasan');
