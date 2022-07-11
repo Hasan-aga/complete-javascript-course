@@ -78,3 +78,40 @@
 // greeterHello('Hasan');
 // greet('selam')('Hasan');
 // greetArrow('selam')('Hasan Ali');
+
+//the call and apply methods
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(passengerName, flightNum) {
+    console.log(
+      `${passengerName} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({
+      flight: `${this.airline}${this.iataCode}${flightNum}`,
+      passengerName,
+    });
+  },
+};
+lufthansa.book('Hasan Ali', 123);
+lufthansa.book('John Ali', 103);
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// book('hawawa', 20);
+book.call(eurowings, 'hawawa', '20');
+book.apply(eurowings, ['kawasaki', 110]);
+
+// bind method
+const bookEW = book.bind(eurowings);
+bookEW('jack sparrow', 19);
+
+// with event listner
