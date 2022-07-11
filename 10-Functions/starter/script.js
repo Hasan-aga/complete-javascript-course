@@ -136,3 +136,9 @@
 // const greetHello = greet.bind(null, 'hello');
 
 // greetHello('hasan');
+
+// // imediately invoked function expression
+
+// (function () {
+//   console.log('this only runs once');
+// })();
