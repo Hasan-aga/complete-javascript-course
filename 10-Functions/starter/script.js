@@ -63,3 +63,18 @@
 
 // transform('js is good!', capitalizeFirstWord);
 // transform('js is good!', oneWord);
+
+// function greet(greeting) {
+//   return function (fullname) {
+//     console.log(`${greeting} ${fullname}`);
+//   };
+// }
+
+// // same above function using arrow
+// const greetArrow = greeting => fullname =>
+//   console.log(`${greeting} ${fullname}`);
+
+// const greeterHello = greet('hello');
+// greeterHello('Hasan');
+// greet('selam')('Hasan');
+// greetArrow('selam')('Hasan Ali');
