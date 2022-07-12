@@ -83,6 +83,19 @@ function displayMovements(movements) {
 
 displayMovements(account1.movements);
 
+function computeUsername(fullname) {
+  return fullname
+    .split(' ')
+    .map(oneName => oneName[0].toLowerCase())
+    .join('');
+}
+
+function computeUsernamesOfAccounts(accounts) {
+  accounts.forEach(function (account) {
+    account.username = computeUsername(account.owner);
+  });
+}
+computeUsernamesOfAccounts(accounts);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -120,3 +133,25 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // });
 
 // console.log(uniqueSymbols);
+
+////map
+// const usdTryRate = 17.38;
+
+// const movementsTry = movements.map(movement => movement * usdTryRate);
+
+// console.log(movements);
+// console.log(movementsTry);
+
+// const movementDescriptions = movements.map(function (movement, index) {
+//   if (movement > 0) {
+//     return `movement ${index}: you deposited ${Math.abs(movement)}`;
+//   } else {
+//     return `movement ${index}: you withdrew ${Math.abs(movement)}`;
+//   }
+// });
+
+// console.log(movementDescriptions);
+
+// // filter
+// const deposits = movements.filter(movement => movement > 0);
+// console.log(deposits);
