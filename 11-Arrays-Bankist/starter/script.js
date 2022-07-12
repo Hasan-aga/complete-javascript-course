@@ -138,7 +138,11 @@ btnLogin.addEventListener("click", function (event) {
     (acc) => acc?.username === inputLoginUsername.value
   );
   // match input pin
-  if (Number(inputLoginPin.value) === currentAcount.pin) {
+  if (Number(inputLoginPin?.value) === currentAcount.pin) {
+    // clear login fields
+    inputLoginUsername.value = "";
+    inputLoginPin.value = "";
+
     // display ui and welcome
     containerApp.style.opacity = "100";
     labelWelcome.textContent = `Welcome back ${currentAcount.owner}`; // calculate and display balance
