@@ -192,6 +192,17 @@ btnTransfer.addEventListener("click", function (event) {
   }
 });
 
+btnLoan.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  const loan = Number(inputLoanAmount.value);
+  const validLoan = currentAcount.movements.some((move) => move >= 0.1 * loan);
+  if (validLoan) {
+    currentAcount.movements.push(loan);
+    updateUi(currentAcount);
+  }
+});
+
 btnClose.addEventListener("click", (event) => {
   event.preventDefault();
 
