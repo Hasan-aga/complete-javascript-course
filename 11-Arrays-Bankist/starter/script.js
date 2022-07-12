@@ -81,12 +81,14 @@ function displayMovements(movements) {
   });
 }
 
-function calculateDisplayBalance(movements) {
+function calculateDisplayBalance(currentAcount) {
+  const movements = currentAcount.movements;
   const balance = movements.reduce(function (acc, mov) {
     return acc + mov;
   }, 0);
 
   labelBalance.textContent = `${balance}€`;
+  currentAcount.balance = balance;
 }
 
 function calculateDisplaySummary(currentAcount) {
@@ -149,7 +151,7 @@ btnLogin.addEventListener("click", function (event) {
     labelWelcome.textContent = `Welcome back ${currentAcount.owner}`; // calculate and display balance
 
     // calculate and display balance
-    calculateDisplayBalance(currentAcount.movements);
+    calculateDisplayBalance(currentAcount);
 
     // calculate and display summary
     calculateDisplaySummary(currentAcount);
@@ -163,11 +165,19 @@ btnLogin.addEventListener("click", function (event) {
 
 btnTransfer.addEventListener("click", function (event) {
   event.preventDefault();
-  const amount = inputTransferAmount.value;
+  const amount = Number(inputTransferAmount.value);
   const destinationAccount = accounts.find(
-    (account) => account.username === inputTransferTo.value.toLowerCase()
+    (account) => account.username === inputTransferTo.value.toLowerCase().trim()
   );
-  console.log(amount, destinationAccount);
+  if (
+    amount > 0 &&
+    amount <= currentAcount.balance &&
+    destinationAccount !== currentAcountb
+  ) {
+    currentAcount.movements.push(-amount);
+    destinationAccount?.movements.push(amount);
+    displayMovements(currentAcount.movements);
+  }
 });
 
 /////////////////////////////////////////////////
