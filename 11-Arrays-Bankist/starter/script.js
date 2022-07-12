@@ -81,8 +81,6 @@ function displayMovements(movements) {
   });
 }
 
-displayMovements(account1.movements);
-
 function calculateDisplayBalance(movements) {
   const balance = movements.reduce(function (acc, mov) {
     return acc + mov;
@@ -90,8 +88,6 @@ function calculateDisplayBalance(movements) {
 
   labelBalance.textContent = `${balance}€`;
 }
-
-calculateDisplayBalance(account1.movements);
 
 function calculateDisplaySummary(movements) {
   const totalIncome = movements
@@ -115,7 +111,6 @@ function calculateDisplaySummary(movements) {
   labelSumInterest.textContent = `${totalInterest}€`;
 }
 
-calculateDisplaySummary(account1.movements);
 function computeUsername(fullname) {
   return fullname
     .split(" ")
@@ -144,7 +139,20 @@ btnLogin.addEventListener("click", function (event) {
   );
   // match input pin
   if (Number(inputLoginPin.value) === currentAcount.pin) {
-    console.log("login");
+    // display ui and welcome
+    containerApp.style.opacity = "100";
+    labelWelcome.textContent = `Welcome back ${currentAcount.owner}`; // calculate and display balance
+
+    // calculate and display balance
+    calculateDisplayBalance(currentAcount.movements);
+
+    // calculate and display summary
+    calculateDisplaySummary(currentAcount.movements);
+
+    // display movements
+    displayMovements(currentAcount.movements);
+
+    // start/restart logout timer
   }
 });
 
@@ -152,13 +160,13 @@ btnLogin.addEventListener("click", function (event) {
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ["USD", "United States dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
-]);
+// const currencies = new Map([
+//   ["USD", "United States dollar"],
+//   ["EUR", "Euro"],
+//   ["GBP", "Pound sterling"],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
