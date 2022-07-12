@@ -150,14 +150,8 @@ btnLogin.addEventListener("click", function (event) {
     containerApp.style.opacity = "100";
     labelWelcome.textContent = `Welcome back ${currentAcount.owner}`; // calculate and display balance
 
-    // calculate and display balance
-    calculateDisplayBalance(currentAcount);
-
-    // calculate and display summary
-    calculateDisplaySummary(currentAcount);
-
-    // display movements
-    displayMovements(currentAcount.movements);
+    // calculate and display data
+    updateUi(currentAcount);
 
     // start/restart logout timer
   }
@@ -169,6 +163,10 @@ btnTransfer.addEventListener("click", function (event) {
   const destinationAccount = accounts.find(
     (account) => account.username === inputTransferTo.value.toLowerCase().trim()
   );
+
+  // clean input fields
+  inputTransferAmount.value = "";
+  inputTransferTo.value = "";
   if (
     amount > 0 &&
     amount <= currentAcount.balance &&
@@ -183,6 +181,16 @@ btnTransfer.addEventListener("click", function (event) {
   }
 });
 
+function updateUi(currentAcount) {
+  // calculate and display balance
+  calculateDisplayBalance(currentAcount);
+
+  // calculate and display summary
+  calculateDisplaySummary(currentAcount);
+
+  // display movements
+  displayMovements(currentAcount.movements);
+}
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
