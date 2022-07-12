@@ -89,7 +89,8 @@ function calculateDisplayBalance(movements) {
   labelBalance.textContent = `${balance}€`;
 }
 
-function calculateDisplaySummary(movements) {
+function calculateDisplaySummary(currentAcount) {
+  const movements = currentAcount.movements;
   const totalIncome = movements
     .filter((movement) => movement > 0)
     .reduce((acc, movement) => acc + movement);
@@ -102,7 +103,7 @@ function calculateDisplaySummary(movements) {
 
   const totalInterest = movements
     .filter((movement) => movement > 0)
-    .map((number) => number * 0.012)
+    .map((number) => number * (currentAcount.interestRate / 100))
     .filter((interest) => interest >= 1)
     .reduce((acc, movement) => acc + movement);
 
@@ -151,7 +152,7 @@ btnLogin.addEventListener("click", function (event) {
     calculateDisplayBalance(currentAcount.movements);
 
     // calculate and display summary
-    calculateDisplaySummary(currentAcount.movements);
+    calculateDisplaySummary(currentAcount);
 
     // display movements
     displayMovements(currentAcount.movements);
