@@ -128,6 +128,17 @@ function computeUsernamesOfAccounts(accounts) {
 }
 computeUsernamesOfAccounts(accounts);
 
+function updateUi(currentAcount) {
+  // calculate and display balance
+  calculateDisplayBalance(currentAcount);
+
+  // calculate and display summary
+  calculateDisplaySummary(currentAcount);
+
+  // display movements
+  displayMovements(currentAcount.movements);
+}
+
 // ////////////////////////////////
 // event handlers
 // ///////////////////////////////
@@ -141,7 +152,7 @@ btnLogin.addEventListener("click", function (event) {
     (acc) => acc?.username === inputLoginUsername.value
   );
   // match input pin
-  if (Number(inputLoginPin?.value) === currentAcount.pin) {
+  if (Number(inputLoginPin.value) === currentAcount?.pin) {
     // clear login fields
     inputLoginUsername.value = "";
     inputLoginPin.value = "";
@@ -181,16 +192,24 @@ btnTransfer.addEventListener("click", function (event) {
   }
 });
 
-function updateUi(currentAcount) {
-  // calculate and display balance
-  calculateDisplayBalance(currentAcount);
+btnClose.addEventListener("click", (event) => {
+  event.preventDefault();
 
-  // calculate and display summary
-  calculateDisplaySummary(currentAcount);
+  if (
+    inputCloseUsername.value === currentAcount.username &&
+    Number(inputClosePin.value) === currentAcount.pin
+  ) {
+    const indexOfCurrentAccount = accounts.findIndex(
+      (account) => account.username === currentAcount.username
+    );
+    // delete user account from data
+    const removed = accounts.splice(indexOfCurrentAccount, 1);
 
-  // display movements
-  displayMovements(currentAcount.movements);
-}
+    // hide ui
+    containerApp.style.opacity = "0";
+  }
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
