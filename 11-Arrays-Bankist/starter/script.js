@@ -83,6 +83,16 @@ function displayMovements(movements) {
 
 displayMovements(account1.movements);
 
+function calculateDisplayBalance(movements) {
+  const balance = movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+
+  labelBalance.textContent = `${balance} USD`;
+}
+
+calculateDisplayBalance(account1.movements);
+
 function computeUsername(fullname) {
   return fullname
     .split(' ')
