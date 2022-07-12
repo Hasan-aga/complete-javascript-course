@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -6,28 +6,28 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: "Jonas Schmedtmann",
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
+  owner: "Jessica Davis",
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'Steven Thomas Williams',
+  owner: "Steven Thomas Williams",
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
+  owner: "Sarah Smith",
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -36,38 +36,38 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 // Elements
-const labelWelcome = document.querySelector('.welcome');
-const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.balance__value');
-const labelSumIn = document.querySelector('.summary__value--in');
-const labelSumOut = document.querySelector('.summary__value--out');
-const labelSumInterest = document.querySelector('.summary__value--interest');
-const labelTimer = document.querySelector('.timer');
+const labelWelcome = document.querySelector(".welcome");
+const labelDate = document.querySelector(".date");
+const labelBalance = document.querySelector(".balance__value");
+const labelSumIn = document.querySelector(".summary__value--in");
+const labelSumOut = document.querySelector(".summary__value--out");
+const labelSumInterest = document.querySelector(".summary__value--interest");
+const labelTimer = document.querySelector(".timer");
 
-const containerApp = document.querySelector('.app');
-const containerMovements = document.querySelector('.movements');
+const containerApp = document.querySelector(".app");
+const containerMovements = document.querySelector(".movements");
 
-const btnLogin = document.querySelector('.login__btn');
-const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('.form__btn--loan');
-const btnClose = document.querySelector('.form__btn--close');
-const btnSort = document.querySelector('.btn--sort');
+const btnLogin = document.querySelector(".login__btn");
+const btnTransfer = document.querySelector(".form__btn--transfer");
+const btnLoan = document.querySelector(".form__btn--loan");
+const btnClose = document.querySelector(".form__btn--close");
+const btnSort = document.querySelector(".btn--sort");
 
-const inputLoginUsername = document.querySelector('.login__input--user');
-const inputLoginPin = document.querySelector('.login__input--pin');
-const inputTransferTo = document.querySelector('.form__input--to');
-const inputTransferAmount = document.querySelector('.form__input--amount');
-const inputLoanAmount = document.querySelector('.form__input--loan-amount');
-const inputCloseUsername = document.querySelector('.form__input--user');
-const inputClosePin = document.querySelector('.form__input--pin');
+const inputLoginUsername = document.querySelector(".login__input--user");
+const inputLoginPin = document.querySelector(".login__input--pin");
+const inputTransferTo = document.querySelector(".form__input--to");
+const inputTransferAmount = document.querySelector(".form__input--amount");
+const inputLoanAmount = document.querySelector(".form__input--loan-amount");
+const inputCloseUsername = document.querySelector(".form__input--user");
+const inputClosePin = document.querySelector(".form__input--pin");
 
 function displayMovements(movements) {
   // reset content before writing our own
-  containerMovements.innerHTML = '';
+  containerMovements.innerHTML = "";
 
   // for each movement create html elements to display movement data
   movements.forEach(function (movement, index) {
-    const type = movement > 0 ? 'deposit' : 'withdrawal';
+    const type = movement > 0 ? "deposit" : "withdrawal";
 
     const html = `
     <div class="movements__row">
@@ -77,7 +77,7 @@ function displayMovements(movements) {
     </div>
     `;
 
-    containerMovements.insertAdjacentHTML('afterbegin', html);
+    containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 }
 
@@ -95,19 +95,19 @@ calculateDisplayBalance(account1.movements);
 
 function calculateDisplaySummary(movements) {
   const totalIncome = movements
-    .filter(movement => movement > 0)
+    .filter((movement) => movement > 0)
     .reduce((acc, movement) => acc + movement);
 
   const totalOutcome = Math.abs(
     movements
-      .filter(movement => movement < 0)
+      .filter((movement) => movement < 0)
       .reduce((acc, movement) => acc + movement)
   );
 
   const totalInterest = movements
-    .filter(movement => movement > 0)
-    .map(number => number * 0.012)
-    .filter(interest => interest >= 1)
+    .filter((movement) => movement > 0)
+    .map((number) => number * 0.012)
+    .filter((interest) => interest >= 1)
     .reduce((acc, movement) => acc + movement);
 
   labelSumIn.textContent = `${totalIncome}€`;
@@ -118,9 +118,9 @@ function calculateDisplaySummary(movements) {
 calculateDisplaySummary(account1.movements);
 function computeUsername(fullname) {
   return fullname
-    .split(' ')
-    .map(oneName => oneName[0].toLowerCase())
-    .join('');
+    .split(" ")
+    .map((oneName) => oneName[0].toLowerCase())
+    .join("");
 }
 
 function computeUsernamesOfAccounts(accounts) {
@@ -130,14 +130,29 @@ function computeUsernamesOfAccounts(accounts) {
 }
 computeUsernamesOfAccounts(accounts);
 
+// ////////////////////////////////
+// event handlers
+// ///////////////////////////////
+
+let currentAcount;
+btnLogin.addEventListener("click", function (event) {
+  // prevent form from submitting
+  event.preventDefault();
+  // find current user from login username
+  currentAcount = accounts.find(
+    (acc) => acc?.username === inputLoginUsername.value
+  );
+  console.log(currentAcount);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
 const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
+  ["USD", "United States dollar"],
+  ["EUR", "Euro"],
+  ["GBP", "Pound sterling"],
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
