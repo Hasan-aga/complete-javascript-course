@@ -88,11 +88,34 @@ function calculateDisplayBalance(movements) {
     return acc + mov;
   }, 0);
 
-  labelBalance.textContent = `${balance} USD`;
+  labelBalance.textContent = `${balance}€`;
 }
 
 calculateDisplayBalance(account1.movements);
 
+function calculateDisplaySummary(movements) {
+  const totalIncome = movements
+    .filter(movement => movement > 0)
+    .reduce((acc, movement) => acc + movement);
+
+  const totalOutcome = Math.abs(
+    movements
+      .filter(movement => movement < 0)
+      .reduce((acc, movement) => acc + movement)
+  );
+
+  const totalInterest = movements
+    .filter(movement => movement > 0)
+    .map(number => number * 0.012)
+    .filter(interest => interest >= 1)
+    .reduce((acc, movement) => acc + movement);
+
+  labelSumIn.textContent = `${totalIncome}€`;
+  labelSumOut.textContent = `${totalOutcome}€`;
+  labelSumInterest.textContent = `${totalInterest}€`;
+}
+
+calculateDisplaySummary(account1.movements);
 function computeUsername(fullname) {
   return fullname
     .split(' ')
