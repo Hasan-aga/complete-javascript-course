@@ -172,11 +172,14 @@ btnTransfer.addEventListener("click", function (event) {
   if (
     amount > 0 &&
     amount <= currentAcount.balance &&
-    destinationAccount !== currentAcountb
+    destinationAccount &&
+    destinationAccount?.username !== currentAcount.username
   ) {
     currentAcount.movements.push(-amount);
     destinationAccount?.movements.push(amount);
     displayMovements(currentAcount.movements);
+    calculateDisplayBalance(currentAcount);
+    calculateDisplaySummary(currentAcount);
   }
 });
 
