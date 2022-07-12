@@ -96,6 +96,7 @@ function computeUsernamesOfAccounts(accounts) {
   });
 }
 computeUsernamesOfAccounts(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -155,3 +156,9 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // // filter
 // const deposits = movements.filter(movement => movement > 0);
 // console.log(deposits);
+
+// reduce
+// const balance = movements.reduce(function (acc, mov) {
+//   return acc + mov;
+// }, 0);
+// console.log(balance);
