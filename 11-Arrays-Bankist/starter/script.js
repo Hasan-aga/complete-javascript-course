@@ -275,3 +275,7 @@ btnClose.addEventListener("click", (event) => {
 //   return acc + mov;
 // }, 0);
 // console.log(balance);
+
+// // some
+// const anyDeposit = movements.some((move) => move > 0);
+// console.log(anyDeposit);
