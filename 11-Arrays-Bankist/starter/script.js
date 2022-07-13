@@ -61,12 +61,14 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-function displayMovements(movements) {
+function displayMovements(movements, sort = false) {
+  //sort
+  const moves = sort ? [...movements].sort((a, b) => a - b) : [...movements];
   // reset content before writing our own
   containerMovements.innerHTML = "";
 
   // for each movement create html elements to display movement data
-  movements.forEach(function (movement, index) {
+  moves.forEach(function (movement, index) {
     const type = movement > 0 ? "deposit" : "withdrawal";
 
     const html = `
@@ -220,7 +222,13 @@ btnClose.addEventListener("click", (event) => {
     containerApp.style.opacity = "0";
   }
 });
-
+let sortMoves = false;
+btnSort.addEventListener("click", function () {
+  sortMoves = !sortMoves;
+  console.log(sortMoves);
+  displayMovements(currentAcount.movements, sortMoves);
+  btnSort.textContent = `${sortMoves ? "⨯" : "↓"} sort`;
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -303,12 +311,12 @@ btnClose.addEventListener("click", (event) => {
 //   .reduce((acc, move) => acc + move);
 // console.log(totalMoves2);
 
-// sort
+// // sort
 
-const names = ["hasan", "martha", "ali", "ibrahim"];
-console.log(names.sort());
+// const names = ["hasan", "martha", "ali", "ibrahim"];
+// console.log(names.sort());
 
-const nums = [1, 40, 6, 7, 88, 90, 23333, 3, 4, -10];
+// const nums = [1, 40, 6, 7, 88, 90, 23333, 3, 4, -10];
 // console.log(
 //   nums.sort((current, next) => {
 //     if (current > next) {
@@ -320,5 +328,5 @@ const nums = [1, 40, 6, 7, 88, 90, 23333, 3, 4, -10];
 //   })
 // );
 
-nums.sort((current, next) => next - current); //if current > next -> return negative (switch order)
-console.log(nums);
+// nums.sort((current, next) => next - current); //if current > next -> return negative (switch order)
+// console.log(nums);
