@@ -290,3 +290,15 @@ btnClose.addEventListener("click", (event) => {
 // // some
 // const anyDeposit = movements.some((move) => move > 0);
 // console.log(anyDeposit);
+
+// flat and flatmap
+const totalMoves = accounts
+  .map((account) => account.movements)
+  .flat()
+  .reduce((acc, move) => acc + move);
+console.log(totalMoves);
+
+const totalMoves2 = accounts
+  .flatMap((account) => account.movements)
+  .reduce((acc, move) => acc + move);
+console.log(totalMoves2);
