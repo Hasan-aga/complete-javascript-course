@@ -95,7 +95,7 @@ function displayMovements(movements, sort = false) {
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${index} ${type}</div>
       <div class="movements__date">3 days ago</div>
-      <div class="movements__value">${movement}€</div>
+      <div class="movements__value">${movement.toFixed(2)}€</div>
     </div>
     `;
 
@@ -109,7 +109,7 @@ function calculateDisplayBalance(currentAcount) {
     return acc + mov;
   }, 0);
 
-  labelBalance.textContent = `${balance}€`;
+  labelBalance.textContent = `${balance.toFixed(2)}€`;
   currentAcount.balance = balance;
 }
 
@@ -131,9 +131,9 @@ function calculateDisplaySummary(currentAcount) {
     .filter(interest => interest >= 1)
     .reduce((acc, movement) => acc + movement);
 
-  labelSumIn.textContent = `${totalIncome}€`;
-  labelSumOut.textContent = `${totalOutcome}€`;
-  labelSumInterest.textContent = `${totalInterest}€`;
+  labelSumIn.textContent = `${totalIncome.toFixed(2)}€`;
+  labelSumOut.textContent = `${totalOutcome.toFixed(2)}€`;
+  labelSumInterest.textContent = `${totalInterest.toFixed(2)}€`;
 }
 
 function computeUsername(fullname) {
@@ -217,7 +217,7 @@ btnTransfer.addEventListener('click', function (event) {
 btnLoan.addEventListener('click', function (event) {
   event.preventDefault();
 
-  const loan = Number(inputLoanAmount.value);
+  const loan = Math.floor(inputLoanAmount.value);
   const validLoan = currentAcount.movements.some(move => move >= 0.1 * loan);
   if (validLoan) {
     currentAcount.movements.push(loan);
