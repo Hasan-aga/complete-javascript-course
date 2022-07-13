@@ -291,14 +291,34 @@ btnClose.addEventListener("click", (event) => {
 // const anyDeposit = movements.some((move) => move > 0);
 // console.log(anyDeposit);
 
-// flat and flatmap
-const totalMoves = accounts
-  .map((account) => account.movements)
-  .flat()
-  .reduce((acc, move) => acc + move);
-console.log(totalMoves);
+// // flat and flatmap
+// const totalMoves = accounts
+//   .map((account) => account.movements)
+//   .flat()
+//   .reduce((acc, move) => acc + move);
+// console.log(totalMoves);
 
-const totalMoves2 = accounts
-  .flatMap((account) => account.movements)
-  .reduce((acc, move) => acc + move);
-console.log(totalMoves2);
+// const totalMoves2 = accounts
+//   .flatMap((account) => account.movements)
+//   .reduce((acc, move) => acc + move);
+// console.log(totalMoves2);
+
+// sort
+
+const names = ["hasan", "martha", "ali", "ibrahim"];
+console.log(names.sort());
+
+const nums = [1, 40, 6, 7, 88, 90, 23333, 3, 4, -10];
+// console.log(
+//   nums.sort((current, next) => {
+//     if (current > next) {
+//       return -1;
+//     }
+//     if (current < next) {
+//       return 1;
+//     }
+//   })
+// );
+
+nums.sort((current, next) => next - current); //if current > next -> return negative (switch order)
+console.log(nums);
