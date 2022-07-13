@@ -260,3 +260,9 @@ btnSort.addEventListener('click', function () {
 // console.log(Number.isFinite(20));
 // console.log(Number.isFinite('20'));
 // console.log(Number.isFinite('hh'));
+
+// // random
+// const randomBetween = (max, min) =>
+//   Math.trunc(Math.random() * (max - min) + 1) + min;
+
+// console.log(randomBetween(0, 13));
