@@ -330,3 +330,24 @@ btnSort.addEventListener("click", function () {
 
 // nums.sort((current, next) => next - current); //if current > next -> return negative (switch order)
 // console.log(nums);
+
+// // fill
+// let arr = [1, 2, 3, 4, 5, 6];
+// let emptyArr = new Array(7);
+
+// arr.fill(100, 2, 4);
+// console.log(arr);
+
+// emptyArr.fill(1000);
+// console.log(emptyArr);
+
+// array initi
+
+const y = Array.from({ length: 10 }, () => 111);
+console.log(y);
+
+const x = Array.from({ length: 5 }, (_, index, arr) => {
+  return index;
+});
+
+console.log(Array.from("hello world", (letter) => letter.toUpperCase()));
