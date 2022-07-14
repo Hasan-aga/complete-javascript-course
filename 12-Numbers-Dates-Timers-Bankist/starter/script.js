@@ -16,14 +16,14 @@ const account1 = {
   pin: 1111,
 
   movementsDates: [
-    '2022-07-13T21:31:17.178Z',
+    '2019-12-23T07:42:02.383Z',
     '2019-12-23T07:42:02.383Z',
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2022-07-11T10:51:36.790Z',
+    '2022-07-13T10:51:36.790Z',
+    '2022-07-14T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -168,11 +168,18 @@ function displayDate(formattedDate) {
 }
 
 function formatDate(date = new Date()) {
-  const currentDate = new Date();
-  const year = date.getFullYear();
-  const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  const dayOfMonth = `${date.getDate()}`.padStart(2, 0);
-  return `${year}/${month}/${dayOfMonth}`;
+  const timeSpanInDays = calcTimeSpanInDays(date, new Date());
+  if (timeSpanInDays >= 4) {
+    const currentDate = new Date();
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const dayOfMonth = `${date.getDate()}`.padStart(2, 0);
+    return `${year}/${month}/${dayOfMonth}`;
+  } else if (timeSpanInDays <= 1)
+    return `today at ${date.getHours()}:${date.getMinutes()}`;
+  else if (timeSpanInDays > 1 && timeSpanInDays < 2)
+    return `yesterday at ${date.getHours()}:${date.getMinutes()}`;
+  else return `${Math.round(timeSpanInDays)} days ago.`;
 }
 
 function calcTimeSpanInDays(date1, date2) {
