@@ -151,14 +151,21 @@ function computeUsernamesOfAccounts(accounts) {
 computeUsernamesOfAccounts(accounts);
 
 function updateUi(currentAcount) {
-  // calculate and display balance
   calculateDisplayBalance(currentAcount);
 
-  // calculate and display summary
   calculateDisplaySummary(currentAcount);
 
-  // display movements
   displayMovements(currentAcount.movements);
+
+  displayDate();
+}
+
+function displayDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `${today.getMonth() + 1}`.padStart(2, 0);
+  const dayOfMonth = `${today.getDate()}`.padStart(2, 0);
+  labelDate.textContent = `${year}/${month}/${dayOfMonth}`;
 }
 
 // ////////////////////////////////
@@ -166,6 +173,12 @@ function updateUi(currentAcount) {
 // ///////////////////////////////
 
 let currentAcount;
+
+// fake always logged in (for testing)
+currentAcount = account1;
+updateUi(currentAcount);
+containerApp.style.opacity = '100';
+
 btnLogin.addEventListener('click', function (event) {
   // prevent form from submitting
   event.preventDefault();
@@ -181,7 +194,7 @@ btnLogin.addEventListener('click', function (event) {
 
     // display ui and welcome
     containerApp.style.opacity = '100';
-    labelWelcome.textContent = `Welcome back ${currentAcount.owner}`; // calculate and display balance
+    labelWelcome.textContent = `Welcome back ${currentAcount.owner}`;
 
     // calculate and display data
     updateUi(currentAcount);
