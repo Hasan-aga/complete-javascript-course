@@ -158,15 +158,18 @@ function updateUi(currentAcount) {
 
   displayMovements(currentAcount);
 
-  displayDate();
+  displayDate(formatDate());
 }
 
-function displayDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = `${today.getMonth() + 1}`.padStart(2, 0);
-  const dayOfMonth = `${today.getDate()}`.padStart(2, 0);
-  labelDate.textContent = `${year}/${month}/${dayOfMonth}`;
+function displayDate(formattedDate) {
+  labelDate.textContent = formattedDate;
+}
+
+function formatDate(date = new Date()) {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  const dayOfMonth = `${date.getDate()}`.padStart(2, 0);
+  return `${year}/${month}/${dayOfMonth}`;
 }
 
 // ////////////////////////////////
