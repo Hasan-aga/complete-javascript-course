@@ -272,3 +272,8 @@ btnSort.addEventListener('click', function () {
 // console.log(2837683475638465832467583765);
 // console.log(BigInt(2837683475638465832467583765));
 // console.log(2837683475638465832467583765n);
+
+// // dates
+// const future = new Date(2030, 0, 1);
+// console.log(future);
+// console.log(future.getFullYear());
