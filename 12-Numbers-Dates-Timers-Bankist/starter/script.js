@@ -309,3 +309,17 @@ btnSort.addEventListener('click', function () {
 // const future = new Date(2030, 0, 1);
 // console.log(future);
 // console.log(future.getFullYear());
+
+// internationalization
+
+const now = new Date();
+const options = {
+  hour12: true,
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+};
+const formatted = Intl.DateTimeFormat('en-GB', options).format(now);
+console.log(formatted);
