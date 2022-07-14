@@ -169,16 +169,29 @@ function displayDate(formattedDate) {
 
 function formatDate(date = new Date()) {
   const timeSpanInDays = calcTimeSpanInDays(date, new Date());
-  if (timeSpanInDays >= 4) {
-    const currentDate = new Date();
-    const year = date.getFullYear();
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const dayOfMonth = `${date.getDate()}`.padStart(2, 0);
-    return `${year}/${month}/${dayOfMonth}`;
-  } else if (timeSpanInDays <= 1)
-    return `today at ${date.getHours()}:${date.getMinutes()}`;
+  const locale = navigator.language;
+  const options = {
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  };
+  const todayFormatted = Intl.DateTimeFormat(locale, options).format(date);
+  const todayFormattedParts = Intl.DateTimeFormat(
+    locale,
+    options
+  ).formatToParts(date);
+  const time12h = todayFormattedParts
+    .slice(todayFormattedParts.findIndex(obj => obj.type === 'hour')) //find the object where the hour notation starts
+    .map(hour => hour.value)
+    .join('');
+  if (timeSpanInDays >= 4 || timeSpanInDays === 0) {
+    return todayFormatted;
+  } else if (timeSpanInDays <= 1) return `today at ${time12h}`;
   else if (timeSpanInDays > 1 && timeSpanInDays < 2)
-    return `yesterday at ${date.getHours()}:${date.getMinutes()}`;
+    return `yesterday at ${time12h}`;
   else return `${Math.round(timeSpanInDays)} days ago.`;
 }
 
@@ -312,14 +325,14 @@ btnSort.addEventListener('click', function () {
 
 // internationalization
 
-const now = new Date();
-const options = {
-  hour12: true,
-  hour: 'numeric',
-  minute: 'numeric',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-};
-const formatted = Intl.DateTimeFormat('en-GB', options).format(now);
-console.log(formatted);
+// const now = new Date();
+// const options = {
+//   hour12: true,
+//   hour: 'numeric',
+//   minute: 'numeric',
+//   day: 'numeric',
+//   month: 'long',
+//   year: 'numeric',
+// };
+// const formatted = Intl.DateTimeFormat('en-GB', options).format(now);
+// console.log(formatted);
