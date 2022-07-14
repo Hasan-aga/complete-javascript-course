@@ -16,7 +16,7 @@ const account1 = {
   pin: 1111,
 
   movementsDates: [
-    '2019-11-18T21:31:17.178Z',
+    '2022-07-13T21:31:17.178Z',
     '2019-12-23T07:42:02.383Z',
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
@@ -168,10 +168,15 @@ function displayDate(formattedDate) {
 }
 
 function formatDate(date = new Date()) {
+  const currentDate = new Date();
   const year = date.getFullYear();
   const month = `${date.getMonth() + 1}`.padStart(2, 0);
   const dayOfMonth = `${date.getDate()}`.padStart(2, 0);
   return `${year}/${month}/${dayOfMonth}`;
+}
+
+function calcTimeSpanInDays(date1, date2) {
+  return Math.abs(date1 - date2) / (1000 * 60 * 60 * 24);
 }
 
 // ////////////////////////////////
