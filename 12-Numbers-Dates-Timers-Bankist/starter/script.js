@@ -226,7 +226,9 @@ btnTransfer.addEventListener('click', function (event) {
     destinationAccount?.username !== currentAcount.username
   ) {
     currentAcount.movements.push(-amount);
+    currentAcount.movementsDates.push(new Date());
     destinationAccount?.movements.push(amount);
+    destinationAccount?.movementsDates.push(new Date());
     displayMovements(currentAcount);
     calculateDisplayBalance(currentAcount);
     calculateDisplaySummary(currentAcount);
@@ -240,6 +242,7 @@ btnLoan.addEventListener('click', function (event) {
   const validLoan = currentAcount.movements.some(move => move >= 0.1 * loan);
   if (validLoan) {
     currentAcount.movements.push(loan);
+    currentAcount.movementsDates.push(new Date());
     updateUi(currentAcount);
   }
 });
