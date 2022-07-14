@@ -266,3 +266,9 @@ btnSort.addEventListener('click', function () {
 //   Math.trunc(Math.random() * (max - min) + 1) + min;
 
 // console.log(randomBetween(0, 13));
+
+// // bigint
+
+// console.log(2837683475638465832467583765);
+// console.log(BigInt(2837683475638465832467583765));
+// console.log(2837683475638465832467583765n);
