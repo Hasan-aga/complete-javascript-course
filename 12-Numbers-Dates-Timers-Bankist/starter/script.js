@@ -95,7 +95,9 @@ function displayMovements(currentAcount, sort = false) {
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${index} ${type}</div>
-      <div class="movements__date">${currentAcount.movementsDates[index]}</div>
+      <div class="movements__date">${formatDate(
+        new Date(currentAcount.movementsDates[index])
+      )}</div>
       <div class="movements__value">${movement.toFixed(2)}€</div>
     </div>
     `;
