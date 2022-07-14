@@ -81,7 +81,8 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-function displayMovements(movements, sort = false) {
+function displayMovements(currentAcount, sort = false) {
+  const movements = currentAcount.movements;
   //sort
   const moves = sort ? [...movements].sort((a, b) => a - b) : [...movements];
   // reset content before writing our own
@@ -94,7 +95,7 @@ function displayMovements(movements, sort = false) {
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${index} ${type}</div>
-      <div class="movements__date">3 days ago</div>
+      <div class="movements__date">${currentAcount.movementsDates[index]}</div>
       <div class="movements__value">${movement.toFixed(2)}€</div>
     </div>
     `;
@@ -155,7 +156,7 @@ function updateUi(currentAcount) {
 
   calculateDisplaySummary(currentAcount);
 
-  displayMovements(currentAcount.movements);
+  displayMovements(currentAcount);
 
   displayDate();
 }
@@ -221,7 +222,7 @@ btnTransfer.addEventListener('click', function (event) {
   ) {
     currentAcount.movements.push(-amount);
     destinationAccount?.movements.push(amount);
-    displayMovements(currentAcount.movements);
+    displayMovements(currentAcount);
     calculateDisplayBalance(currentAcount);
     calculateDisplaySummary(currentAcount);
   }
@@ -259,7 +260,7 @@ let sortMoves = false;
 btnSort.addEventListener('click', function () {
   sortMoves = !sortMoves;
   console.log(sortMoves);
-  displayMovements(currentAcount.movements, sortMoves);
+  displayMovements(currentAcount, sortMoves);
   btnSort.textContent = `${sortMoves ? '⨯' : '↓'} sort`;
 });
 /////////////////////////////////////////////////
