@@ -92,18 +92,35 @@ function displayMovements(currentAcount, sort = false) {
   moves.forEach(function (movement, index) {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
+    const money = formatMoney({ movement, currency: 'eur' });
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${index} ${type}</div>
       <div class="movements__date">${formatDate(
         new Date(currentAcount.movementsDates[index])
       )}</div>
-      <div class="movements__value">${movement.toFixed(2)}€</div>
+      <div class="movements__value">${money}</div>
     </div>
     `;
 
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
+}
+
+function formatMoney({
+  movement,
+  local = 'de-DE',
+  currency = 'usd',
+  fixed = 2,
+}) {
+  const options = {
+    style: 'currency',
+    currency: `${currency}`,
+  };
+  const money = Intl.NumberFormat(local, options).format(
+    Math.abs(movement.toFixed(fixed))
+  );
+  return money;
 }
 
 function calculateDisplayBalance(currentAcount) {
@@ -112,7 +129,10 @@ function calculateDisplayBalance(currentAcount) {
     return acc + mov;
   }, 0);
 
-  labelBalance.textContent = `${balance.toFixed(2)}€`;
+  labelBalance.textContent = `${formatMoney({
+    movement: balance,
+    currency: 'eur',
+  })}`;
   currentAcount.balance = balance;
 }
 
@@ -134,9 +154,18 @@ function calculateDisplaySummary(currentAcount) {
     .filter(interest => interest >= 1)
     .reduce((acc, movement) => acc + movement);
 
-  labelSumIn.textContent = `${totalIncome.toFixed(2)}€`;
-  labelSumOut.textContent = `${totalOutcome.toFixed(2)}€`;
-  labelSumInterest.textContent = `${totalInterest.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatMoney({
+    movement: totalIncome,
+    currency: 'eur',
+  })}`;
+  labelSumOut.textContent = `${formatMoney({
+    movement: totalOutcome,
+    currency: 'eur',
+  })}`;
+  labelSumInterest.textContent = `${formatMoney({
+    movement: totalInterest,
+    currency: 'eur',
+  })}`;
 }
 
 function computeUsername(fullname) {
