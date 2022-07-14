@@ -229,9 +229,7 @@ btnTransfer.addEventListener('click', function (event) {
     currentAcount.movementsDates.push(new Date());
     destinationAccount?.movements.push(amount);
     destinationAccount?.movementsDates.push(new Date());
-    displayMovements(currentAcount);
-    calculateDisplayBalance(currentAcount);
-    calculateDisplaySummary(currentAcount);
+    updateUi(currentAcount);
   }
 });
 
