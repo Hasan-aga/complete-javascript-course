@@ -59,7 +59,8 @@ const tabContainer = document.querySelector('.operations__tab-container');
 // add event listener to parent for a button click
 tabContainer.addEventListener('click', function (event) {
   const clickedElement = event.target.closest('.btn');
-  if (clickedElement.classList.contains('btn')) {
+  if (clickedElement) {
+    //not null
     // get child div that match button data
     const contentOrder = clickedElement.getAttribute('data-tab');
     // add operations__content--active to perations__content operations__content-- that matches contentOrder
