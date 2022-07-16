@@ -85,9 +85,31 @@ tabContainer.addEventListener('click', function (event) {
 
 // ///////////////////////////////////////////
 //reveal sections with animation as they scroll into view
+// hide all sections at first
 const sections = document.querySelectorAll('.section');
 sections.forEach(section => section.classList.add('section--hidden'));
 
+// reveal sections as they get in view
+function sectionsObserverCallback(entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+}
+
+const sectionsObserverOptions = {
+  root: null,
+  threshold: 0.15,
+};
+
+const sectionsObserver = new IntersectionObserver(
+  sectionsObserverCallback,
+  sectionsObserverOptions
+);
+
+sections.forEach(section => sectionsObserver.observe(section));
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
