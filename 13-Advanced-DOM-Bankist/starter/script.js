@@ -39,16 +39,13 @@ scrollButton.addEventListener('click', e => {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-document.querySelectorAll('.nav__link').forEach(element =>
-  element.addEventListener('click', event => {
-    event.preventDefault();
-    const scrollDestination = document.querySelector(
-      element.getAttribute('href')
-    );
-    console.log(scrollDestination);
-    scrollDestination.scrollIntoView({ behavior: 'smooth' });
-  })
-);
+const linksParent = document.querySelector('.nav__links');
+linksParent.addEventListener('click', function (event) {
+  event.preventDefault();
+  const destinationID = event.target.getAttribute('href');
+  const destinationElement = document.querySelector(destinationID);
+  destinationElement.scrollIntoView({ behavior: 'smooth' });
+});
 
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
