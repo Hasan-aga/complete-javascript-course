@@ -42,9 +42,14 @@ scrollButton.addEventListener('click', e => {
 const linksParent = document.querySelector('.nav__links');
 linksParent.addEventListener('click', function (event) {
   event.preventDefault();
-  const destinationID = event.target.getAttribute('href');
-  const destinationElement = document.querySelector(destinationID);
-  destinationElement.scrollIntoView({ behavior: 'smooth' });
+  if (
+    event.target.classList.contains('nav__link') &&
+    !event.target.classList.contains('nav__link--btn')
+  ) {
+    const destinationID = event.target.getAttribute('href');
+    const destinationElement = document.querySelector(destinationID);
+    destinationElement.scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 // ///////////////////////////////////////////
