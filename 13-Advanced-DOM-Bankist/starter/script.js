@@ -58,9 +58,11 @@ linksParent.addEventListener('click', function (event) {
 const tabContainer = document.querySelector('.operations__tab-container');
 // add event listener to parent for a button click
 tabContainer.addEventListener('click', function (event) {
-  if (event.target.classList.contains('btn')) {
+  const clickedElement =
+    event.target.tagName === 'SPAN' ? event.target.parentElement : event.target;
+  if (clickedElement.classList.contains('btn')) {
     // get child div that match button data
-    const contentOrder = event.target.getAttribute('data-tab');
+    const contentOrder = clickedElement.getAttribute('data-tab');
     // add operations__content--active to perations__content operations__content-- that matches contentOrder
     // get content that matches order
     const children = [...this.parentElement.children];
