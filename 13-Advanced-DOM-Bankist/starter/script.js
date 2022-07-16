@@ -51,6 +51,28 @@ linksParent.addEventListener('click', function (event) {
     destinationElement.scrollIntoView({ behavior: 'smooth' });
   }
 });
+// ///////////////////////////////////////////
+// tabbed navigation
+
+// select parent
+const tabContainer = document.querySelector('.operations__tab-container');
+// add event listener to parent for a button click
+tabContainer.addEventListener('click', function (event) {
+  if (event.target.classList.contains('btn')) {
+    // get child div that match button data
+    const contentOrder = event.target.getAttribute('data-tab');
+    // add operations__content--active to perations__content operations__content-- that matches contentOrder
+    // get content that matches order
+    const children = [...this.parentElement.children];
+    console.log('btn clc', contentOrder, children);
+    children.forEach(function (element) {
+      element.classList.remove('operations__content--active');
+      if (element.classList.contains(`operations__content--${contentOrder}`)) {
+        element.classList.add('operations__content--active');
+      }
+    });
+  }
+});
 
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
