@@ -29,3 +29,18 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// ////////////////////////////////////////////
+// smooth scrolling
+const scrollButton = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+scrollButton.addEventListener('click', e => {
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+// ///////////////////////////////////////////
+// ///////////////////////////////////////////
+// ///////////////////////////////////////////
+// ///////////////////////////////////////////
+
+console.log(document.documentElement);
