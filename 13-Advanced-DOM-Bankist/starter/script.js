@@ -39,6 +39,17 @@ scrollButton.addEventListener('click', e => {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+document.querySelectorAll('.nav__link').forEach(element =>
+  element.addEventListener('click', event => {
+    event.preventDefault();
+    const scrollDestination = document.querySelector(
+      element.getAttribute('href')
+    );
+    console.log(scrollDestination);
+    scrollDestination.scrollIntoView({ behavior: 'smooth' });
+  })
+);
+
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
