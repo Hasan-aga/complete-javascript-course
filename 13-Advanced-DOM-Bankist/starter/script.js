@@ -65,13 +65,20 @@ tabContainer.addEventListener('click', function (event) {
     const contentOrder = clickedElement.getAttribute('data-tab');
     // add operations__content--active to perations__content operations__content-- that matches contentOrder
     // get content that matches order
-    const children = [...this.parentElement.children];
-    console.log('btn clc', contentOrder, children);
-    children.forEach(function (element) {
+    const contentElements = [...this.parentElement.children];
+    contentElements.forEach(function (element) {
       element.classList.remove('operations__content--active');
       if (element.classList.contains(`operations__content--${contentOrder}`)) {
         element.classList.add('operations__content--active');
       }
+    });
+
+    // remove operations__tab--active from inactive button and add it to active
+    // get all children of tab container
+    const buttons = [...this.children];
+    buttons.forEach(button => {
+      button.classList.remove('operations__tab--active');
+      clickedElement.classList.add('operations__tab--active');
     });
   }
 });
