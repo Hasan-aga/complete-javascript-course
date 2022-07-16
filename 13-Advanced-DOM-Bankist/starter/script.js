@@ -43,3 +43,21 @@ scrollButton.addEventListener('click', e => {
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
+////event propagation demo
+// function getRandomInt(min = 0, max = 255) {
+//   return Math.floor(Math.random() * (max - min + 1) - min);
+// }
+
+// function getRandomColor() {
+//   return `rgb(${getRandomInt()},${getRandomInt()},${getRandomInt()})`;
+// }
+// // event bubbling
+
+// scrollButton.onclick = function (event) {
+//   this.style.backgroundColor = getRandomColor();
+// };
+
+// document.querySelector('.header__title').onclick = function (event) {
+//   if (event.target === scrollButton)
+//     this.style.backgroundColor = getRandomColor();
+// };
