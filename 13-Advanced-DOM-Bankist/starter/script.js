@@ -147,8 +147,8 @@ sliderBtnRight.addEventListener('click', function () {
   currentSlide = currentSlide >= slides.length - 1 ? 0 : ++currentSlide;
   moveSlides(slides, currentSlide);
 });
-sliderBtnLeft.addEventListener('click', function (vent) {
-  currentSlide = currentSlide <= slides.length ? 0 : --currentSlide;
+sliderBtnLeft.addEventListener('click', function () {
+  currentSlide = currentSlide === 0 ? slides.length - 1 : --currentSlide;
   moveSlides(slides, currentSlide);
 });
 
