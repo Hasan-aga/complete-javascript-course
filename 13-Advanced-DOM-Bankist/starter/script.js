@@ -87,7 +87,7 @@ tabContainer.addEventListener('click', function (event) {
 //reveal sections with animation as they scroll into view
 // hide all sections at first
 const sections = document.querySelectorAll('.section');
-sections.forEach(section => section.classList.add('section--hidden'));
+// sections.forEach(section => section.classList.add('section--hidden'));
 
 // reveal sections as they get in view
 function sectionsObserverCallback(entries, observer) {
@@ -133,6 +133,30 @@ const lazyImagesObserver = new IntersectionObserver(lazyImageObserverCallback, {
 });
 
 lazyImages.forEach(img => lazyImagesObserver.observe(img));
+// ///////////////////////////////////////////
+// slider
+const sliderBtnRight = document.querySelector('.slider__btn--right');
+const sliderBtnLeft = document.querySelector('.slider__btn--left');
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+let currentSlide = 0;
+
+moveSlides(slides, 0);
+
+sliderBtnRight.addEventListener('click', function () {
+  currentSlide = currentSlide >= slides.length - 1 ? 0 : ++currentSlide;
+  moveSlides(slides, currentSlide);
+});
+sliderBtnLeft.addEventListener('click', function (vent) {
+  currentSlide = currentSlide <= slides.length ? 0 : --currentSlide;
+  moveSlides(slides, currentSlide);
+});
+
+function moveSlides(slides, order) {
+  slides.forEach((slide, index) => {
+    slide.style.transform = `translateX(${100 * (index - order)}%)`;
+  });
+}
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
 // ///////////////////////////////////////////
