@@ -56,3 +56,14 @@
 
 // Personas.hi();
 // console.log(Personas);
+
+const PersonsProto = {
+  calcBirthYear: function () {
+    return new Date().getFullYear() - this.age;
+  },
+};
+
+const hasan = Object.create(PersonsProto);
+hasan.name = 'hasan';
+hasan.age = 30;
+// console.log(hasan.calcBirthYear());
