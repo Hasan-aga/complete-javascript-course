@@ -35,4 +35,13 @@ console.log(bmw.speedUS);
 bmw.speedUS = 60;
 console.log(bmw.speedUS);
 
-// ch 2
+// ch 3
+class EV extends Car {
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.charge = charge;
+  }
+}
+
+const tesla = new EV('tesla', 120, 90);
+console.log(tesla);
