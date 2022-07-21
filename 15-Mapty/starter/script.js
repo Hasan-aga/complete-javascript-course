@@ -89,7 +89,7 @@ function saveWorkout(user, workout) {
   user.workouts.push(workout);
 }
 
-function displayWorkouts(user) {
+function displayWorkoutsAndStats(user) {
   const workout = user.workouts.at(-1);
 
   const html = `
@@ -159,7 +159,7 @@ if (navigator.geolocation)
           workout.latlng,
           `${workout.type} at ${workout.shortDate}`
         );
-        displayWorkouts(user);
+        displayWorkoutsAndStats(user);
       });
     },
     function () {
