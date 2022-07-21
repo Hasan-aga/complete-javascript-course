@@ -12,6 +12,7 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const statAverageDistance = document.querySelector('.avg__distance');
 const statAverageDuration = document.querySelector('.avg__duration');
+const workoutListElement = document.querySelector('.workout');
 
 class User {
   workouts = [];
@@ -68,7 +69,7 @@ function displayInputForm() {
   form.classList.remove('hidden');
 }
 
-function getWorkoutDetails(latlng, map, user) {
+function getWorkoutDetails(latlng) {
   const type = inputType.value;
   const duration = inputDuration.value;
   const distance = inputDistance.value;
@@ -117,7 +118,7 @@ function displayWorkoutsAndStats(user) {
         </div>
       </li>
           `;
-  containerWorkouts.insertAdjacentHTML('beforeend', html);
+  form.insertAdjacentHTML('afterend', html);
   calculateStats(user);
   displayStats(user.stats);
 }
@@ -146,14 +147,14 @@ if (navigator.geolocation)
     function (position) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      const latlong = [latitude, longitude];
       const user = new User(latitude, longitude);
       const map = renderMap(user.latlng);
       map.addMarkerToMap(user.latlng, '<b>Hello world!</b><br>I am a popup.');
+
       map.on('click', function (event) {
         displayInputForm();
         const latlng = event.latlng;
-        const workout = getWorkoutDetails(latlng, map, user);
+        const workout = getWorkoutDetails(latlng);
         saveWorkout(user, workout);
         map.addMarkerToMap(
           workout.latlng,
