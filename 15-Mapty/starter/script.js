@@ -80,10 +80,7 @@ function getWorkoutDetails(latlng, map, user) {
     elevation,
     latlng
   );
-  saveWorkout(user, workout);
-  console.log(user.workouts);
-  map.addMarkerToMap(workout.latlng, `${workout.type} at ${workout.shortDate}`);
-  displayWorkouts(user);
+  return workout;
 }
 
 function saveWorkout(user, workout) {
@@ -133,7 +130,14 @@ if (navigator.geolocation)
       map.on('click', function (event) {
         displayInputForm();
         const latlng = event.latlng;
-        getWorkoutDetails(latlng, map, user);
+        const workout = getWorkoutDetails(latlng, map, user);
+        saveWorkout(user, workout);
+        console.log(user.workouts);
+        map.addMarkerToMap(
+          workout.latlng,
+          `${workout.type} at ${workout.shortDate}`
+        );
+        displayWorkouts(user);
       });
     },
     function () {
