@@ -11,16 +11,27 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-function renderMap(latitude, longitude) {
-  let map = L.map('map').setView([latitude, longitude], 13);
+class User {
+  workouts = [];
+  latlng;
+  constructor(latitude, longitude) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.latlng = [this.latitude, this.longitude];
+  }
+}
+
+function renderMap(latlong) {
+  let map = L.map('map').setView(latlong, 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap',
   }).addTo(map);
 
-  map.addMarkerToMap = function (latitude, longitude, popUp = null) {
-    const marker = L.marker([latitude, longitude]).addTo(this);
+  map.addMarkerToMap = function (latlong, popUp = false) {
+    console.log(this);
+    const marker = L.marker(latlong).addTo(this);
     if (popUp) marker.bindPopup(`${popUp}`).openPopup();
     return map;
   };
@@ -33,12 +44,14 @@ if (navigator.geolocation)
     function (position) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      const map = renderMap(latitude, longitude);
-      map.addMarkerToMap(
-        latitude,
-        longitude,
-        '<b>Hello world!</b><br>I am a popup.'
-      );
+      const latlong = [latitude, longitude];
+      const user = new User(latitude, longitude);
+      console.log(latitude, longitude, user);
+      const map = renderMap(user.latlng);
+      map.addMarkerToMap(latlong, '<b>Hello world!</b><br>I am a popup.');
+      map.on('click', function (event) {
+        map.addMarkerToMap(event.latlng, 'hello');
+      });
     },
     function () {
       console.log('Could not get position.');
