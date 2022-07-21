@@ -87,11 +87,33 @@ function getWorkoutDetails(latlng) {
 
 function saveWorkout(user, workout) {
   user.workouts.push(workout);
+  localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
+}
+
+function clearLocalStorage() {
+  localStorage.clear();
+}
+
+function displayStoredWrokouts() {
+  const keys = Object.keys(localStorage);
+  for (let key of keys) {
+    // console.log(`${key}: ${JSON.parse(localStorage.getItem(key))}`);
+    const workout = JSON.parse(localStorage.getItem(key));
+    console.log(workout);
+
+    displayWorkout(workout);
+  }
 }
 
 function displayWorkoutsAndStats(user) {
   const workout = user.workouts.at(-1);
 
+  displayWorkout(workout);
+  calculateStats(user);
+  displayStats(user.stats);
+}
+
+function displayWorkout(workout) {
   const html = `
         <li class="workout workout--${workout.type}" data-id="${workout.timeStamp}">
         <h2 class="workout__title">${workout.type} on ${workout.shortDate}</h2>
@@ -118,8 +140,6 @@ function displayWorkoutsAndStats(user) {
       </li>
           `;
   form.insertAdjacentHTML('afterend', html);
-  calculateStats(user);
-  displayStats(user.stats);
 }
 
 function calculateStats(user) {
@@ -144,6 +164,8 @@ function displayStats(stats) {
 function centerMapOn(latlng, map) {
   map.setView(latlng, 13);
 }
+
+displayStoredWrokouts();
 
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
