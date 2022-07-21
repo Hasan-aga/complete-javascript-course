@@ -23,6 +23,13 @@ class User {
 
 class Workout {
   timeStamp;
+  shortDate;
+  options = {
+    weekday: 'long',
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric',
+  };
   constructor(type, distance, duration, cadence, elevation, latlng) {
     this.type = type;
     this.distance = distance;
@@ -31,6 +38,9 @@ class Workout {
     this.elevation = elevation;
     this.latlng = latlng;
     this.timeStamp = new Date();
+    this.shortDate = Intl.DateTimeFormat('en-GB', this.options).format(
+      this.timeStamp
+    ); // 14 July 2022
   }
 }
 
@@ -72,11 +82,43 @@ function getWorkoutDetails(latlng, map, user) {
   );
   saveWorkout(user, workout);
   console.log(user.workouts);
-  map.addMarkerToMap(workout.latlng, `${workout.type} at ${workout.timeStamp}`);
+  map.addMarkerToMap(workout.latlng, `${workout.type} at ${workout.shortDate}`);
+  displayWorkouts(user);
 }
 
 function saveWorkout(user, workout) {
   user.workouts.push(workout);
+}
+
+function displayWorkouts(user) {
+  const workout = user.workouts.at(-1);
+
+  const html = `
+        <li class="workout workout--${workout.type}" data-id="${workout.timeStamp}">
+        <h2 class="workout__title">${workout.type} on ${workout.shortDate}</h2>
+        <div class="workout__details">
+          <span class="workout__icon">🏃‍♂️</span>
+          <span class="workout__value">${workout.distance}</span>
+          <span class="workout__unit">km</span>
+        </div>
+        <div class="workout__details">
+          <span class="workout__icon">⏱</span>
+          <span class="workout__value">${workout.duration}</span>
+          <span class="workout__unit">min</span>
+        </div>
+        <div class="workout__details">
+          <span class="workout__icon">⚡️</span>
+          <span class="workout__value">${workout.elevation}</span>
+          <span class="workout__unit">min/km</span>
+        </div>
+        <div class="workout__details">
+          <span class="workout__icon">🦶🏼</span>
+          <span class="workout__value">${workout.cadence}</span>
+          <span class="workout__unit">spm</span>
+        </div>
+      </li>
+          `;
+  containerWorkouts.insertAdjacentHTML('beforeend', html);
 }
 
 if (navigator.geolocation)
