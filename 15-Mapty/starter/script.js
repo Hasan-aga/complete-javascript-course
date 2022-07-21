@@ -164,17 +164,18 @@ if (navigator.geolocation)
           `${workout.type} at ${workout.shortDate}`
         );
         displayWorkoutsAndStats(user);
-        containerWorkouts.addEventListener('click', function (event) {
-          const clicked = event.target.closest('.workout');
-          if (!clicked) return;
-          const workoutID = clicked.dataset.id;
-          const clickedWorkoutPosition = user.workouts.find(
-            workout => workout.timeStamp == workoutID
-          ).latlng;
+      });
 
-          console.log(clickedWorkoutPosition);
-          centerMapOn(clickedWorkoutPosition, map);
-        });
+      containerWorkouts.addEventListener('click', function (event) {
+        const clicked = event.target.closest('.workout');
+        if (!clicked) return;
+        const workoutID = clicked.dataset.id;
+        const clickedWorkoutPosition = user.workouts.find(
+          workout => workout.timeStamp == workoutID
+        ).latlng;
+
+        console.log(clickedWorkoutPosition);
+        centerMapOn(clickedWorkoutPosition, map);
       });
     },
     function () {
