@@ -8,10 +8,12 @@ class Car {
 
   accelarate() {
     this.speed += 10;
+    return this;
   }
 
   brake() {
     this.speed -= 5;
+    return this;
   }
 
   get speedUS() {
@@ -37,11 +39,22 @@ console.log(bmw.speedUS);
 
 // ch 3
 class EV extends Car {
+  #charge;
   constructor(make, speed, charge) {
     super(make, speed);
-    this.charge = charge;
+    this.#charge = charge;
+  }
+
+  get charge() {
+    return this.#charge;
+  }
+
+  set charge(charge) {
+    this.#charge = charge;
   }
 }
 
 const tesla = new EV('tesla', 120, 90);
+console.log(tesla);
+tesla.accelarate().accelarate().brake();
 console.log(tesla);

@@ -58,6 +58,32 @@
 // console.log(Personas);
 
 //iherit between classes
+// const Person = function (firstName, age) {
+//   (this.firstName = firstName), (this.age = age);
+// };
+
+// Person.prototype.calcBirthYear = function () {
+//   return new Date().getFullYear() - this.age;
+// };
+
+// const Student = function (firstName, age, course) {
+//   Person.call(this, firstName, age); //Step 1: person's `this` will be Student object
+//   this.course = course;
+// };
+
+// Student.prototype = Object.create(Person.prototype); //step 2
+// Student.prototype.introduceSelf = function () {
+//   console.log(
+//     `I am ${
+//       this.firstName
+//     } I was born in ${this.calcBirthYear()} and I am studying ${this.course}`
+//   );
+// };
+
+// const hasan = new Student('hasan', 30, 'programming');
+// hasan.introduceSelf();
+// hasan.calcBirthYear();
+
 const Person = function (firstName, age) {
   (this.firstName = firstName), (this.age = age);
 };
@@ -66,20 +92,6 @@ Person.prototype.calcBirthYear = function () {
   return new Date().getFullYear() - this.age;
 };
 
-const Student = function (firstName, age, course) {
-  Person.call(this, firstName, age); //Step 1: person's `this` will be Student object
-  this.course = course;
-};
+const Student = Object.create(Person);
 
-Student.prototype = Object.create(Person.prototype); //step 2
-Student.prototype.introduceSelf = function () {
-  console.log(
-    `I am ${
-      this.firstName
-    } I was born in ${this.calcBirthYear()} and I am studying ${this.course}`
-  );
-};
-
-const hasan = new Student('hasan', 30, 'programming');
-hasan.introduceSelf();
-hasan.calcBirthYear();
+const hasan = Object.create(Student);
