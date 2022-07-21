@@ -11,12 +11,21 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+function renderMap(latitude, longitude) {
+  let map = L.map('map').setView([latitude, longitude], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap',
+  }).addTo(map);
+}
+
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
     function (position) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      console.log(latitude, longitude);
+      renderMap(latitude, longitude);
     },
     function () {
       console.log('Could not get position.');
