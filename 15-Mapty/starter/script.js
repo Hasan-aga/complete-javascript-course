@@ -168,9 +168,11 @@ if (navigator.geolocation)
           const clicked = event.target.closest('.workout');
           if (!clicked) return;
           const workoutID = clicked.dataset.id;
-          const clickedWorkoutPosition = user.workouts.filter(
+          const clickedWorkoutPosition = user.workouts.find(
             workout => workout.timeStamp == workoutID
-          )[0].latlng;
+          ).latlng;
+
+          console.log(clickedWorkoutPosition);
           centerMapOn(clickedWorkoutPosition, map);
         });
       });
