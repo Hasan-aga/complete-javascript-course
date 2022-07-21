@@ -10,10 +10,13 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const statAverageDistance = document.querySelector('.avg__distance');
+const statAverageDuration = document.querySelector('.avg__duration');
 
 class User {
   workouts = [];
   latlng;
+  stats;
   constructor(latitude, longitude) {
     this.latitude = latitude;
     this.longitude = longitude;
@@ -116,6 +119,7 @@ function displayWorkouts(user) {
           `;
   containerWorkouts.insertAdjacentHTML('beforeend', html);
   calculateStats(user);
+  displayStats(user.stats);
 }
 
 function calculateStats(user) {
@@ -127,9 +131,14 @@ function calculateStats(user) {
     (acc, workout) => acc + workout.duration,
     0
   );
-  const avgDistance = totalDistance / user.workouts.length;
-  const avgDuration = totalDuration / user.workouts.length;
-  console.log(totalDistance, totalDuration);
+  const avgDistance = (totalDistance / user.workouts.length).toFixed(1);
+  const avgDuration = (totalDuration / user.workouts.length).toFixed(1);
+  user.stats = { totalDistance, totalDuration, avgDistance, avgDuration };
+}
+
+function displayStats(stats) {
+  statAverageDistance.textContent = `Avg Distance: ${stats.avgDistance} Km`;
+  statAverageDuration.textContent = `Avg Duration: ${stats.avgDuration} Min`;
 }
 
 if (navigator.geolocation)
