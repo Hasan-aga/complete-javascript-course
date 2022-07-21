@@ -1,9 +1,30 @@
-as a user, I want to log my cycling workout with start and end time, duration,distance and geo location.
+as a user, I want to log my cycling workout with start and end time, duration,distance and geo location so that I can keep track of them.
 
-as a user, I want all my workouts to be listed when I view the site.
+as a user, I want all my workouts to be listed when I view the site so that I can see them.
 
-as a user, I want my workouts to presists between sessions.
+as a user, I want my workouts to presists between sessions so that I can leave and comeback freely.
 
-as a user, I want to see all my workouts on the map.
+as a user, I want to see all my workouts on the map so that I can see where I workout.
 
-as a user, I want the map to center on the selected workout.
+as a user, I want the map to center on the selected workout so that I dont have to manually move the view.
+
+as a user I want to see average stats about all my workouts at the end so that I get a general idea about my performance.
+
+
+######### features ############
+a form to take workout info:
+    time
+    duration
+    distance
+    location: get from map
+a map to get the location of the workout and to display all workout locations
+
+center the map to the current selected workout.
+
+a list to view all the workouts
+
+using browser storage api to store the workouts locally at the user
+
+a list to view stats about workouts:
+    avg speed
+    avg distance
