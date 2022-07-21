@@ -18,6 +18,14 @@ function renderMap(latitude, longitude) {
     maxZoom: 19,
     attribution: '© OpenStreetMap',
   }).addTo(map);
+
+  map.addMarkerToMap = function (latitude, longitude, popUp = null) {
+    const marker = L.marker([latitude, longitude]).addTo(this);
+    if (popUp) marker.bindPopup(`${popUp}`).openPopup();
+    return map;
+  };
+
+  return map;
 }
 
 if (navigator.geolocation)
@@ -25,7 +33,12 @@ if (navigator.geolocation)
     function (position) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      renderMap(latitude, longitude);
+      const map = renderMap(latitude, longitude);
+      map.addMarkerToMap(
+        latitude,
+        longitude,
+        '<b>Hello world!</b><br>I am a popup.'
+      );
     },
     function () {
       console.log('Could not get position.');
