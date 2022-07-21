@@ -21,6 +21,19 @@ class User {
   }
 }
 
+class Workout {
+  timeStamp;
+  constructor(type, distance, duration, cadence, elevation, latlng) {
+    this.type = type;
+    this.distance = distance;
+    this.duration = duration;
+    this.cadence = cadence;
+    this.elevation = elevation;
+    this.latlng = latlng;
+    this.timeStamp = new Date();
+  }
+}
+
 function renderMap(latlong) {
   let map = L.map('map').setView(latlong, 13);
 
@@ -39,6 +52,33 @@ function renderMap(latlong) {
   return map;
 }
 
+function displayInputForm() {
+  form.classList.remove('hidden');
+}
+
+function getWorkoutDetails(latlng, map, user) {
+  const type = inputType.value;
+  const duration = inputDuration.value;
+  const distance = inputDistance.value;
+  const cadence = inputCadence.value;
+  const elevation = inputElevation.value;
+  const workout = new Workout(
+    type,
+    distance,
+    duration,
+    cadence,
+    elevation,
+    latlng
+  );
+  saveWorkout(user, workout);
+  console.log(user.workouts);
+  map.addMarkerToMap(workout.latlng, `${workout.type} at ${workout.timeStamp}`);
+}
+
+function saveWorkout(user, workout) {
+  user.workouts.push(workout);
+}
+
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
     function (position) {
@@ -46,11 +86,12 @@ if (navigator.geolocation)
       const { longitude } = position.coords;
       const latlong = [latitude, longitude];
       const user = new User(latitude, longitude);
-      console.log(latitude, longitude, user);
       const map = renderMap(user.latlng);
-      map.addMarkerToMap(latlong, '<b>Hello world!</b><br>I am a popup.');
+      map.addMarkerToMap(user.latlng, '<b>Hello world!</b><br>I am a popup.');
       map.on('click', function (event) {
-        map.addMarkerToMap(event.latlng, 'hello');
+        displayInputForm();
+        const latlng = event.latlng;
+        getWorkoutDetails(latlng, map, user);
       });
     },
     function () {
