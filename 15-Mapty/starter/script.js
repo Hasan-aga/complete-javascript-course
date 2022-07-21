@@ -32,10 +32,10 @@ class Workout {
   };
   constructor(type, distance, duration, cadence, elevation, latlng) {
     this.type = type;
-    this.distance = distance;
-    this.duration = duration;
-    this.cadence = cadence;
-    this.elevation = elevation;
+    this.distance = Number(distance);
+    this.duration = Number(duration);
+    this.cadence = Number(cadence);
+    this.elevation = Number(elevation);
     this.latlng = latlng;
     this.timeStamp = new Date();
     this.shortDate = Intl.DateTimeFormat('en-GB', this.options).format(
@@ -53,7 +53,6 @@ function renderMap(latlong) {
   }).addTo(map);
 
   map.addMarkerToMap = function (latlong, popUp = false) {
-    console.log(this);
     const marker = L.marker(latlong).addTo(this);
     if (popUp) marker.bindPopup(`${popUp}`).openPopup();
     return map;
@@ -116,6 +115,21 @@ function displayWorkouts(user) {
       </li>
           `;
   containerWorkouts.insertAdjacentHTML('beforeend', html);
+  calculateStats(user);
+}
+
+function calculateStats(user) {
+  const totalDistance = user.workouts.reduce(
+    (acc, workout) => acc + workout.distance,
+    0
+  );
+  const totalDuration = user.workouts.reduce(
+    (acc, workout) => acc + workout.duration,
+    0
+  );
+  const avgDistance = totalDistance / user.workouts.length;
+  const avgDuration = totalDuration / user.workouts.length;
+  console.log(totalDistance, totalDuration);
 }
 
 if (navigator.geolocation)
@@ -132,7 +146,6 @@ if (navigator.geolocation)
         const latlng = event.latlng;
         const workout = getWorkoutDetails(latlng, map, user);
         saveWorkout(user, workout);
-        console.log(user.workouts);
         map.addMarkerToMap(
           workout.latlng,
           `${workout.type} at ${workout.shortDate}`
