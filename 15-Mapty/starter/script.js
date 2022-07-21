@@ -12,7 +12,6 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const statAverageDistance = document.querySelector('.avg__distance');
 const statAverageDuration = document.querySelector('.avg__duration');
-const workoutListElement = document.querySelector('.workout');
 
 class User {
   workouts = [];
@@ -142,6 +141,10 @@ function displayStats(stats) {
   statAverageDuration.textContent = `Avg Duration: ${stats.avgDuration} Min`;
 }
 
+function centerMapOn(latlng, map) {
+  map.setView(latlng, 13);
+}
+
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
     function (position) {
@@ -153,7 +156,7 @@ if (navigator.geolocation)
 
       map.on('click', function (event) {
         displayInputForm();
-        const latlng = event.latlng;
+        const latlng = Object.values(event.latlng);
         const workout = getWorkoutDetails(latlng);
         saveWorkout(user, workout);
         map.addMarkerToMap(
@@ -161,6 +164,15 @@ if (navigator.geolocation)
           `${workout.type} at ${workout.shortDate}`
         );
         displayWorkoutsAndStats(user);
+        containerWorkouts.addEventListener('click', function (event) {
+          const clicked = event.target.closest('.workout');
+          if (!clicked) return;
+          const workoutID = clicked.dataset.id;
+          const clickedWorkoutPosition = user.workouts.filter(
+            workout => workout.timeStamp == workoutID
+          )[0].latlng;
+          centerMapOn(clickedWorkoutPosition, map);
+        });
       });
     },
     function () {
