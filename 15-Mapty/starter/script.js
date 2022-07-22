@@ -84,6 +84,14 @@ class User {
     localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
   }
 
+  removeWorkout(workoutToRemove) {
+    console.log('removing:', workoutToRemove);
+    this.workouts = this.workouts.filter(
+      workout => !workout === workoutToRemove
+    );
+    console.log(this.workouts);
+  }
+
   calculateStats() {
     const totalDistance = this.workouts.reduce(
       (acc, workout) => acc + workout.distance,
@@ -284,6 +292,7 @@ if (navigator.geolocation)
 
       //   handle submit form
       form.addEventListener('submit', function (event) {
+        console.log(event.target);
         event.preventDefault();
         user.addWorkout(inputType.value, currentWorkoutPosition);
         app.map.addPermenantMarker(
@@ -305,13 +314,27 @@ if (navigator.geolocation)
       });
 
       containerWorkouts.addEventListener('click', function (event) {
-        const clicked = event.target.closest('.workout');
-        if (!clicked) return;
-        const workoutID = clicked.dataset.id;
-        const clickedWorkoutPosition = user.getWorkoutFromId(workoutID).latlng;
+        const clicked = event.target;
+        if (clicked.classList.contains('workout__remove')) {
+          // handle click on remove button
+          const workoutElement = event.target.closest('.workout');
+          const workoutID = workoutElement.dataset.id;
+          const workoutToRemove = user.getWorkoutFromId(workoutID);
+          user.removeWorkout(workoutToRemove);
+        } else if (!clicked || /form/gm.test(clicked.classList))
+          return; //handle click on empty section or input form
+        else {
+          //handle click on workout
+          const workoutElement = event.target.closest('.workout');
+          const workoutID = workoutElement.dataset.id;
+          const clickedWorkoutPosition =
+            user.getWorkoutFromId(workoutID).latlng;
 
-        app.centerMapOn(clickedWorkoutPosition, map);
+          app.centerMapOn(clickedWorkoutPosition, map);
+        }
       });
+
+      //   TODO: handle creating workout without clicking on map
     },
     function () {
       alert('Could not get position.');
