@@ -103,6 +103,19 @@ a:visited {
   transform: scale(1.5);
 }
 
+.reset-storage {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: #f7f7f7;
+  font-weight: 700;
+  transition: all 200ms;
+}
+
+.reset-storage:hover {
+  background-color: #444;
+}
+
 .workout__details {
   display: flex;
   align-items: baseline;

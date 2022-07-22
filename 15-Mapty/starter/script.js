@@ -141,7 +141,10 @@ class User {
   }
 
   displayAllWorkouts() {
-    this.workouts.forEach(workout => workout.displayWorkout());
+    this.workouts.forEach(workout => {
+      workout.displayWorkout();
+      console.log(workout.timeStamp);
+    });
   }
 
   getWorkoutFromId(workoutID) {
@@ -168,6 +171,7 @@ class Workout {
     this.duration = Number(duration);
     this.latlng = latlng;
     this.timeStamp = new Date();
+    console.log(this.timeStamp);
     this.shortDate = Intl.DateTimeFormat('en-GB', this.options).format(
       this.timeStamp
     ); // 14 July 2022
@@ -328,14 +332,19 @@ if (navigator.geolocation)
           .classList.toggle('form__row--hidden');
       });
 
+      //   handle click on workout list
       containerWorkouts.addEventListener('click', function (event) {
         const clicked = event.target;
+        console.log(clicked, clicked.classList);
         if (clicked.classList.contains('workout__remove')) {
           // handle click on remove button
           const workoutElement = event.target.closest('.workout');
           const workoutID = workoutElement.dataset.id;
           const workoutToRemove = user.getWorkoutFromId(workoutID);
           user.removeWorkout(workoutToRemove);
+        } else if (clicked.classList.contains('reset-storage')) {
+          console.log('reset local storage');
+          localStorage.clear();
         } else if (!clicked || /form/gm.test(clicked.classList))
           return; //handle click on empty section or input form
         else {
@@ -344,8 +353,8 @@ if (navigator.geolocation)
           const workoutID = workoutElement.dataset.id;
           const clickedWorkoutPosition =
             user.getWorkoutFromId(workoutID).latlng;
-
-          app.centerMapOn(clickedWorkoutPosition, map);
+          console.log(clickedWorkoutPosition, workoutID);
+          app.centerMapOn(clickedWorkoutPosition);
         }
       });
 
