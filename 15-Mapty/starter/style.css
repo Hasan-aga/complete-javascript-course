@@ -196,6 +196,10 @@ a:visited {
   background-color: var(--color-light--1);
 }
 
+#map:hover {
+  cursor: url('location.svg '), pointer;
+}
+
 /* Popup width is defined in JS using options */
 .leaflet-popup .leaflet-popup-content-wrapper {
   background-color: var(--color-dark--1);
