@@ -1,4 +1,5 @@
 'use strict';
+// localStorage.clear();
 
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -291,8 +292,6 @@ class Running extends Workout {
     return new Running(type, distance, duration, cadence, latlng);
   }
 }
-
-// localStorage.clear();
 
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
