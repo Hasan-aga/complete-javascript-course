@@ -35,10 +35,11 @@
       <img src="logo.png" alt="Logo" class="logo" />
 
       <ul class="workouts">
-        <form class="form hidden">
+        <form class="form">
           <div class="form__row">
             <label class="form__label">Type</label>
             <select class="form__input form__input--type">
+              <option selected disabled value="">Type</option>
               <option value="running">Running</option>
               <option value="cycling">Cycling</option>
             </select>
@@ -55,10 +56,10 @@
             />
           </div>
           <div class="form__row">
-            <label class="form__label">Cadence</label>
+            <label class="form__label">Location</label>
             <input
-              class="form__input form__input--cadence"
-              placeholder="step/min"
+              class="form__input form__input--location"
+              placeholder="lat, lon"
             />
           </div>
           <div class="form__row form__row--hidden">
@@ -126,5 +127,15 @@
     </div>
 
     <div id="map"></div>
+
+    <!-- icons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
