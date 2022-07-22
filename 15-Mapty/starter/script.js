@@ -13,6 +13,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 const statAverageDistance = document.querySelector('.avg__distance');
 const statAverageDuration = document.querySelector('.avg__duration');
 
+let currentWorkoutPosition, map;
 class User {
   workouts = [];
   latlng;
@@ -47,17 +48,29 @@ class Workout {
   }
 }
 
-function renderMap(latlong) {
-  let map = L.map('map').setView(latlong, 13);
+function renderMap(latlng) {
+  let map = L.map('map').setView(latlng, 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap',
   }).addTo(map);
 
-  map.addMarkerToMap = function (latlong, popUp = false) {
-    const marker = L.marker(latlong).addTo(this);
-    if (popUp) marker.bindPopup(`${popUp}`).openPopup();
+  map.addPermenantMarker = function (latlng, popUp = false) {
+    const marker = L.marker(latlng).addTo(this);
+    if (popUp) {
+      marker.bindPopup(`${popUp}`).openPopup();
+    }
+    return map;
+  };
+
+  map.addTemporaryMarker = function (latlng) {
+    // if map already has marker -> move it to new coordinates
+    if (map.temporaryWorkoutMarker) {
+      map.temporaryWorkoutMarker.setLatLng(latlng);
+      return map;
+    }
+    map.temporaryWorkoutMarker = L.marker(latlng).addTo(this);
     return map;
   };
 
@@ -93,6 +106,8 @@ function saveWorkout(user, workout) {
 function clearLocalStorage() {
   localStorage.clear();
 }
+
+clearLocalStorage();
 
 function displayStoredWrokouts() {
   const keys = Object.keys(localStorage);
@@ -173,17 +188,23 @@ if (navigator.geolocation)
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       const user = new User(latitude, longitude);
-      const map = renderMap(user.latlng);
-      map.addMarkerToMap(user.latlng, '<b>Hello world!</b><br>I am a popup.');
+      map = renderMap(user.latlng);
+      map.addPermenantMarker(user.latlng, '<b>This is you</b>');
 
       map.on('click', function (event) {
         displayInputForm();
         const latlng = Object.values(event.latlng);
-        const workout = getWorkoutDetails(latlng);
+        currentWorkoutPosition = latlng;
+        map.addTemporaryMarker(currentWorkoutPosition);
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const workout = getWorkoutDetails(currentWorkoutPosition);
         saveWorkout(user, workout);
-        map.addMarkerToMap(
+        map.addPermenantMarker(
           workout.latlng,
-          `${workout.type} at ${workout.shortDate}`
+          `<b>${workout.type}</b> <br> ${workout.shortDate}`
         );
         displayWorkoutsAndStats(user);
       });
