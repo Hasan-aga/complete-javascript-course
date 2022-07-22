@@ -105,6 +105,30 @@ class Cycling extends Workout {
     this.elevation = elevation;
   }
 
+  displayWorkout() {
+    const html = `
+          <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
+          <h2 class="workout__title">${this.type} on ${this.shortDate}</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__value">${this.distance}</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">${this.duration}</span>
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">${this.elevation}</span>
+            <span class="workout__unit">min/km</span>
+          </div>
+        </li>
+            `;
+    form.insertAdjacentHTML('afterend', html);
+  }
+
   static createWorkout(latlng) {
     let type = inputType.value;
     let duration = inputDuration.value;
@@ -117,6 +141,32 @@ class Running extends Workout {
   constructor(type, distance, duration, cadence, latlng) {
     super(type, distance, duration, latlng);
     this.cadence = cadence;
+  }
+
+  displayWorkout() {
+    const html = `
+          <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
+          <h2 class="workout__title">${this.type} on ${this.shortDate}</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__value">${this.distance}</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">${this.duration}</span>
+            <span class="workout__unit">min</span>
+          </div>
+
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">🦶🏼</span>
+            <span class="workout__value">${this.cadence}</span>
+            <span class="workout__unit">spm</span>
+          </div>
+        </li>
+            `;
+    form.insertAdjacentHTML('afterend', html);
   }
 
   static createWorkout(latlng) {
@@ -146,40 +196,9 @@ function displayStoredWrokouts() {
 }
 
 function displayWorkoutsAndStats(user) {
-  const workout = user.workouts.at(-1);
-
-  displayWorkout(workout);
+  user.lastWorkout.displayWorkout();
   calculateStats(user);
   displayStats(user.stats);
-}
-
-function displayWorkout(workout) {
-  const html = `
-        <li class="workout workout--${workout.type}" data-id="${workout.timeStamp}">
-        <h2 class="workout__title">${workout.type} on ${workout.shortDate}</h2>
-        <div class="workout__details">
-          <span class="workout__icon">🏃‍♂️</span>
-          <span class="workout__value">${workout.distance}</span>
-          <span class="workout__unit">km</span>
-        </div>
-        <div class="workout__details">
-          <span class="workout__icon">⏱</span>
-          <span class="workout__value">${workout.duration}</span>
-          <span class="workout__unit">min</span>
-        </div>
-        <div class="workout__details">
-          <span class="workout__icon">⚡️</span>
-          <span class="workout__value">${workout.elevation}</span>
-          <span class="workout__unit">min/km</span>
-        </div>
-        <div class="workout__details">
-          <span class="workout__icon">🦶🏼</span>
-          <span class="workout__value">${workout.cadence}</span>
-          <span class="workout__unit">spm</span>
-        </div>
-      </li>
-          `;
-  form.insertAdjacentHTML('afterend', html);
 }
 
 function calculateStats(user) {
