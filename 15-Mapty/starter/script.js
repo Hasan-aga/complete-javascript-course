@@ -52,6 +52,14 @@ class App {
   displayInputForm() {
     form.classList.remove('hidden');
   }
+
+  clearForm() {
+    inputDistance.value =
+      inputCadence.value =
+      inputDuration.value =
+      inputElevation.value =
+        '';
+  }
 }
 
 class User {
@@ -71,6 +79,31 @@ class User {
 
     const workout = this.workouts.at(-1);
     localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
+  }
+
+  calculateStats() {
+    const totalDistance = this.workouts.reduce(
+      (acc, workout) => acc + workout.distance,
+      0
+    );
+    const totalDuration = this.workouts.reduce(
+      (acc, workout) => acc + workout.duration,
+      0
+    );
+    const avgDistance = (totalDistance / this.workouts.length).toFixed(1);
+    const avgDuration = (totalDuration / this.workouts.length).toFixed(1);
+    this.stats = { totalDistance, totalDuration, avgDistance, avgDuration };
+  }
+
+  displayStats() {
+    statAverageDistance.textContent = `Avg Distance: ${this.stats.avgDistance} Km`;
+    statAverageDuration.textContent = `Avg Duration: ${this.stats.avgDuration} Min`;
+  }
+
+  displayWorkoutsAndStats() {
+    this.lastWorkout.displayWorkout();
+    this.calculateStats();
+    this.displayStats();
   }
 
   get lastWorkout() {
@@ -195,44 +228,11 @@ function displayStoredWrokouts() {
   }
 }
 
-function displayWorkoutsAndStats(user) {
-  user.lastWorkout.displayWorkout();
-  calculateStats(user);
-  displayStats(user.stats);
-}
-
-function calculateStats(user) {
-  const totalDistance = user.workouts.reduce(
-    (acc, workout) => acc + workout.distance,
-    0
-  );
-  const totalDuration = user.workouts.reduce(
-    (acc, workout) => acc + workout.duration,
-    0
-  );
-  const avgDistance = (totalDistance / user.workouts.length).toFixed(1);
-  const avgDuration = (totalDuration / user.workouts.length).toFixed(1);
-  user.stats = { totalDistance, totalDuration, avgDistance, avgDuration };
-}
-
-function displayStats(stats) {
-  statAverageDistance.textContent = `Avg Distance: ${stats.avgDistance} Km`;
-  statAverageDuration.textContent = `Avg Duration: ${stats.avgDuration} Min`;
-}
-
 function centerMapOn(latlng, map) {
   map.setView(latlng, 13);
 }
 
 displayStoredWrokouts();
-
-function clearForm() {
-  inputDistance.value =
-    inputCadence.value =
-    inputDuration.value =
-    inputElevation.value =
-      '';
-}
 
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
@@ -259,8 +259,8 @@ if (navigator.geolocation)
           user.lastWorkout.latlng,
           `<b>${user.lastWorkout.type}</b> <br> ${user.lastWorkout.shortDate}`
         );
-        displayWorkoutsAndStats(user);
-        clearForm();
+        user.displayWorkoutsAndStats();
+        app.clearForm();
       });
 
       inputType.addEventListener('change', function (event) {
