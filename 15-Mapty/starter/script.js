@@ -1,5 +1,5 @@
 'use strict';
-localStorage.clear();
+// localStorage.clear();
 
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -160,7 +160,9 @@ class App {
     if (navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
         this.initiateMap.bind(this),
-        alert('please provide position.')
+        function () {
+          alert('please provide position.');
+        }
       );
   }
 
