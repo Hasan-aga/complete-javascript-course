@@ -222,21 +222,21 @@ if (navigator.geolocation)
       const { longitude } = position.coords;
       const user = new User(latitude, longitude);
       const app = new App(user);
-      map = app.renderMap(user.latlng);
-      map.addPermenantMarker(user.latlng, '<b>This is you</b>');
+      app.renderMap(user.latlng);
+      app.map.addPermenantMarker(user.latlng, '<b>This is you</b>');
 
-      //   map.on('click', function (event) {
-      //     app.displayInputForm();
-      //     const latlng = Object.values(event.latlng);
-      //     currentWorkoutPosition = latlng;
-      //     map.addTemporaryMarker(currentWorkoutPosition);
-      //   });
+      app.map.on('click', function (event) {
+        app.displayInputForm();
+        const latlng = Object.values(event.latlng);
+        currentWorkoutPosition = latlng;
+        app.map.addTemporaryMarker(currentWorkoutPosition);
+      });
 
       //   handle submit form
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         user.addWorkout(inputType.value, currentWorkoutPosition);
-        map.addPermenantMarker(
+        app.map.addPermenantMarker(
           user.lastWorkout.latlng,
           `<b>${user.lastWorkout.type}</b> <br> ${user.lastWorkout.shortDate}`
         );
