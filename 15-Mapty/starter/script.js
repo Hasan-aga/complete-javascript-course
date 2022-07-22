@@ -52,23 +52,6 @@ class App {
   displayInputForm() {
     form.classList.remove('hidden');
   }
-
-  getWorkoutDetails(latlng) {
-    const type = inputType.value;
-    const duration = inputDuration.value;
-    const distance = inputDistance.value;
-    const cadence = inputCadence.value;
-    const elevation = inputElevation.value;
-    const workout = new Workout(
-      type,
-      distance,
-      duration,
-      cadence,
-      elevation,
-      latlng
-    );
-    return workout;
-  }
 }
 
 class User {
@@ -79,6 +62,19 @@ class User {
     this.latitude = latitude;
     this.longitude = longitude;
     this.latlng = [this.latitude, this.longitude];
+  }
+
+  addWorkout(type, latlng) {
+    console.log(type);
+    if (type === 'cycling') this.workouts.push(Cycling.createWorkout(latlng));
+    if (type === 'running') this.workouts.push(Running.createWorkout(latlng));
+
+    const workout = this.workouts.at(-1);
+    localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
+  }
+
+  get lastWorkout() {
+    return this.workouts.at(-1);
   }
 }
 
@@ -91,12 +87,10 @@ class Workout {
     year: 'numeric',
     day: 'numeric',
   };
-  constructor(type, distance, duration, cadence, elevation, latlng) {
+  constructor(type, distance, duration, latlng) {
     this.type = type;
     this.distance = Number(distance);
     this.duration = Number(duration);
-    this.cadence = Number(cadence);
-    this.elevation = Number(elevation);
     this.latlng = latlng;
     this.timeStamp = new Date();
     this.shortDate = Intl.DateTimeFormat('en-GB', this.options).format(
@@ -105,9 +99,33 @@ class Workout {
   }
 }
 
-function saveWorkout(user, workout) {
-  user.workouts.push(workout);
-  localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
+class Cycling extends Workout {
+  constructor(type, distance, duration, elevation, latlng) {
+    super(type, distance, duration, latlng);
+    this.elevation = elevation;
+  }
+
+  static createWorkout(latlng) {
+    let type = inputType.value;
+    let duration = inputDuration.value;
+    let distance = inputDistance.value;
+    let elevation = inputElevation.value;
+    return new Cycling(type, distance, duration, elevation, latlng);
+  }
+}
+class Running extends Workout {
+  constructor(type, distance, duration, cadence, latlng) {
+    super(type, distance, duration, latlng);
+    this.cadence = cadence;
+  }
+
+  static createWorkout(latlng) {
+    let type = inputType.value;
+    let duration = inputDuration.value;
+    let distance = inputDistance.value;
+    let cadence = inputCadence.value;
+    return new Running(type, distance, duration, cadence, latlng);
+  }
 }
 
 function clearLocalStorage() {
@@ -207,21 +225,20 @@ if (navigator.geolocation)
       map = app.renderMap(user.latlng);
       map.addPermenantMarker(user.latlng, '<b>This is you</b>');
 
-      map.on('click', function (event) {
-        app.displayInputForm();
-        const latlng = Object.values(event.latlng);
-        currentWorkoutPosition = latlng;
-        map.addTemporaryMarker(currentWorkoutPosition);
-      });
+      //   map.on('click', function (event) {
+      //     app.displayInputForm();
+      //     const latlng = Object.values(event.latlng);
+      //     currentWorkoutPosition = latlng;
+      //     map.addTemporaryMarker(currentWorkoutPosition);
+      //   });
 
       //   handle submit form
       form.addEventListener('submit', function (event) {
         event.preventDefault();
-        const workout = app.getWorkoutDetails(currentWorkoutPosition);
-        saveWorkout(user, workout);
+        user.addWorkout(inputType.value, currentWorkoutPosition);
         map.addPermenantMarker(
-          workout.latlng,
-          `<b>${workout.type}</b> <br> ${workout.shortDate}`
+          user.lastWorkout.latlng,
+          `<b>${user.lastWorkout.type}</b> <br> ${user.lastWorkout.shortDate}`
         );
         displayWorkoutsAndStats(user);
         clearForm();
