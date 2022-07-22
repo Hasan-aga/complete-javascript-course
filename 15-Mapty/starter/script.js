@@ -182,6 +182,14 @@ function centerMapOn(latlng, map) {
 
 displayStoredWrokouts();
 
+function clearForm() {
+  inputDistance.value =
+    inputCadence.value =
+    inputDuration.value =
+    inputElevation.value =
+      '';
+}
+
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
     function (position) {
@@ -198,6 +206,7 @@ if (navigator.geolocation)
         map.addTemporaryMarker(currentWorkoutPosition);
       });
 
+      //   handle submit form
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         const workout = getWorkoutDetails(currentWorkoutPosition);
@@ -207,6 +216,7 @@ if (navigator.geolocation)
           `<b>${workout.type}</b> <br> ${workout.shortDate}`
         );
         displayWorkoutsAndStats(user);
+        clearForm();
       });
 
       containerWorkouts.addEventListener('click', function (event) {
