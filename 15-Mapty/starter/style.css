@@ -85,9 +85,22 @@ a:visited {
 }
 
 .workout__title {
+  display: flex;
+  justify-content: space-between;
   font-size: 1.7rem;
   font-weight: 600;
   grid-column: 1 / -1;
+}
+
+.workout__remove {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 200ms;
+}
+
+.workout__remove:hover {
+  transform: scale(1.5);
 }
 
 .workout__details {
