@@ -81,7 +81,8 @@ class User {
     if (type === 'cycling') this.workouts.push(Cycling.createWorkout(latlng));
     if (type === 'running') this.workouts.push(Running.createWorkout(latlng));
 
-    const workout = this.workouts.at(-1);
+    const workout = this.lastWorkout;
+    console.log(JSON.stringify(workout));
     localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
   }
 
@@ -105,9 +106,29 @@ class User {
   }
 
   displayWorkoutsAndStats() {
+    console.log(this.workouts);
     this.lastWorkout.displayWorkout();
     this.calculateStats();
     this.displayStats();
+  }
+
+  displayStoredWrokouts() {
+    console.log(localStorage);
+    const keys = Object.keys(localStorage);
+    for (let key of keys) {
+      // console.log(`${key}: ${JSON.parse(localStorage.getItem(key))}`);
+      let workout;
+      if (
+        Workout.getTypeFromWorkoutString(localStorage.getItem(key)) ===
+        'running'
+      ) {
+        workout = Running.createWorkoutFromString(localStorage.getItem(key));
+      } else {
+        workout = Cycling.createWorkoutFromString(localStorage.getItem(key));
+      }
+      console.log(workout);
+      workout.displayWorkout();
+    }
   }
 
   getWorkoutFromId(workoutID) {
@@ -138,6 +159,10 @@ class Workout {
       this.timeStamp
     ); // 14 July 2022
   }
+
+  static getTypeFromWorkoutString(workout) {
+    return JSON.parse(workout).type;
+  }
 }
 
 class Cycling extends Workout {
@@ -146,6 +171,16 @@ class Cycling extends Workout {
     this.elevation = elevation;
   }
 
+  static createWorkoutFromString(workoutString) {
+    const workout = JSON.parse(workoutString);
+    return new Cycling(
+      workout.type,
+      workout.distance,
+      workout.duration,
+      workout.elevation,
+      workout.latlng
+    );
+  }
   displayWorkout() {
     const html = `
           <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
@@ -184,6 +219,17 @@ class Running extends Workout {
     this.cadence = cadence;
   }
 
+  static createWorkoutFromString(workoutString) {
+    const workout = JSON.parse(workoutString);
+    return new Cycling(
+      workout.type,
+      workout.distance,
+      workout.duration,
+      workout.cadence,
+      workout.latlng
+    );
+  }
+
   displayWorkout() {
     const html = `
           <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
@@ -219,24 +265,7 @@ class Running extends Workout {
   }
 }
 
-function clearLocalStorage() {
-  localStorage.clear();
-}
-
-clearLocalStorage();
-
-function displayStoredWrokouts() {
-  const keys = Object.keys(localStorage);
-  for (let key of keys) {
-    // console.log(`${key}: ${JSON.parse(localStorage.getItem(key))}`);
-    const workout = JSON.parse(localStorage.getItem(key));
-    console.log(workout);
-
-    displayWorkout(workout);
-  }
-}
-
-displayStoredWrokouts();
+// localStorage.clear();
 
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
@@ -244,6 +273,7 @@ if (navigator.geolocation)
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       const user = new User(latitude, longitude);
+      user.displayStoredWrokouts();
       const app = new App(user);
       app.renderMap(user.latlng);
       app.map.addPermenantMarker(user.latlng, '<b>This is you</b>');
@@ -288,6 +318,6 @@ if (navigator.geolocation)
       });
     },
     function () {
-      console.log('Could not get position.');
+      alert('Could not get position.');
     }
   );
