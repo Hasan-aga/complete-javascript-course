@@ -117,10 +117,11 @@ class User {
     this.displayStats();
   }
 
-  displayStoredWrokouts() {
+  getStoredWorkouts() {
     const keys = Object.keys(localStorage);
     for (let key of keys) {
       let workout;
+
       if (
         Workout.getTypeFromWorkoutString(localStorage.getItem(key)) ===
         'running'
@@ -129,8 +130,13 @@ class User {
       } else {
         workout = Cycling.createWorkoutFromString(localStorage.getItem(key));
       }
-      workout.displayWorkout();
+      this.workouts.push(workout); //adds workout without writing to storage since its already in storage
     }
+  }
+
+  displayAllWorkouts() {
+    console.log(this.workouts);
+    this.workouts.forEach(workout => workout.displayWorkout());
   }
 
   getWorkoutFromId(workoutID) {
@@ -186,7 +192,10 @@ class Cycling extends Workout {
   displayWorkout() {
     const html = `
           <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
+          <div class="workout__title">
           <h2 class="workout__title">${this.type} on ${this.shortDate}</h2>
+          <button class="workout__remove">❌️</button>
+        </div>
           <div class="workout__details">
             <span class="workout__icon">🏃‍♂️</span>
             <span class="workout__value">${this.distance}</span>
@@ -223,7 +232,7 @@ class Running extends Workout {
 
   static createWorkoutFromString(workoutString) {
     const workout = JSON.parse(workoutString);
-    return new Cycling(
+    return new Running(
       workout.type,
       workout.distance,
       workout.duration,
@@ -270,7 +279,7 @@ class Running extends Workout {
   }
 }
 
-localStorage.clear();
+// localStorage.clear();
 
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
@@ -278,7 +287,8 @@ if (navigator.geolocation)
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       const user = new User(latitude, longitude);
-      user.displayStoredWrokouts();
+      user.getStoredWorkouts();
+      user.displayAllWorkouts();
       const app = new App(user);
       app.renderMap(user.latlng);
       app.map.addPermenantMarker(user.latlng, '<b>This is you</b>');
