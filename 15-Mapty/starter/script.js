@@ -49,6 +49,10 @@ class App {
     return this.map;
   }
 
+  centerMapOn(latlng) {
+    this.map.setView(latlng, 13);
+  }
+
   displayInputForm() {
     form.classList.remove('hidden');
   }
@@ -104,6 +108,10 @@ class User {
     this.lastWorkout.displayWorkout();
     this.calculateStats();
     this.displayStats();
+  }
+
+  getWorkoutFromId(workoutID) {
+    return this.workouts.find(workout => workout.timeStamp == workoutID);
   }
 
   get lastWorkout() {
@@ -228,10 +236,6 @@ function displayStoredWrokouts() {
   }
 }
 
-function centerMapOn(latlng, map) {
-  map.setView(latlng, 13);
-}
-
 displayStoredWrokouts();
 
 if (navigator.geolocation)
@@ -277,12 +281,10 @@ if (navigator.geolocation)
         const clicked = event.target.closest('.workout');
         if (!clicked) return;
         const workoutID = clicked.dataset.id;
-        const clickedWorkoutPosition = user.workouts.find(
-          workout => workout.timeStamp == workoutID
-        ).latlng;
+        const clickedWorkoutPosition = user.getWorkoutFromId(workoutID).latlng;
 
         console.log(clickedWorkoutPosition);
-        centerMapOn(clickedWorkoutPosition, map);
+        app.centerMapOn(clickedWorkoutPosition, map);
       });
     },
     function () {
