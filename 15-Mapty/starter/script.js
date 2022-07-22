@@ -77,12 +77,10 @@ class User {
   }
 
   addWorkout(type, latlng) {
-    console.log(type);
     if (type === 'cycling') this.workouts.push(Cycling.createWorkout(latlng));
     if (type === 'running') this.workouts.push(Running.createWorkout(latlng));
 
     const workout = this.lastWorkout;
-    console.log(JSON.stringify(workout));
     localStorage.setItem(workout.timeStamp, JSON.stringify(workout));
   }
 
@@ -106,17 +104,14 @@ class User {
   }
 
   displayWorkoutsAndStats() {
-    console.log(this.workouts);
     this.lastWorkout.displayWorkout();
     this.calculateStats();
     this.displayStats();
   }
 
   displayStoredWrokouts() {
-    console.log(localStorage);
     const keys = Object.keys(localStorage);
     for (let key of keys) {
-      // console.log(`${key}: ${JSON.parse(localStorage.getItem(key))}`);
       let workout;
       if (
         Workout.getTypeFromWorkoutString(localStorage.getItem(key)) ===
@@ -126,7 +121,6 @@ class User {
       } else {
         workout = Cycling.createWorkoutFromString(localStorage.getItem(key));
       }
-      console.log(workout);
       workout.displayWorkout();
     }
   }
@@ -313,7 +307,6 @@ if (navigator.geolocation)
         const workoutID = clicked.dataset.id;
         const clickedWorkoutPosition = user.getWorkoutFromId(workoutID).latlng;
 
-        console.log(clickedWorkoutPosition);
         app.centerMapOn(clickedWorkoutPosition, map);
       });
     },
