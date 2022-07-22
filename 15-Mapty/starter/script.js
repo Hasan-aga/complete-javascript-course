@@ -8,7 +8,7 @@ const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
 const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
-const inputCadence = document.querySelector('.form__input--cadence');
+const inputLocation = document.querySelector('.form__input--location');
 const inputElevation = document.querySelector('.form__input--elevation');
 const statAverageDistance = document.querySelector('.avg__distance');
 const statAverageDuration = document.querySelector('.avg__duration');
@@ -33,11 +33,10 @@ class Workout {
     year: 'numeric',
     day: 'numeric',
   };
-  constructor(type, distance, duration, cadence, elevation, latlng) {
+  constructor(type, distance, duration, elevation, latlng) {
     this.type = type;
     this.distance = Number(distance);
     this.duration = Number(duration);
-    this.cadence = Number(cadence);
     this.elevation = Number(elevation);
     this.latlng = latlng;
     this.timeStamp = new Date();
@@ -66,13 +65,14 @@ function renderMap(latlong) {
 
 function displayInputForm() {
   form.classList.remove('hidden');
+  inputType.focus();
 }
 
 function getWorkoutDetails(latlng) {
   const type = inputType.value;
   const duration = inputDuration.value;
   const distance = inputDistance.value;
-  const cadence = inputCadence.value;
+  const location = inputCadence.value;
   const elevation = inputElevation.value;
   const workout = new Workout(
     type,
