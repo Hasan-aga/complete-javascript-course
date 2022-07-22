@@ -35,11 +35,10 @@
       <img src="logo.png" alt="Logo" class="logo" />
 
       <ul class="workouts">
-        <form class="form">
+        <form class="form hidden">
           <div class="form__row">
             <label class="form__label">Type</label>
             <select class="form__input form__input--type">
-              <option selected disabled value="">Type</option>
               <option value="running">Running</option>
               <option value="cycling">Cycling</option>
             </select>
@@ -56,10 +55,10 @@
             />
           </div>
           <div class="form__row">
-            <label class="form__label">Location</label>
+            <label class="form__label">Cadence</label>
             <input
-              class="form__input form__input--location"
-              placeholder="lat, lon"
+              class="form__input form__input--cadence"
+              placeholder="step/min"
             />
           </div>
           <div class="form__row form__row--hidden">
