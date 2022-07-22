@@ -53,6 +53,12 @@ class App {
     this.map.setView(latlng, 13);
   }
 
+  addMarkerForEachWorkout() {
+    this.user.workouts.forEach(workout =>
+      this.map.addPermenantMarker(workout.latlng)
+    );
+  }
+
   displayInputForm() {
     form.classList.remove('hidden');
   }
@@ -135,7 +141,6 @@ class User {
   }
 
   displayAllWorkouts() {
-    console.log(this.workouts);
     this.workouts.forEach(workout => workout.displayWorkout());
   }
 
@@ -287,12 +292,12 @@ if (navigator.geolocation)
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       const user = new User(latitude, longitude);
+      const app = new App(user);
       user.getStoredWorkouts();
       user.displayAllWorkouts();
-      const app = new App(user);
       app.renderMap(user.latlng);
       app.map.addPermenantMarker(user.latlng, '<b>This is you</b>');
-
+      app.addMarkerForEachWorkout();
       app.map.on('click', function (event) {
         app.displayInputForm();
         const latlng = Object.values(event.latlng);
