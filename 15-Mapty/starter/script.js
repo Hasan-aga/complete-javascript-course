@@ -91,11 +91,9 @@ class User {
   }
 
   removeWorkout(workoutToRemove) {
-    console.log('removing:', workoutToRemove);
     this.workouts = this.workouts.filter(
       workout => !workout === workoutToRemove
     );
-    console.log(this.workouts);
   }
 
   calculateStats() {
@@ -190,13 +188,16 @@ class Cycling extends Workout {
 
   static createWorkoutFromString(workoutString) {
     const workout = JSON.parse(workoutString);
-    return new Cycling(
+    const timeStamp = workout.timeStamp;
+    const cyclingWorkout = new Cycling(
       workout.type,
       workout.distance,
       workout.duration,
       workout.elevation,
       workout.latlng
     );
+    cyclingWorkout.timeStamp = timeStamp;
+    return cyclingWorkout;
   }
   displayWorkout() {
     const html = `
@@ -241,13 +242,16 @@ class Running extends Workout {
 
   static createWorkoutFromString(workoutString) {
     const workout = JSON.parse(workoutString);
-    return new Running(
+    const timeStamp = workout.timeStamp;
+    const runningWorkout = new Running(
       workout.type,
       workout.distance,
       workout.duration,
       workout.cadence,
       workout.latlng
     );
+    runningWorkout.timeStamp = timeStamp;
+    return runningWorkout;
   }
 
   displayWorkout() {
@@ -311,7 +315,6 @@ if (navigator.geolocation)
 
       //   handle submit form
       form.addEventListener('submit', function (event) {
-        console.log(event.target);
         event.preventDefault();
         user.addWorkout(inputType.value, currentWorkoutPosition);
         app.map.addPermenantMarker(
@@ -335,7 +338,6 @@ if (navigator.geolocation)
       //   handle click on workout list
       containerWorkouts.addEventListener('click', function (event) {
         const clicked = event.target;
-        console.log(clicked, clicked.classList);
         if (clicked.classList.contains('workout__remove')) {
           // handle click on remove button
           const workoutElement = event.target.closest('.workout');
@@ -353,7 +355,6 @@ if (navigator.geolocation)
           const workoutID = workoutElement.dataset.id;
           const clickedWorkoutPosition =
             user.getWorkoutFromId(workoutID).latlng;
-          console.log(clickedWorkoutPosition, workoutID);
           app.centerMapOn(clickedWorkoutPosition);
         }
       });
