@@ -48,7 +48,29 @@ class App {
 
     return this.map;
   }
+
+  displayInputForm() {
+    form.classList.remove('hidden');
+  }
+
+  getWorkoutDetails(latlng) {
+    const type = inputType.value;
+    const duration = inputDuration.value;
+    const distance = inputDistance.value;
+    const cadence = inputCadence.value;
+    const elevation = inputElevation.value;
+    const workout = new Workout(
+      type,
+      distance,
+      duration,
+      cadence,
+      elevation,
+      latlng
+    );
+    return workout;
+  }
 }
+
 class User {
   workouts = [];
   latlng;
@@ -81,27 +103,6 @@ class Workout {
       this.timeStamp
     ); // 14 July 2022
   }
-}
-
-function displayInputForm() {
-  form.classList.remove('hidden');
-}
-
-function getWorkoutDetails(latlng) {
-  const type = inputType.value;
-  const duration = inputDuration.value;
-  const distance = inputDistance.value;
-  const cadence = inputCadence.value;
-  const elevation = inputElevation.value;
-  const workout = new Workout(
-    type,
-    distance,
-    duration,
-    cadence,
-    elevation,
-    latlng
-  );
-  return workout;
 }
 
 function saveWorkout(user, workout) {
@@ -207,7 +208,7 @@ if (navigator.geolocation)
       map.addPermenantMarker(user.latlng, '<b>This is you</b>');
 
       map.on('click', function (event) {
-        displayInputForm();
+        app.displayInputForm();
         const latlng = Object.values(event.latlng);
         currentWorkoutPosition = latlng;
         map.addTemporaryMarker(currentWorkoutPosition);
@@ -216,7 +217,7 @@ if (navigator.geolocation)
       //   handle submit form
       form.addEventListener('submit', function (event) {
         event.preventDefault();
-        const workout = getWorkoutDetails(currentWorkoutPosition);
+        const workout = app.getWorkoutDetails(currentWorkoutPosition);
         saveWorkout(user, workout);
         map.addPermenantMarker(
           workout.latlng,
