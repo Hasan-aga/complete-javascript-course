@@ -14,6 +14,41 @@ const statAverageDistance = document.querySelector('.avg__distance');
 const statAverageDuration = document.querySelector('.avg__duration');
 
 let currentWorkoutPosition, map;
+
+class App {
+  map;
+  constructor(user) {
+    this.user = user;
+  }
+  renderMap(latlng) {
+    this.map = L.map('map').setView(latlng, 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap',
+    }).addTo(this.map);
+
+    this.map.addPermenantMarker = function (latlng, popUp = false) {
+      const marker = L.marker(latlng).addTo(this);
+      if (popUp) {
+        marker.bindPopup(`${popUp}`).openPopup();
+      }
+      return this;
+    };
+
+    this.map.addTemporaryMarker = function (latlng) {
+      // if map already has marker -> move it to new coordinates
+      if (this.temporaryWorkoutMarker) {
+        this.temporaryWorkoutMarker.setLatLng(latlng);
+        return this;
+      }
+      this.temporaryWorkoutMarker = L.marker(latlng).addTo(this);
+      return this;
+    };
+
+    return this.map;
+  }
+}
 class User {
   workouts = [];
   latlng;
@@ -46,35 +81,6 @@ class Workout {
       this.timeStamp
     ); // 14 July 2022
   }
-}
-
-function renderMap(latlng) {
-  let map = L.map('map').setView(latlng, 13);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap',
-  }).addTo(map);
-
-  map.addPermenantMarker = function (latlng, popUp = false) {
-    const marker = L.marker(latlng).addTo(this);
-    if (popUp) {
-      marker.bindPopup(`${popUp}`).openPopup();
-    }
-    return map;
-  };
-
-  map.addTemporaryMarker = function (latlng) {
-    // if map already has marker -> move it to new coordinates
-    if (map.temporaryWorkoutMarker) {
-      map.temporaryWorkoutMarker.setLatLng(latlng);
-      return map;
-    }
-    map.temporaryWorkoutMarker = L.marker(latlng).addTo(this);
-    return map;
-  };
-
-  return map;
 }
 
 function displayInputForm() {
@@ -196,7 +202,8 @@ if (navigator.geolocation)
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       const user = new User(latitude, longitude);
-      map = renderMap(user.latlng);
+      const app = new App(user);
+      map = app.renderMap(user.latlng);
       map.addPermenantMarker(user.latlng, '<b>This is you</b>');
 
       map.on('click', function (event) {
@@ -217,6 +224,12 @@ if (navigator.geolocation)
         );
         displayWorkoutsAndStats(user);
         clearForm();
+      });
+
+      inputType.addEventListener('change', function (event) {
+        inputElevation
+          .closest('.form__row')
+          .classList.toggle('form__row--hidden');
       });
 
       containerWorkouts.addEventListener('click', function (event) {
