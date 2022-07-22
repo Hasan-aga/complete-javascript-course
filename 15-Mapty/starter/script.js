@@ -263,8 +263,12 @@ if (navigator.geolocation)
         app.clearForm();
       });
 
+      //toggle cadence and elevation by workout type
       inputType.addEventListener('change', function (event) {
         inputElevation
+          .closest('.form__row')
+          .classList.toggle('form__row--hidden');
+        inputCadence
           .closest('.form__row')
           .classList.toggle('form__row--hidden');
       });
