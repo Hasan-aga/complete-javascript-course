@@ -37,14 +37,12 @@ export class User {
   }
 
   sortWorkouts(ascend, sortBy) {
-    console.log('sorting', sortBy, typeof this.workouts[0][sortBy]);
     if (ascend) this.workouts.sort((a, b) => b[sortBy] - a[sortBy]);
     else this.workouts.sort((a, b) => a[sortBy] - b[sortBy]);
     this.refreshWorkoutList();
   }
 
   refreshWorkoutList() {
-    console.log('refresh');
     this.clearWorkoutScreen();
     this.displayAllWorkouts();
   }
@@ -107,7 +105,6 @@ export class User {
   }
 
   clearWorkoutScreen() {
-    console.log(this.workoutElements);
     this.workoutElements.forEach(w => w.remove());
   }
 

@@ -46,8 +46,7 @@ class App {
 
   handleClickOnWorkoutList(event) {
     const clicked = event.target;
-    console.log('1st event', event);
-    console.log(clicked);
+
     if (clicked.classList.contains('workout__remove'))
       this.removeWorkout(event);
     if (
@@ -63,6 +62,7 @@ class App {
     else {
       //handle click on workout
       const workoutElement = event.target.closest('.workout');
+      if (!workoutElement) return; //if clicked on empty workout list
       const workoutID = workoutElement.dataset.id;
       const clickedWorkoutPosition =
         this.user.getWorkoutFromId(workoutID).latlng;
@@ -70,8 +70,6 @@ class App {
     }
   }
   toggleSortMenu() {
-    console.log('toggle menu');
-
     containerWorkouts.querySelector('.sort__menu').classList.toggle('hidden');
   }
 
@@ -90,14 +88,12 @@ class App {
       const sortBy = document.querySelector('.sort__input--sortby').value;
       const label = sortLabels[sortBy];
       this.user.sortWorkouts(ascend, label);
-      console.log(ascend);
     }
   }
 
   removeWorkout(event) {
     // handle click on remove button
     const workoutElement = event.target.closest('.workout');
-    console.log('2nd event', workoutElement);
     const workoutID = workoutElement.dataset.id;
     const workoutToRemove = this.user.getWorkoutFromId(workoutID);
     this.user.removeWorkout(workoutToRemove);
@@ -148,6 +144,7 @@ class App {
 
   handleMapClick(event) {
     form.classList.remove('hidden');
+    containerWorkouts.querySelector('.sort__menu').classList.add('hidden');
     const latlng = Object.values(event.latlng);
     this.currentWorkoutPosition = latlng;
     this.map.addTemporaryMarker(this.currentWorkoutPosition);
