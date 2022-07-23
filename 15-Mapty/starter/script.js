@@ -153,6 +153,8 @@ class App {
       `<b>${this.user.lastWorkout.type}</b> <br> ${this.user.lastWorkout.shortDate}`
     );
     this.user.displayWorkoutsAndStats();
+    form.classList.add('hidden');
+
     this.clearForm();
   }
 
