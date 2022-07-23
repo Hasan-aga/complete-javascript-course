@@ -64,7 +64,7 @@ export class Cycling extends Workout {
             <button class="workout__remove" title="Remove Item">❌️</button>
           </div>
             <div class="workout__details">
-              <span class="workout__icon">🏃‍♂️</span>
+              <span class="workout__icon">🚴️</span>
               <span class="workout__value">${this.distance}</span>
               <span class="workout__unit">km</span>
             </div>
