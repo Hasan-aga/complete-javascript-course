@@ -35,9 +35,15 @@ class User {
   }
 
   removeWorkout(workoutToRemove) {
+    console.log('remove:', workoutToRemove.timeStamp);
+    console.log(this.workouts);
+    this.workouts.forEach(w => {
+      if (w.timeStamp === workoutToRemove.timeStamp) console.log(true);
+    });
     this.workouts = this.workouts.filter(
-      workout => !workout === workoutToRemove
+      workout => workout.timeStamp != workoutToRemove.timeStamp
     );
+    console.log(this.workouts);
   }
 
   calculateStats() {
@@ -80,6 +86,13 @@ class User {
       }
       this.workouts.push(workout); //adds workout without writing to storage since its already in storage
     }
+  }
+
+  updateStorage() {
+    localStorage.clear();
+    this.workouts.forEach(workout =>
+      localStorage.setItem(workout.timeStamp, JSON.stringify(workout))
+    );
   }
 
   displayAllWorkouts() {
@@ -125,6 +138,7 @@ class App {
       const workoutID = workoutElement.dataset.id;
       const workoutToRemove = this.user.getWorkoutFromId(workoutID);
       this.user.removeWorkout(workoutToRemove);
+      this.user.updateStorage();
     } else if (clicked.classList.contains('reset-storage')) {
       console.log('reset local storage');
       localStorage.clear();
