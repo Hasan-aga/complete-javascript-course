@@ -37,14 +37,10 @@ export class User {
   }
 
   sortWorkouts(ascend, sortBy) {
+    console.log(this.workouts[0]);
     if (ascend) this.workouts.sort((a, b) => b[sortBy] - a[sortBy]);
     else this.workouts.sort((a, b) => a[sortBy] - b[sortBy]);
     this.refreshWorkoutList();
-  }
-
-  refreshWorkoutList() {
-    this.clearWorkoutScreen();
-    this.displayAllWorkouts();
   }
 
   calculateStats() {
@@ -66,11 +62,24 @@ export class User {
     statAverageDuration.textContent = `Avg Duration: ${this.stats.avgDuration} Min`;
   }
 
+  //main way of displaying items
   displayWorkoutsAndStats() {
     // this.lastWorkout.displayWorkout();
     this.refreshWorkoutList();
     this.calculateStats();
     this.displayStats();
+  }
+
+  refreshWorkoutList() {
+    this.clearWorkoutScreen();
+    this.displayAllWorkouts();
+  }
+
+  displayAllWorkouts() {
+    this.workouts.forEach(workout => {
+      workout.displayWorkout();
+    });
+    this.workoutElements = containerWorkouts.querySelectorAll('.workout');
   }
 
   getStoredWorkouts() {
@@ -97,14 +106,8 @@ export class User {
     );
   }
 
-  displayAllWorkouts() {
-    this.workouts.forEach(workout => {
-      workout.displayWorkout();
-    });
-    this.workoutElements = containerWorkouts.querySelectorAll('.workout');
-  }
-
   clearWorkoutScreen() {
+    if (!this.workoutElements) return;
     this.workoutElements.forEach(w => w.remove());
   }
 

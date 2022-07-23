@@ -83,12 +83,10 @@ class App {
   }
 
   sortWorkouts(clicked) {
-    {
-      const ascend = clicked.classList.contains('sort__order--ascend');
-      const sortBy = document.querySelector('.sort__input--sortby').value;
-      const label = sortLabels[sortBy];
-      this.user.sortWorkouts(ascend, label);
-    }
+    const ascend = clicked.classList.contains('sort__order--ascend');
+    const sortBy = document.querySelector('.sort__input--sortby').value;
+    const label = sortLabels[sortBy];
+    this.user.sortWorkouts(ascend, label);
   }
 
   removeWorkout(event) {
@@ -135,7 +133,7 @@ class App {
     const { longitude } = position.coords;
     this.user = new User(latitude, longitude);
     this.user.getStoredWorkouts();
-    this.user.displayAllWorkouts();
+    this.user.displayWorkoutsAndStats();
     this.renderMap(this.user.latlng);
     this.map.addPermenantMarker(this.user.latlng, '<b>This is you</b>');
     this.addMarkerForEachWorkout();
