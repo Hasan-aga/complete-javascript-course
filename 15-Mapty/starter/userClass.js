@@ -95,6 +95,7 @@ export class User {
       } else {
         workout = Cycling.createWorkoutFromString(localStorage.getItem(key));
       }
+      workout.timeStamp = new Date(workout.timeStamp);
       this.workouts.push(workout); //adds workout without writing to storage since its already in storage
     }
   }
