@@ -301,7 +301,7 @@ class Cycling extends Workout {
           <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
           <div class="workout__title">
           <h2 class="workout__title">${this.type} on ${this.shortDate}</h2>
-          <button class="workout__remove">❌️</button>
+          <button class="workout__remove" title="Remove Item">❌️</button>
         </div>
           <div class="workout__details">
             <span class="workout__icon">🏃‍♂️</span>
@@ -356,7 +356,7 @@ class Running extends Workout {
           <li class="workout workout--${this.type}" data-id="${this.timeStamp}">
           <div class="workout__title">
           <h2 class="workout__title">${this.type} on ${this.shortDate}</h2>
-          <button class="workout__remove">❌️</button>
+          <button class="workout__remove" title="Remove Item">❌️</button>
         </div>
           <div class="workout__details">
             <span class="workout__icon">🏃‍♂️</span>
