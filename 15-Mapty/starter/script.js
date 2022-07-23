@@ -35,15 +35,9 @@ class User {
   }
 
   removeWorkout(workoutToRemove) {
-    console.log('remove:', workoutToRemove.timeStamp);
-    console.log(this.workouts);
-    this.workouts.forEach(w => {
-      if (w.timeStamp === workoutToRemove.timeStamp) console.log(true);
-    });
     this.workouts = this.workouts.filter(
       workout => workout.timeStamp != workoutToRemove.timeStamp
     );
-    console.log(this.workouts);
   }
 
   calculateStats() {
@@ -98,7 +92,6 @@ class User {
   displayAllWorkouts() {
     this.workouts.forEach(workout => {
       workout.displayWorkout();
-      console.log(workout.timeStamp);
     });
   }
 
@@ -187,7 +180,6 @@ class App {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
     this.user = new User(latitude, longitude);
-    console.log(this.user);
     this.user.getStoredWorkouts();
     this.user.displayAllWorkouts();
     this.renderMap(this.user.latlng);
@@ -266,7 +258,6 @@ class Workout {
     this.duration = Number(duration);
     this.latlng = latlng;
     this.timeStamp = new Date();
-    console.log(this.timeStamp);
     this.shortDate = Intl.DateTimeFormat('en-GB', this.options).format(
       this.timeStamp
     ); // 14 July 2022
