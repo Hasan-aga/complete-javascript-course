@@ -238,17 +238,19 @@ a:visited {
   cursor: pointer;
 }
 
-.remove__all {
+.sort__menu--button {
   color: var(--color-light--2);
   background-color: transparent;
   border: none;
   font-size: 2rem;
   font-weight: 500;
   align-items: flex-end;
+  transition: all 200ms;
 }
 
-.remove__all:hover {
+.sort__menu--button:hover {
   cursor: pointer;
+  transform: scale(1.5);
 }
 
 .copyright {
