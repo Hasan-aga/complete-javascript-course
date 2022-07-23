@@ -202,6 +202,8 @@ a:visited {
 }
 
 .sort {
+  overflow-x: visible;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -210,6 +212,26 @@ a:visited {
   color: var(--color-dark--1);
   border: solid 2px var(--color-dark--1);
   border-radius: 5px;
+}
+
+.sort__menu {
+  width: 20rem;
+  padding: 2rem;
+  border: solid 1px var(--color-brand--2);
+  border-radius: 5px;
+  background-color: var(--color-dark--1);
+  z-index: 1000;
+  position: absolute;
+  bottom: -100%;
+  right: 5%;
+}
+
+.hidden {
+  display: none;
+}
+
+.remove__all:hover {
+  cursor: pointer;
 }
 
 .sort__input {

@@ -40,6 +40,11 @@ export class User {
     console.log('sorting', sortBy, typeof this.workouts[0][sortBy]);
     if (ascend) this.workouts.sort((a, b) => b[sortBy] - a[sortBy]);
     else this.workouts.sort((a, b) => a[sortBy] - b[sortBy]);
+    this.refreshWorkoutList();
+  }
+
+  refreshWorkoutList() {
+    console.log('refresh');
     this.clearWorkoutScreen();
     this.displayAllWorkouts();
   }
@@ -64,7 +69,8 @@ export class User {
   }
 
   displayWorkoutsAndStats() {
-    this.lastWorkout.displayWorkout();
+    // this.lastWorkout.displayWorkout();
+    this.refreshWorkoutList();
     this.calculateStats();
     this.displayStats();
   }
@@ -111,5 +117,9 @@ export class User {
 
   get lastWorkout() {
     return this.workouts.at(-1);
+  }
+
+  removeAllWorkouts() {
+    this.workouts = [];
   }
 }

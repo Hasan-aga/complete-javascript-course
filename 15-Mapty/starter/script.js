@@ -46,27 +46,19 @@ class App {
 
   handleClickOnWorkoutList(event) {
     const clicked = event.target;
-    if (clicked.classList.contains('workout__remove')) {
-      // handle click on remove button
-      const workoutElement = event.target.closest('.workout');
-      const workoutID = workoutElement.dataset.id;
-      const workoutToRemove = this.user.getWorkoutFromId(workoutID);
-      this.user.removeWorkout(workoutToRemove);
-      this.user.updateStorage();
-      workoutElement.remove();
-    } else if (clicked.classList.contains('reset-storage')) {
-      console.log('reset local storage');
-      localStorage.clear();
-    } else if (
+    console.log('1st event', event);
+    console.log(clicked);
+    if (clicked.classList.contains('workout__remove'))
+      this.removeWorkout(event);
+    if (
       clicked.classList.contains('sort__order') ||
       clicked.classList.contains('sort__input')
-    ) {
-      const ascend = clicked.classList.contains('sort__order--ascend');
-      const sortBy = document.querySelector('.sort__input--sortby').value;
-      const label = sortLabels[sortBy];
-      this.user.sortWorkouts(ascend, label);
-      console.log(ascend);
-    } else if (!clicked || /form/gm.test(clicked.classList))
+    )
+      this.sortWorkouts(clicked);
+    if (clicked.classList.contains('reset-storage')) this.resetStorage();
+
+    if (clicked.classList.contains('sort__menu--button')) this.toggleSortMenu();
+    if (!clicked || /form/gm.test(clicked.classList))
       return; //handle click on empty section or input form
     else {
       //handle click on workout
@@ -76,6 +68,41 @@ class App {
         this.user.getWorkoutFromId(workoutID).latlng;
       this.centerMapOn(clickedWorkoutPosition);
     }
+  }
+  toggleSortMenu() {
+    console.log('toggle menu');
+
+    containerWorkouts.querySelector('.sort__menu').classList.toggle('hidden');
+  }
+
+  resetStorage() {
+    {
+      console.log('reset local storage');
+      this.user.removeAllWorkouts();
+      localStorage.clear();
+      this.user.refreshWorkoutList();
+    }
+  }
+
+  sortWorkouts(clicked) {
+    {
+      const ascend = clicked.classList.contains('sort__order--ascend');
+      const sortBy = document.querySelector('.sort__input--sortby').value;
+      const label = sortLabels[sortBy];
+      this.user.sortWorkouts(ascend, label);
+      console.log(ascend);
+    }
+  }
+
+  removeWorkout(event) {
+    // handle click on remove button
+    const workoutElement = event.target.closest('.workout');
+    console.log('2nd event', workoutElement);
+    const workoutID = workoutElement.dataset.id;
+    const workoutToRemove = this.user.getWorkoutFromId(workoutID);
+    this.user.removeWorkout(workoutToRemove);
+    this.user.updateStorage();
+    workoutElement.remove();
   }
 
   toggleFormWithType() {
