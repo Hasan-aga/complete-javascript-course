@@ -109,10 +109,12 @@ class App {
   handleSubmit(event) {
     event.preventDefault();
     this.user.addWorkout(inputType.value, this.currentWorkoutPosition);
-    this.map.addPermenantMarker(
+    const marker = this.map.addPermenantMarker(
       this.user.lastWorkout.latlng,
       `<b>${this.user.lastWorkout.type}</b> <br> ${this.user.lastWorkout.shortDate}`
     );
+    this.user.lastWorkout.marker = marker;
+    console.log(this.user.lastWorkout);
     this.user.displayWorkoutsAndStats();
     form.classList.add('hidden');
 
