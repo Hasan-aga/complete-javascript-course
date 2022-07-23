@@ -8,6 +8,7 @@ import {
   inputElevation,
   statAverageDistance,
   statAverageDuration,
+  sort,
 } from './DOMelements.js';
 
 export class Workout {
@@ -78,7 +79,7 @@ export class Cycling extends Workout {
             </div>
           </li>
               `;
-    form.insertAdjacentHTML('afterend', html);
+    sort.insertAdjacentHTML('afterend', html);
   }
 
   static createWorkout(latlng) {
@@ -135,7 +136,7 @@ export class Running extends Workout {
             </div>
           </li>
               `;
-    form.insertAdjacentHTML('afterend', html);
+    sort.insertAdjacentHTML('afterend', html);
   }
 
   static createWorkout(latlng) {
