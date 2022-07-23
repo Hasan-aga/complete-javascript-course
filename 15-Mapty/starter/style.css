@@ -34,6 +34,10 @@ body {
   display: flex;
 }
 
+input {
+  font-family: 'Manrope', sans-serif;
+}
+
 /* GENERAL */
 a:link,
 a:visited {
@@ -195,6 +199,43 @@ a:visited {
 
 .form__btn {
   display: none;
+}
+
+.sort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--color-dark--2);
+  color: var(--color-dark--1);
+  border: solid 2px var(--color-dark--1);
+  border-radius: 5px;
+}
+
+.sort__input {
+  border: none;
+  background-color: var(--color-light--2);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.sort__label {
+  color: var(--color-light--2);
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.sort__order--ascend,
+.sort__order--descend {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  margin: 0 5px;
+}
+
+.sort__order--ascend:hover,
+.sort__order--descend:hover {
+  cursor: pointer;
 }
 
 .copyright {
