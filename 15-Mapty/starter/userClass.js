@@ -9,9 +9,11 @@ import {
   inputElevation,
   statAverageDistance,
   statAverageDuration,
+  sortBy,
 } from './DOMelements.js';
 
 export class User {
+  workoutElements;
   workouts = [];
   latlng;
   stats;
@@ -33,6 +35,13 @@ export class User {
     this.workouts = this.workouts.filter(
       workout => workout.timeStamp != workoutToRemove.timeStamp
     );
+  }
+
+  sortWorkouts(order) {
+    console.log('sorting');
+    this.workouts.sort();
+    this.clearWorkoutScreen();
+    this.displayAllWorkouts();
   }
 
   calculateStats() {
@@ -88,6 +97,12 @@ export class User {
     this.workouts.forEach(workout => {
       workout.displayWorkout();
     });
+    this.workoutElements = containerWorkouts.querySelectorAll('.workout');
+  }
+
+  clearWorkoutScreen() {
+    console.log(this.workoutElements);
+    this.workoutElements.forEach(w => w.remove());
   }
 
   getWorkoutFromId(workoutID) {

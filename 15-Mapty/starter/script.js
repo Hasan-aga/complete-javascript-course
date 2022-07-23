@@ -16,8 +16,6 @@ import {
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-let currentWorkoutPosition, map;
-
 class App {
   map;
   user;
@@ -52,6 +50,10 @@ class App {
     } else if (clicked.classList.contains('reset-storage')) {
       console.log('reset local storage');
       localStorage.clear();
+    } else if (clicked.classList.contains('sort__order')) {
+      const ascend = clicked.classList.contains('sort__order--ascend');
+      this.user.sortWorkouts(ascend);
+      console.log(ascend);
     } else if (!clicked || /form/gm.test(clicked.classList))
       return; //handle click on empty section or input form
     else {
@@ -152,6 +154,7 @@ class App {
   }
 
   fitMapOnAllMarkers() {
+    if (0 == this.allMarkers.length) return;
     const group = new L.featureGroup([...this.allMarkers]);
     this.map.fitBounds(group.getBounds());
   }
