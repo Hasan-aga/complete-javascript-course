@@ -22,6 +22,7 @@ class App {
   map;
   user;
   currentWorkoutPosition;
+  allMarkers = [];
   constructor() {
     this.getPosition();
 
@@ -100,6 +101,7 @@ class App {
     this.renderMap(this.user.latlng);
     this.map.addPermenantMarker(this.user.latlng, '<b>This is you</b>');
     this.addMarkerForEachWorkout();
+    this.fitMapOnAllMarkers();
     this.map.on('click', this.handleMapClick.bind(this));
   }
 
@@ -123,7 +125,7 @@ class App {
       if (popUp) {
         marker.bindPopup(`${popUp}`).openPopup();
       }
-      return this;
+      return marker;
     };
 
     this.map.addTemporaryMarker = function (latlng) {
@@ -145,8 +147,13 @@ class App {
 
   addMarkerForEachWorkout() {
     this.user.workouts.forEach(workout =>
-      this.map.addPermenantMarker(workout.latlng)
+      this.allMarkers.push(this.map.addPermenantMarker(workout.latlng))
     );
+  }
+
+  fitMapOnAllMarkers() {
+    const group = new L.featureGroup([...this.allMarkers]);
+    this.map.fitBounds(group.getBounds());
   }
 
   clearForm() {
