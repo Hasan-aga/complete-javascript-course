@@ -139,6 +139,7 @@ class App {
       const workoutToRemove = this.user.getWorkoutFromId(workoutID);
       this.user.removeWorkout(workoutToRemove);
       this.user.updateStorage();
+      workoutElement.remove();
     } else if (clicked.classList.contains('reset-storage')) {
       console.log('reset local storage');
       localStorage.clear();
