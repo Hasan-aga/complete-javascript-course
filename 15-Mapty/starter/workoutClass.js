@@ -12,7 +12,6 @@ import {
 } from './DOMelements.js';
 
 export class Workout {
-  marker;
   timeStamp;
   shortDate;
   options = {
