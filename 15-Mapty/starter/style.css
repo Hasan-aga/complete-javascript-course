@@ -1,11 +1,11 @@
 :root {
-  --color-brand--1: #ffb545;
-  --color-brand--2: #00c46a;
+  --color-brand--1: #4bb3fd;
+  --color-brand--2: #6bd425;
 
-  --color-dark--1: #2d3439;
-  --color-dark--2: #42484d;
-  --color-light--1: #aaa;
-  --color-light--2: #ececec;
+  --color-dark--1: #221e49;
+  --color-dark--2: #322d6d;
+  --color-light--1: #9893d3;
+  --color-light--2: #ccc9e9;
   --color-light--3: rgb(214, 222, 224);
 }
 
@@ -54,7 +54,7 @@ a:visited {
 }
 
 .logo {
-  height: 5.2rem;
+  height: 10rem;
   align-self: center;
   margin-bottom: 4rem;
 }
