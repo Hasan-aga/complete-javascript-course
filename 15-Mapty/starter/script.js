@@ -49,15 +49,15 @@ class App {
 
     if (clicked.classList.contains('workout__remove'))
       this.removeWorkout(event);
-    if (
+    else if (
       clicked.classList.contains('sort__order') ||
       clicked.classList.contains('sort__input')
     )
       this.sortWorkouts(clicked);
-    if (clicked.classList.contains('reset-storage')) this.resetStorage();
-
-    if (clicked.classList.contains('sort__menu--button')) this.toggleSortMenu();
-    if (!clicked || /form/gm.test(clicked.classList))
+    else if (clicked.classList.contains('reset-storage')) this.resetStorage();
+    else if (clicked.classList.contains('sort__menu--button'))
+      this.toggleSortMenu();
+    else if (!clicked || /form/gm.test(clicked.classList))
       return; //handle click on empty section or input form
     else {
       //handle click on workout
