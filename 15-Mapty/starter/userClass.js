@@ -9,7 +9,6 @@ import {
   inputElevation,
   statAverageDistance,
   statAverageDuration,
-  sortBy,
 } from './DOMelements.js';
 
 export class User {
@@ -37,9 +36,10 @@ export class User {
     );
   }
 
-  sortWorkouts(order) {
-    console.log('sorting');
-    this.workouts.sort();
+  sortWorkouts(ascend, sortBy) {
+    console.log('sorting', sortBy, typeof this.workouts[0][sortBy]);
+    if (ascend) this.workouts.sort((a, b) => b[sortBy] - a[sortBy]);
+    else this.workouts.sort((a, b) => a[sortBy] - b[sortBy]);
     this.clearWorkoutScreen();
     this.displayAllWorkouts();
   }

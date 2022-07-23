@@ -8,4 +8,3 @@ export const inputElevation = document.querySelector('.form__input--elevation');
 export const statAverageDistance = document.querySelector('.avg__distance');
 export const statAverageDuration = document.querySelector('.avg__duration');
 export const sort = document.querySelector('.sort');
-export const sortBy = document.querySelector('.sort__input--sortby');

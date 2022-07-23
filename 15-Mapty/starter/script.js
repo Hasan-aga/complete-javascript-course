@@ -16,6 +16,13 @@ import {
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+const sortLabels = {
+  time: 'timeStamp',
+  distance: 'distance',
+  duration: 'duration',
+  type: 'type',
+};
+
 class App {
   map;
   user;
@@ -50,9 +57,14 @@ class App {
     } else if (clicked.classList.contains('reset-storage')) {
       console.log('reset local storage');
       localStorage.clear();
-    } else if (clicked.classList.contains('sort__order')) {
+    } else if (
+      clicked.classList.contains('sort__order') ||
+      clicked.classList.contains('sort__input')
+    ) {
       const ascend = clicked.classList.contains('sort__order--ascend');
-      this.user.sortWorkouts(ascend);
+      const sortBy = document.querySelector('.sort__input--sortby').value;
+      const label = sortLabels[sortBy];
+      this.user.sortWorkouts(ascend, label);
       console.log(ascend);
     } else if (!clicked || /form/gm.test(clicked.classList))
       return; //handle click on empty section or input form
