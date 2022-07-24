@@ -54,6 +54,8 @@ a:visited {
 }
 
 .logo {
+  text-transform: capitalize;
+  display: flex;
   height: 10rem;
   align-self: center;
   margin-bottom: 4rem;
