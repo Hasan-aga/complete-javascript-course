@@ -63,7 +63,10 @@ function createCountryElement(country, className = '') {
 
 function getCountryData(country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(Response => Response.json())
+    .then(response => {
+      if (response.ok) return response.json();
+      else throw new Error(`no country was found! status: ${response.status}`);
+    })
     .then(data => createCountryElement(data[0]))
     .then(borders =>
       fetch(`https://restcountries.com/v3.1/alpha/${borders[0]}`)
