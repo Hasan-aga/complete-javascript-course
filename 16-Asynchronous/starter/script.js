@@ -61,19 +61,21 @@ function createCountryElement(country, className = '') {
   return country?.borders;
 }
 
+function getCountryData(response, className = '') {
+  if (!response.ok)
+    throw new Error(`no country was found! status: ${response.status}`);
+
+  return response.json().then(data => createCountryElement(data[0], className));
+}
+
 function getCountryData(country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => {
-      if (response.ok) return response.json();
-      else throw new Error(`no country was found! status: ${response.status}`);
-    })
-    .then(data => createCountryElement(data[0]))
+    .then(response => getCountryData(response))
     .then(borders =>
       fetch(`https://restcountries.com/v3.1/alpha/${borders[0]}`)
     )
-    .then(response => response.json())
-    .then(data => createCountryElement(data[0], 'neighbour'))
+    .then(response => getCountryData(response))
     .catch(error => console.log('FAILED!', error.message));
 }
 
-btn.addEventListener('click', () => getCountryData('sss'));
+btn.addEventListener('click', () => getCountryData('turkey'));
