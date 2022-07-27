@@ -91,20 +91,22 @@ const countriesContainer = document.querySelector('.countries');
 
 // lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
 
-// promisify setTimeout
+// // promisify setTimeout
 
-function wait(seconds) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, seconds * 1000);
-  });
-}
+// function wait(seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// }
 
-wait(2)
-  .then(() => {
-    console.log(`waited for 2 seconds`);
-    return wait(1);
-  })
-  .then(() => {
-    console.log(`waited for 1 seconds`);
-    return wait(0.5);
-  });
+// wait(2)
+//   .then(() => {
+//     console.log(`waited for 2 seconds`);
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log(`waited for 1 seconds`);
+//     return wait(0.5);
+//   });
+
+// promisfying the geolocation api
