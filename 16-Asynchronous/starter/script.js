@@ -37,29 +37,29 @@ const countriesContainer = document.querySelector('.countries');
 
 // addCountry('france');
 
-// function createCountryElement(country, className = '') {
-//   const countryHtmlCode = `<article class="country ${className}">
-//             <img class="country__img" src="${country.flags.svg}" />
-//             <div class="country__data">
-//           <h3 class="country__name">${country.name.common}</h3>
-//           <h4 class="country__region">${country.region}</h4>
-//           <p class="country__row"><span>👫</span>${(
-//             country.population / 1000_000
-//           ).toFixed(0)} million people</p>
-//           <p class="country__row"><span>🗣️</span>${
-//             Object.values(country.languages)[0]
-//           }</p>
-//           <p class="country__row"><span>💰</span>${Object.keys(
-//             country.currencies
-//           )}</p>
-//         </div>
-//       </article>
-//       `;
+function createCountryElement(country, className = '') {
+  const countryHtmlCode = `<article class="country ${className}">
+            <img class="country__img" src="${country.flags.svg}" />
+            <div class="country__data">
+          <h3 class="country__name">${country.name.common}</h3>
+          <h4 class="country__region">${country.region}</h4>
+          <p class="country__row"><span>👫</span>${(
+            country.population / 1000_000
+          ).toFixed(0)} million people</p>
+          <p class="country__row"><span>🗣️</span>${
+            Object.values(country.languages)[0]
+          }</p>
+          <p class="country__row"><span>💰</span>${Object.keys(
+            country.currencies
+          )}</p>
+        </div>
+      </article>
+      `;
 
-//   countriesContainer.style.opacity = 1;
-//   countriesContainer.insertAdjacentHTML('afterbegin', countryHtmlCode);
-//   return country?.borders;
-// }
+  countriesContainer.style.opacity = 1;
+  countriesContainer.insertAdjacentHTML('afterbegin', countryHtmlCode);
+  return country?.borders;
+}
 
 // function getCountryData(response, className = '') {
 //   if (!response.ok)
@@ -110,3 +110,19 @@ const countriesContainer = document.querySelector('.countries');
 //   });
 
 // promisfying the geolocation api
+
+// async await
+const whereAmI = async function (country) {
+  try {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${country}`
+    );
+    const data = await response.json();
+    createCountryElement(data[0]);
+  } catch (error) {
+    console.error(`FAIL: ${error.message}`);
+  }
+};
+
+whereAmI('iraqd');
+console.log('log');
