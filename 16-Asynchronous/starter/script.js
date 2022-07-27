@@ -83,10 +83,34 @@ const countriesContainer = document.querySelector('.countries');
 // setTimeout(() => console.log('hello callback queue'), 0);
 // Promise.resolve('Hello microtask queue').then(res => console.log(res));
 
-// building a promise
-const lotteryPromise = new Promise(function (resolve, reject) {
-  if (Math.random() >= 0.5) resolve('you won');
-  else reject('you lost');
-});
+// // building a promise
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   if (Math.random() >= 0.5) resolve('you won');
+//   else reject('you lost');
+// });
 
-lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// promisify setTimeout
+
+function wait(seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(
+      seconds => {
+        resolve(seconds);
+      },
+      seconds * 1000,
+      seconds
+    );
+  });
+}
+
+wait(2)
+  .then(seconds => {
+    console.log(`waited for ${seconds} seconds`);
+    return wait(seconds / 2);
+  })
+  .then(seconds => {
+    console.log(`waited for ${seconds} seconds`);
+    return wait(seconds / 2);
+  });
