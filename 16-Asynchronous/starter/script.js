@@ -119,10 +119,21 @@ const whereAmI = async function (country) {
     );
     const data = await response.json();
     createCountryElement(data[0]);
+    return data[0].population;
   } catch (error) {
     console.error(`FAIL: ${error.message}`);
+    throw error;
   }
 };
 
-whereAmI('iraqd');
-console.log('log');
+// console.log('1: getting country data');
+// const population = whereAmI('iraq')
+//   .then(population => console.log(`2 success: ${population}`))
+//   .catch(error => console.error(`2 fail: ${error.message}`))
+//   .finally(() => console.log('3: finished'));
+
+console.log('1: getting country data');
+(async function () {
+  const population = await whereAmI('iraq');
+  console.log(population);
+})();
