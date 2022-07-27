@@ -23,15 +23,19 @@ function createImage(imagePath) {
 }
 
 const loadNpause = async function () {
-  const img1 = await createImage('img/img-1.jpg');
-  await wait(1);
-  img1.style.display = 'none';
-  const img2 = await createImage('img/img-2.jpg');
-  await wait(1);
-  img2.style.display = 'none';
-  const img3 = await createImage('img/img-3.jpg');
-  await wait(1);
-  img3.style.display = 'none';
+  try {
+    const img1 = await createImage('img/img-1.jpg');
+    await wait(1);
+    img1.style.display = 'none';
+    const img2 = await createImage('img/img-2.jpg');
+    await wait(1);
+    img2.style.display = 'none';
+    const img3 = await createImage('img/img-3.jpg');
+    await wait(1);
+    img3.style.display = 'none';
+  } catch (err) {
+    console.error(`failed! ${err}`);
+  }
 };
 
 loadNpause();
