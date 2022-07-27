@@ -95,22 +95,16 @@ const countriesContainer = document.querySelector('.countries');
 
 function wait(seconds) {
   return new Promise(function (resolve) {
-    setTimeout(
-      seconds => {
-        resolve(seconds);
-      },
-      seconds * 1000,
-      seconds
-    );
+    setTimeout(resolve, seconds * 1000);
   });
 }
 
 wait(2)
-  .then(seconds => {
-    console.log(`waited for ${seconds} seconds`);
-    return wait(seconds / 2);
+  .then(() => {
+    console.log(`waited for 2 seconds`);
+    return wait(1);
   })
-  .then(seconds => {
-    console.log(`waited for ${seconds} seconds`);
-    return wait(seconds / 2);
+  .then(() => {
+    console.log(`waited for 1 seconds`);
+    return wait(0.5);
   });
