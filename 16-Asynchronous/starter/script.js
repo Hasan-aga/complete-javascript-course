@@ -138,50 +138,50 @@ function createCountryElement(country, className = '') {
 //   console.log(population);
 // })();
 
-const getJSON = function (url, errorMsg = 'Something went wrong') {
-  return fetch(url).then(response => {
-    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+// const getJSON = function (url, errorMsg = 'Something went wrong') {
+//   return fetch(url).then(response => {
+//     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
 
-    return response.json();
-  });
-};
+//     return response.json();
+//   });
+// };
 
-const getCapitalsOf3countries = async function (c1, c2, c3) {
-  try {
-    // const [data1] = await getJSON(`https://restcountries.com/v3.1/name/${c1}`);
-    // const [data2] = await getJSON(`https://restcountries.com/v3.1/name/${c2}`);
-    // const [data3] = await getJSON(`https://restcountries.com/v3.1/name/${c3}`);
+// const getCapitalsOf3countries = async function (c1, c2, c3) {
+//   try {
+//     // const [data1] = await getJSON(`https://restcountries.com/v3.1/name/${c1}`);
+//     // const [data2] = await getJSON(`https://restcountries.com/v3.1/name/${c2}`);
+//     // const [data3] = await getJSON(`https://restcountries.com/v3.1/name/${c3}`);
 
-    // console.log(data1.capital, data2.capital, data3.capital);
+//     // console.log(data1.capital, data2.capital, data3.capital);
 
-    const data = await Promise.all([
-      getJSON(`https://restcountries.com/v3.1/name/${c1}`),
-      getJSON(`https://restcountries.com/v3.1/name/${c2}`),
-      getJSON(`https://restcountries.com/v3.1/name/${c3}`),
-    ]);
+//     const data = await Promise.all([
+//       getJSON(`https://restcountries.com/v3.1/name/${c1}`),
+//       getJSON(`https://restcountries.com/v3.1/name/${c2}`),
+//       getJSON(`https://restcountries.com/v3.1/name/${c3}`),
+//     ]);
 
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-};
+//     console.log(data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
-getCapitalsOf3countries('iraq', 'jordan', 'turkey');
+// getCapitalsOf3countries('iraq', 'jordan', 'turkey');
 
-Promise.allSettled([
-  Promise.resolve('success'),
-  Promise.reject('fail'),
-  Promise.resolve('success'),
-]).then(res => console.log(res));
+// Promise.allSettled([
+//   Promise.resolve('success'),
+//   Promise.reject('fail'),
+//   Promise.resolve('success'),
+// ]).then(res => console.log(res));
 
-Promise.all([
-  Promise.resolve('success'),
-  Promise.reject('fail'),
-  Promise.resolve('success'),
-]).then(res => console.log(res));
+// Promise.all([
+//   Promise.resolve('success'),
+//   Promise.reject('fail'),
+//   Promise.resolve('success'),
+// ]).then(res => console.log(res));
 
-Promise.any([
-  Promise.resolve('success'),
-  Promise.reject('fail'),
-  Promise.resolve('success'),
-]).then(res => console.log(`any: ${res}`));
+// Promise.any([
+//   Promise.resolve('success'),
+//   Promise.reject('fail'),
+//   Promise.resolve('success'),
+// ]).then(res => console.log(`any: ${res}`));
