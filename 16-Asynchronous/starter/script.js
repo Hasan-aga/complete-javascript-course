@@ -82,3 +82,11 @@ const countriesContainer = document.querySelector('.countries');
 
 // setTimeout(() => console.log('hello callback queue'), 0);
 // Promise.resolve('Hello microtask queue').then(res => console.log(res));
+
+// building a promise
+const lotteryPromise = new Promise(function (resolve, reject) {
+  if (Math.random() >= 0.5) resolve('you won');
+  else reject('you lost');
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
