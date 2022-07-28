@@ -12,7 +12,7 @@ function createImage(imagePath) {
     const img = document.createElement('img');
     img.src = imagePath;
     img.addEventListener('load', function () {
-      img.classList.add('images');
+      img.classList.add('parallel');
       container.insertAdjacentElement('afterbegin', img);
       resolve(img);
     });
@@ -38,4 +38,17 @@ const loadNpause = async function () {
   }
 };
 
-loadNpause();
+const loadAll = async function (imagePathArray) {
+  try {
+    const imgs = imagePathArray.map(async path => await createImage(path));
+    const actualImgs = await Promise.all(imgs);
+    console.log(imgs);
+    console.log(actualImgs);
+  } catch (err) {
+    console.error(`failed because ${err}`);
+  }
+};
+
+// loadNpause();
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
