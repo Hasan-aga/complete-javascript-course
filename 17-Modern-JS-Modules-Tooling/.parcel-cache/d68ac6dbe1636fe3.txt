@@ -1,0 +1,17 @@
+16
+159/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/starter/index.html1659027397336654561 0
+160/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/starter/.prettierrc1656663752729937229 0
+140/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling1659038293333082487 1
+146/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final1659038166547898809 1
+164/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/package-lock.json1656663752729937229 0
+156/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/script.js1656663752729937229 0
+162/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/shoppingCart.js1656663752729937229 0
+157/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/starter/clean.js1656663752729937229 0
+155/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/clean.js1656663752705937190 0
+157/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/index.html1656663752729937229 0
+159/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/package.json1656663752729937229 0
+148/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/starter1656663752729937229 1
+153/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/package.json1659037244488830941 0
+158/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/final/.prettierrc1656663752705937190 0
+158/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/package-lock.json1659037244484830544 0
+158/media/hasan/92804264-c37f-48cb-8ec5-49bc5be832fa/hasan/playground/bunyan/javascript/complete-javascript-course/17-Modern-JS-Modules-Tooling/starter/script.js1659028415792902865 0
