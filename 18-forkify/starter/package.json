@@ -2,14 +2,16 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "food app",
-  "main": "index.js",
+  "source": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html"
+    "start": "parcel ",
+    "build": "parcel build"
   },
   "author": "hasan",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.6.2",
     "parcel": "^2.6.2"
   }
 }
