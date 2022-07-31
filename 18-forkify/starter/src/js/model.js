@@ -1,20 +1,35 @@
-import { API_URL } from './config';
+import { API_URL, SEARCH_URL } from './config';
 import { getJson } from './helper';
 
 export const state = {
   recipe: {},
+  search: {
+    query: '',
+    count: undefined,
+    results: [],
+  },
 };
 
 export const loadRecipe = async function (id) {
   try {
-    // const res = await fetch(`${API_URL}${id}`);
-    // const data = await res.json();
-    // if (!res.ok) throw new Error(`faaail ${data.message}, ${res.status}`);
-
     const { recipe } = await getJson(`${API_URL}${id}`);
     state.recipe = recipe;
-    console.log(state.recipe);
   } catch (error) {
     throw error;
   }
 };
+
+export const loadSearchResults = async function (query) {
+  try {
+    const data = await getJson(`${SEARCH_URL}${query}`);
+    state.search.query = query;
+    state.search.count = data.count;
+    state.search.results = data.recipes;
+    console.log(state);
+  } catch (error) {
+    console.error(`search failed: ${error}`);
+    throw error;
+  }
+};
+
+loadSearchResults('hamburger');
