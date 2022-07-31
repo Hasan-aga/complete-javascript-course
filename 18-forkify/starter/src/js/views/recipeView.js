@@ -12,6 +12,7 @@ class RecipeView {
             </svg>
           </div>
     `;
+    this.#clearView();
     this.#parentElement.insertAdjacentHTML('afterBegin', htmlMarkup);
   }
 
@@ -20,6 +21,22 @@ class RecipeView {
     const recipeHtml = this.#generateMarkup();
     this.#clearView();
     this.#parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
+  }
+
+  renderError(message) {
+    const htmlMarkup = `
+    <div class="error">
+        <div>
+          <svg>
+            <use href="${icons}.svg#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+
+    this.#clearView();
+    this.#parentElement.insertAdjacentHTML('afterbegin', htmlMarkup);
   }
 
   addHandlerRender(handler) {
@@ -32,17 +49,7 @@ class RecipeView {
 
   #generateMarkup() {
     return `
-
-    <!-- <div class="error">
-        <div>
-          <svg>
-            <use href="src/img/icons.svg#icon-alert-triangle"></use>
-          </svg>
-        </div>
-        <p>No recipes found for your query. Please try again!</p>
-      </div> -->
-
-    
+  
     <figure class="recipe__fig">
       <img src="${this.#state.recipe.image_url}" alt="${
       this.#state.recipe.title
