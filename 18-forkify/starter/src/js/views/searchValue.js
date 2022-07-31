@@ -5,11 +5,11 @@ class SearchValue {
 
   get query() {
     const query = this.#parentElement.querySelector('.search__field').value;
-    this.clearView();
+    this.#clearView();
     return query;
   }
 
-  clearView() {
+  #clearView() {
     this.#parentElement.querySelector('.search__field').value = '';
   }
 
