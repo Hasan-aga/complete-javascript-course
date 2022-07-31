@@ -3,8 +3,8 @@ import icons from 'url:../../img/icons.svg';
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #state;
-  #errorMessage = `¯\\_(ツ)_/ <br>
-  Oh oh! something went wrong, try again!`;
+  #errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
+  #successMessage = '';
 
   renderSpinner() {
     const htmlMarkup = `
@@ -31,6 +31,22 @@ class RecipeView {
         <div>
           <svg>
             <use href="${icons}.svg#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+
+    this.#clearView();
+    this.#parentElement.insertAdjacentHTML('afterbegin', htmlMarkup);
+  }
+
+  renderMessage(message = this.#successMessage) {
+    const htmlMarkup = `
+    <div class="message">
+        <div>
+          <svg>
+            <use href="${icons}.svg#icon-smile></use>
           </svg>
         </div>
         <p>${message}</p>
