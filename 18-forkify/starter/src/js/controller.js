@@ -26,7 +26,7 @@ const controlRecipes = async function controlRecipes() {
     await model.loadRecipe(id);
     recipeView.render(model.state);
   } catch (error) {
-    console.error(`failed to get recipee: (${error})`);
+    console.error(`failed to get recipe: (${error})`);
   }
 };
 
