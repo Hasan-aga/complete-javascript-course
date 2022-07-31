@@ -4,7 +4,9 @@ class SearchValue {
   #parentElement = document.querySelector('.search');
 
   get query() {
-    return this.#parentElement.querySelector('.search__field').value;
+    const query = this.#parentElement.querySelector('.search__field').value;
+    this.clearView();
+    return query;
   }
 
   clearView() {

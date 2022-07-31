@@ -28,7 +28,6 @@ const controlSearchResults = async function () {
   try {
     const query = searchValue.query;
     if (!query) return;
-    searchValue.clearView();
     await model.loadSearchResults(query);
   } catch (error) {
     console.error(`could not get results. ${error}`);
