@@ -3,6 +3,8 @@ import icons from 'url:../../img/icons.svg';
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #state;
+  #errorMessage = `¯\\_(ツ)_/ <br>
+  Oh oh! something went wrong, try again!`;
 
   renderSpinner() {
     const htmlMarkup = `
@@ -23,7 +25,7 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
   }
 
-  renderError(message) {
+  renderError(message = this.#errorMessage) {
     const htmlMarkup = `
     <div class="error">
         <div>
