@@ -18,9 +18,12 @@ class RecipeView {
   render(state) {
     this.#state = state;
     const recipeHtml = this.#generateMarkup();
-
-    this.#parentElement.innerHTML = '';
+    this.#clearView();
     this.#parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
+  }
+
+  #clearView() {
+    this.#parentElement.innerHTML = '';
   }
 
   #generateMarkup() {
