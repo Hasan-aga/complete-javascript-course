@@ -25,7 +25,7 @@ export const loadSearchResults = async function (query) {
     state.search.query = query;
     state.search.count = data.count;
     state.search.results = data.recipes;
-    console.log(state);
+    console.log(state.search);
   } catch (error) {
     console.error(`search failed: ${error}`);
     throw error;
