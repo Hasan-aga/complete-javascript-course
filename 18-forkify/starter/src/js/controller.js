@@ -21,11 +21,10 @@ const showRecipe = async function showRecipe() {
   try {
     const id = window.location.hash.slice(-5);
     if (!id) return;
+
     recipeView.renderSpinner();
-
     await model.loadRecipe(id);
-
-    recipeView.render(model.state.recipe);
+    recipeView.render(model.state);
   } catch (error) {
     console.error(`failed to get recipee: (${error})`);
   }

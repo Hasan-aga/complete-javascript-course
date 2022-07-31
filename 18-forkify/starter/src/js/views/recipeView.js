@@ -2,6 +2,7 @@ import icons from 'url:../../img/icons.svg';
 
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
+  #state;
 
   renderSpinner() {
     const htmlMarkup = `
@@ -14,7 +15,8 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterBegin', htmlMarkup);
   }
 
-  render(recipe) {
+  render(state) {
+    this.#state = state;
     const recipeHtml = `
 
 
@@ -29,11 +31,11 @@ class RecipeView {
 
         
         <figure class="recipe__fig">
-          <img src="${recipe.image_url}" alt="${
-      recipe.title
+          <img src="${this.#state.recipe.image_url}" alt="${
+      this.#state.recipe.title
     }" class="recipe__img" />
           <h1 class="recipe__title">
-            <span>${recipe.title}</span>
+            <span>${this.#state.recipe.title}</span>
           </h1>
         </figure>
 
@@ -81,7 +83,7 @@ class RecipeView {
         <div class="recipe__ingredients">
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
-            ${recipe.ingredients
+            ${this.#state.recipe.ingredients
               .map(ingredient => {
                 return `<li class="recipe__ingredient">
               <svg class="recipe__icon">
@@ -103,13 +105,13 @@ class RecipeView {
           <p class="recipe__directions-text">
             This recipe was carefully designed and tested by
             <span class="recipe__publisher">${
-              recipe.publisher
+              this.#state.recipe.publisher
             }</span>. Please check out
             directions at their website.
           </p>
           <a
             class="btn--small recipe__btn"
-            href="${recipe.source_url}"
+            href="${this.#state.recipe.source_url}"
             target="_blank"
           >
             <span>Directions</span>
