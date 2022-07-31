@@ -9,7 +9,7 @@ const recipeContainer = document.querySelector('.recipe');
 
 ///////////////////////////////////////
 
-const controlRecipes = async function controlRecipes() {
+const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(-5);
     if (!id) return;
@@ -23,8 +23,18 @@ const controlRecipes = async function controlRecipes() {
   }
 };
 
+const controlSearchResults = async function () {
+  try {
+    await model.loadSearchResults('hamburger');
+  } catch (error) {
+    console.error(`could not get results. ${error}`);
+  }
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
 };
 
 init();
+
+controlSearchResults();

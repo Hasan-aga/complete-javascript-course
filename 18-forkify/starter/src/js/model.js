@@ -31,5 +31,3 @@ export const loadSearchResults = async function (query) {
     throw error;
   }
 };
-
-loadSearchResults('hamburger');
