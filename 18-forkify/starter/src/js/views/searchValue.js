@@ -7,6 +7,10 @@ class SearchValue {
     return this.#parentElement.querySelector('.search__field').value;
   }
 
+  clearView() {
+    this.#parentElement.querySelector('.search__field').value = '';
+  }
+
   addSearchHandler(handler) {
     this.#parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
