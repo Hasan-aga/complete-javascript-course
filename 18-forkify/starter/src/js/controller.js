@@ -29,6 +29,7 @@ const controlSearchResults = async function () {
   try {
     const query = searchValue.query;
     if (!query) return;
+    resultsView.renderSpinner();
     await model.loadSearchResults(query);
     resultsView.render(model.state);
   } catch (error) {
