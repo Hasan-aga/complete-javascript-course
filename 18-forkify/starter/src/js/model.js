@@ -13,7 +13,6 @@ export const state = {
 export const loadRecipe = async function (id) {
   try {
     const data = await getJson(`${API_URL}${id}`);
-    console.log('data', data);
     state.recipe = data.data.recipe;
   } catch (error) {
     throw error;
@@ -26,7 +25,6 @@ export const loadSearchResults = async function (query) {
     state.search.query = query;
     state.search.count = data.results;
     state.search.results = data.data.recipes;
-    console.log(state.search);
   } catch (error) {
     console.error(`search failed: ${error}`);
     throw error;

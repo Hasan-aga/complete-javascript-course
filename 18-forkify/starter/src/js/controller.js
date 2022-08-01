@@ -16,12 +16,10 @@ if (module.hot) {
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    console.log(id);
     if (!id) return;
 
     recipeView.renderSpinner();
     await model.loadRecipe(id);
-    console.log(model.state);
     recipeView.render(model.state);
   } catch (error) {
     console.error(`failed to get recipe: (${error})`);
