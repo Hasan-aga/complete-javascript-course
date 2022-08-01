@@ -8,6 +8,10 @@ export const state = {
     count: undefined,
     results: [],
     resultsPerPage: RESULTS_PER_PAGE,
+    currentPage: 1,
+    getTotalNumberOfPages() {
+      return Math.ceil(this.results.length / this.resultsPerPage);
+    },
   },
 };
 
@@ -34,8 +38,10 @@ export const loadSearchResults = async function (query) {
   }
 };
 
-export const getResultsOfPage = function (page) {
-  console.log('object');
+export const getResultsOfPage = function (
+  page = this.state.search.currentPage
+) {
+  this.state.search.currentPage = page;
   const startIndex = (page - 1) * this.state.search.resultsPerPage;
   const endIndex = page * this.state.search.resultsPerPage;
   return this.state.search.results.slice(startIndex, endIndex);
