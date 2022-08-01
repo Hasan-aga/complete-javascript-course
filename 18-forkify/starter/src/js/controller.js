@@ -52,7 +52,9 @@ const controlServings = function (changeAmount) {
   model.updateServings(changeAmount);
 
   //display new ingriedients
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+
+  recipeView.update(model.state.recipe);
 };
 
 const init = function () {

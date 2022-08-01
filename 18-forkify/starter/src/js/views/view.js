@@ -56,4 +56,30 @@ export default class View {
     this._clearView();
     this._parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
   }
+
+  update(state) {
+    //update data with new one
+    this._data = state;
+    //get new markup
+    const recipeHtml = this._generateMarkup();
+    const newElements = Array.from(
+      document
+        .createRange()
+        .createContextualFragment(recipeHtml)
+        .querySelectorAll('*')
+    );
+    //get current rendered markup
+    const renderedELements = Array.from(
+      this._parentElement.querySelectorAll('*')
+    );
+    //compare the two
+    renderedELements.forEach((renderedElement, index) => {
+      if (
+        !renderedElement.isEqualNode(newElements[index]) &&
+        newElements[index].firstChild?.nodeValue.trim() !== ''
+      )
+        renderedElement.textContent = newElements[index].textContent;
+    });
+    //change rendered markup where change has occured
+  }
 }
