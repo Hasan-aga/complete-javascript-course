@@ -14,7 +14,6 @@ class RecipeView extends View {
   }
 
   _generateMarkup() {
-    console.log(this._data);
     return `
   
     <figure class="recipe__fig">
@@ -38,7 +37,9 @@ class RecipeView extends View {
         <svg class="recipe__info-icon">
           <use href="${icons}.svg#icon-users"></use>
         </svg>
-        <span class="recipe__info-data recipe__info-data--people">4</span>
+        <span class="recipe__info-data recipe__info-data--people">${
+          this._data.servings
+        }</span>
         <span class="recipe__info-text">servings</span>
 
         <div class="recipe__info-buttons">
