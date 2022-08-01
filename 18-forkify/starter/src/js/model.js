@@ -10,7 +10,7 @@ export const state = {
     resultsPerPage: RESULTS_PER_PAGE,
     currentPage: 1,
     getTotalNumberOfPages() {
-      return Math.ceil(this.results.length / this.resultsPerPage);
+      return Math.ceil(this.count / this.resultsPerPage);
     },
   },
 };
@@ -27,6 +27,7 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     const data = await getJson(`${SEARCH_URL}${query}&key=${API_KEY}`);
+    state.search.currentPage = 1;
     state.search.query = query;
     state.search.count = data.results;
     if (Array.isArray(data.data.recipes) && data.data.recipes.length === 0)
