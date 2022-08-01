@@ -3,11 +3,11 @@ import View from './view';
 
 class ResultsView extends View {
   _parentElement = document.querySelector('.results');
-  _state;
+  _data;
   _errorMessage = `¯\\_(ツ)_/ <br>could not find results for that item`;
 
   _generateMarkup() {
-    return this._state.search.results
+    return this._data
       .map(result => {
         return `
     <li class="preview">

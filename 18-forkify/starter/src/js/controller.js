@@ -20,7 +20,7 @@ const controlRecipes = async function () {
 
     recipeView.renderSpinner();
     await model.loadRecipe(id);
-    recipeView.render(model.state);
+    recipeView.render(model.state.recipe);
   } catch (error) {
     console.error(`failed to get recipe: (${error})`);
     recipeView.renderError();
@@ -33,7 +33,7 @@ const controlSearchResults = async function () {
     if (!query) return;
     resultsView.renderSpinner();
     await model.loadSearchResults(query);
-    resultsView.render(model.state);
+    resultsView.render(model.state.search.results);
   } catch (error) {
     console.error(`could not get results. ${error}`);
     resultsView.renderError(error.message);

@@ -5,7 +5,7 @@ import fracty from 'fracty';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
-  _state;
+  _data;
   _errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
   _successMessage = '';
 
@@ -14,15 +14,15 @@ class RecipeView extends View {
   }
 
   _generateMarkup() {
-    console.log(this._state);
+    console.log(this._data);
     return `
   
     <figure class="recipe__fig">
-      <img src="${this._state.recipe.image_url}" alt="${
-      this._state.recipe.title
+      <img src="${this._data.image_url}" alt="${
+      this._data.title
     }" class="recipe__img" />
       <h1 class="recipe__title">
-        <span>${this._state.recipe.title}</span>
+        <span>${this._data.title}</span>
       </h1>
     </figure>
 
@@ -66,9 +66,7 @@ class RecipeView extends View {
     <div class="recipe__ingredients">
         <h2 class="heading--2">Recipe ingredients</h2>
         <ul class="recipe__ingredient-list">
-          ${this._state.recipe.ingredients
-            .map(this._generateMarkupIngredient)
-            .join('')}
+          ${this._data.ingredients.map(this._generateMarkupIngredient).join('')}
       </div>
 
        
@@ -80,13 +78,13 @@ class RecipeView extends View {
       <p class="recipe__directions-text">
         This recipe was carefully designed and tested by
         <span class="recipe__publisher">${
-          this._state.recipe.publisher
+          this._data.publisher
         }</span>. Please check out
         directions at their website.
       </p>
       <a
         class="btn--small recipe__btn"
-        href="${this._state.recipe.source_url}"
+        href="${this._data.source_url}"
         target="_blank"
       >
         <span>Directions</span>

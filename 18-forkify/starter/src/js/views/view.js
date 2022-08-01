@@ -51,7 +51,7 @@ export default class View {
   }
 
   render(state) {
-    this._state = state;
+    this._data = state;
     const recipeHtml = this._generateMarkup();
     this._clearView();
     this._parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
