@@ -1,4 +1,4 @@
-import { API_URL, SEARCH_URL } from './config';
+import { API_URL, SEARCH_URL, API_KEY } from './config';
 import { getJson } from './helper';
 
 export const state = {
@@ -12,8 +12,9 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-    const { recipe } = await getJson(`${API_URL}${id}`);
-    state.recipe = recipe;
+    const data = await getJson(`${API_URL}${id}`);
+    console.log('data', data);
+    state.recipe = data.data.recipe;
   } catch (error) {
     throw error;
   }
@@ -21,10 +22,10 @@ export const loadRecipe = async function (id) {
 
 export const loadSearchResults = async function (query) {
   try {
-    const data = await getJson(`${SEARCH_URL}${query}`);
+    const data = await getJson(`${SEARCH_URL}${query}&key=${API_KEY}`);
     state.search.query = query;
-    state.search.count = data.count;
-    state.search.results = data.recipes;
+    state.search.count = data.results;
+    state.search.results = data.data.recipes;
     console.log(state.search);
   } catch (error) {
     console.error(`search failed: ${error}`);

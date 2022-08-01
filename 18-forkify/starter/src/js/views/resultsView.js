@@ -11,7 +11,7 @@ class ResultsView extends View {
       .map(result => {
         return `
     <li class="preview">
-            <a class="preview__link " href="#${result.recipe_id}">
+            <a class="preview__link " href="#${result.id}">
               <figure class="preview__fig">
                 <img src="${result.image_url}" alt="${result.title}" />
               </figure>
