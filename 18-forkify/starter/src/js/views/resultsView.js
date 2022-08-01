@@ -1,40 +1,16 @@
 'use strict';
 import icons from 'url:../../img/icons.svg';
+import View from './view';
 
-class ResultsView {
-  #parentElement = document.querySelector('.results');
-  #state;
-  #errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
+class ResultsView extends View {
+  _parentElement = document.querySelector('.results');
+  _state;
+  _errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
 
-  #clearView() {
-    this.#parentElement.innerHTML = '';
-  }
-
-  renderSpinner() {
-    const htmlMarkup = `
-    <div class="spinner">
-            <svg>
-              <use href="${icons}.svg#icon-loader"></use>
-            </svg>
-          </div>
-    `;
-    this.#clearView();
-    this.#parentElement.insertAdjacentHTML('afterBegin', htmlMarkup);
-  }
-
-  render(state) {
-    this.#clearView();
-    this.#state = state;
-    const recipeHtml = this.#state.search.results
+  _generateMarkup() {
+    return this._state.search.results
       .map(result => {
-        return this.#generateMarkup(result);
-      })
-      .join('');
-    this.#parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
-  }
-
-  #generateMarkup(result) {
-    return `
+        return `
     <li class="preview">
             <a class="preview__link " href="#${result.recipe_id}">
               <figure class="preview__fig">
@@ -52,6 +28,8 @@ class ResultsView {
             </a>
           </li>
     `;
+      })
+      .join('');
   }
 }
 
