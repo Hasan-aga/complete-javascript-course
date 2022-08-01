@@ -74,12 +74,19 @@ export default class View {
     );
     //compare the two
     renderedELements.forEach((renderedElement, index) => {
+      //change rendered markup where change has occured
+      //only change nodes where first child is text
       if (
         !renderedElement.isEqualNode(newElements[index]) &&
         newElements[index].firstChild?.nodeValue.trim() !== ''
       )
         renderedElement.textContent = newElements[index].textContent;
+
+      // Updates changed ATTRIBUES
+      if (!renderedElement.isEqualNode(newElements[index]))
+        Array.from(newElements[index].attributes).forEach(attr =>
+          renderedElement.setAttribute(attr.name, attr.value)
+        );
     });
-    //change rendered markup where change has occured
   }
 }

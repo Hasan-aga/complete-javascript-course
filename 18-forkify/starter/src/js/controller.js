@@ -22,6 +22,7 @@ const controlRecipes = async function () {
     recipeView.renderSpinner();
     await model.loadRecipe(id);
     recipeView.render(model.state.recipe);
+    resultsView.update(model.getResultsOfPage());
   } catch (error) {
     console.error(`failed to get recipe: (${error})`);
     recipeView.renderError();
