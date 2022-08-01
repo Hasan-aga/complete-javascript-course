@@ -2,7 +2,7 @@
 import icons from 'url:../../img/icons.svg';
 
 class ResultsView {
-  #parentElement = document.querySelector('.search-results');
+  #parentElement = document.querySelector('.results');
   #state;
   #errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
 
@@ -30,14 +30,13 @@ class ResultsView {
         return this.#generateMarkup(result);
       })
       .join('');
-    console.log(this.#parentElement);
     this.#parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
   }
 
   #generateMarkup(result) {
     return `
     <li class="preview">
-            <a class="preview__link preview__link--active" href="#${result.recipe_id}">
+            <a class="preview__link " href="#${result.recipe_id}">
               <figure class="preview__fig">
                 <img src="${result.image_url}" alt="${result.title}" />
               </figure>
