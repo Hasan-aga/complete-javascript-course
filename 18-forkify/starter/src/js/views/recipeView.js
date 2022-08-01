@@ -1,80 +1,26 @@
 'use strict';
 import icons from 'url:../../img/icons.svg';
+import View from './view';
 
-class RecipeView {
-  #parentElement = document.querySelector('.recipe');
-  #state;
-  #errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
-  #successMessage = '';
-
-  renderSpinner() {
-    const htmlMarkup = `
-    <div class="spinner">
-            <svg>
-              <use href="${icons}.svg#icon-loader"></use>
-            </svg>
-          </div>
-    `;
-    this.#clearView();
-    this.#parentElement.insertAdjacentHTML('afterBegin', htmlMarkup);
-  }
-
-  render(state) {
-    this.#state = state;
-    const recipeHtml = this.#generateMarkup();
-    this.#clearView();
-    this.#parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
-  }
-
-  renderError(message = this.#errorMessage) {
-    const htmlMarkup = `
-    <div class="error">
-        <div>
-          <svg>
-            <use href="${icons}.svg#icon-alert-triangle"></use>
-          </svg>
-        </div>
-        <p>${message}</p>
-      </div>
-    `;
-
-    this.#clearView();
-    this.#parentElement.insertAdjacentHTML('afterbegin', htmlMarkup);
-  }
-
-  renderMessage(message = this.#successMessage) {
-    const htmlMarkup = `
-    <div class="message">
-        <div>
-          <svg>
-            <use href="${icons}.svg#icon-smile></use>
-          </svg>
-        </div>
-        <p>${message}</p>
-      </div>
-    `;
-
-    this.#clearView();
-    this.#parentElement.insertAdjacentHTML('afterbegin', htmlMarkup);
-  }
+class RecipeView extends View {
+  _parentElement = document.querySelector('.recipe');
+  _state;
+  _errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
+  _successMessage = '';
 
   addHandlerRender(handler) {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
-  #clearView() {
-    this.#parentElement.innerHTML = '';
-  }
-
-  #generateMarkup() {
+  _generateMarkup() {
     return `
   
     <figure class="recipe__fig">
-      <img src="${this.#state.recipe.image_url}" alt="${
-      this.#state.recipe.title
+      <img src="${this._state.recipe.image_url}" alt="${
+      this._state.recipe.title
     }" class="recipe__img" />
       <h1 class="recipe__title">
-        <span>${this.#state.recipe.title}</span>
+        <span>${this._state.recipe.title}</span>
       </h1>
     </figure>
 
@@ -122,7 +68,7 @@ class RecipeView {
     <div class="recipe__ingredients">
       <h2 class="heading--2">Recipe ingredients</h2>
       <ul class="recipe__ingredient-list">
-        ${this.#state.recipe.ingredients
+        ${this._state.recipe.ingredients
           .map(ingredient => {
             return `<li class="recipe__ingredient">
           <svg class="recipe__icon">
@@ -144,13 +90,13 @@ class RecipeView {
       <p class="recipe__directions-text">
         This recipe was carefully designed and tested by
         <span class="recipe__publisher">${
-          this.#state.recipe.publisher
+          this._state.recipe.publisher
         }</span>. Please check out
         directions at their website.
       </p>
       <a
         class="btn--small recipe__btn"
-        href="${this.#state.recipe.source_url}"
+        href="${this._state.recipe.source_url}"
         target="_blank"
       >
         <span>Directions</span>
