@@ -36,6 +36,7 @@ const controlSearchResults = async function () {
     resultsView.render(model.state);
   } catch (error) {
     console.error(`could not get results. ${error}`);
+    resultsView.renderError(error.message);
   }
 };
 

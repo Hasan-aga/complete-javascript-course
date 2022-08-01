@@ -4,7 +4,7 @@ import View from './view';
 class ResultsView extends View {
   _parentElement = document.querySelector('.results');
   _state;
-  _errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
+  _errorMessage = `¯\\_(ツ)_/ <br>could not find results for that item`;
 
   _generateMarkup() {
     return this._state.search.results

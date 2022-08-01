@@ -24,6 +24,8 @@ export const loadSearchResults = async function (query) {
     const data = await getJson(`${SEARCH_URL}${query}&key=${API_KEY}`);
     state.search.query = query;
     state.search.count = data.results;
+    if (data.data.recipes.length === 0)
+      throw new Error(`No results for ${query}`);
     state.search.results = data.data.recipes;
   } catch (error) {
     console.error(`search failed: ${error}`);
