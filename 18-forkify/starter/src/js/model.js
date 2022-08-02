@@ -25,7 +25,7 @@ export const loadRecipe = async function (id) {
         bookmarkedRecipe => bookmarkedRecipe.id === id
       );
     } else {
-      const data = await ApiTools.getJson(`${API_URL}${id}`);
+      const data = await ApiTools.getJson(`${API_URL}${id}?key=${API_KEY}`);
       recipe = data.data.recipe;
     }
     const alreadyBookmarked = this.state.bookmarks.find(
@@ -40,7 +40,7 @@ export const loadRecipe = async function (id) {
 
 export const loadSearchResults = async function (query) {
   try {
-    const data = await ApiTools.getJson(`${SEARCH_URL}${query}`);
+    const data = await ApiTools.getJson(`${SEARCH_URL}${query}&key=${API_KEY}`);
     state.search.currentPage = 1;
     state.search.query = query;
     state.search.count = data.results;
