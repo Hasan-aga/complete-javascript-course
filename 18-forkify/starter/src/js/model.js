@@ -40,7 +40,7 @@ export const loadRecipe = async function (id) {
 
 export const loadSearchResults = async function (query) {
   try {
-    const data = await getJson(`${SEARCH_URL}${query}&key=${API_KEY}`);
+    const data = await getJson(`${SEARCH_URL}${query}`);
     state.search.currentPage = 1;
     state.search.query = query;
     state.search.count = data.results;
@@ -113,8 +113,16 @@ export const uploadRecipe = async function (newRecipe) {
           description,
         };
       });
-
-    console.log(ingredients);
+    const recipe = {
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      publisher: newRecipe.publisher,
+      cooking_time: +newRecipe.cookingTime,
+      servings: +newRecipe.servings,
+      ingredients,
+    };
+    console.log(recipe);
   } catch (error) {
     throw error;
   }
