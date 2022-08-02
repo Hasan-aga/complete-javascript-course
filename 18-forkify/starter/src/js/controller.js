@@ -8,9 +8,9 @@ import uploadRecipeView from './views/uploadRecipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
+if (module.hot) {
+  module.hot.accept();
+}
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -67,8 +67,12 @@ const controlBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controlUploadRecipe = function () {
-  console.log('object');
+const controlUploadRecipe = async function (data) {
+  try {
+    await model.uploadRecipe(data);
+  } catch (error) {
+    uploadRecipeView.renderError(`Error, ${error}`);
+  }
 };
 
 const init = function () {
@@ -79,6 +83,7 @@ const init = function () {
   searchValue.addSearchHandler(controlSearchResults);
   paginationView.addHandlerPagination(controlPagination);
   uploadRecipeView.addShowRecipeFormHandler();
+  uploadRecipeView.addUploadRecipeHandler(controlUploadRecipe);
 };
 
 init();

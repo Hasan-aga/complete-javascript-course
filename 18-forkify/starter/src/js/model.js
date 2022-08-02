@@ -93,3 +93,29 @@ const saveBookmarksToLocal = function () {
 export const getBookmarksFromLocal = function () {
   state.bookmarks = [...JSON.parse(localStorage.getItem('bookmarks'))];
 };
+
+export const uploadRecipe = async function (newRecipe) {
+  try {
+    const ingredients = Object.entries(newRecipe)
+      .filter(
+        ingPair => ingPair[0].startsWith('ingredient') && ingPair[1] !== ''
+      )
+      .map(ing => {
+        const ingredients = ing[1].replaceAll(' ', '').split(',');
+        if (ingredients.length < 3)
+          throw new Error(
+            'Wrong ingriedients format, please use correct format: &ltquantity, unit, description&gt'
+          );
+        const [quantity, unit, description] = ingredients;
+        return {
+          quantity: quantity ? Number(quantity) : null,
+          unit,
+          description,
+        };
+      });
+
+    console.log(ingredients);
+  } catch (error) {
+    throw error;
+  }
+};

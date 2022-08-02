@@ -24,6 +24,15 @@ class UploadRecipeView extends View {
     );
   }
 
+  addUploadRecipeHandler(handler) {
+    this._parentElement.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const dataArray = [...new FormData(this)];
+      const data = Object.fromEntries(dataArray);
+      handler(data);
+    });
+  }
+
   _generateMarkup() {}
 }
 
