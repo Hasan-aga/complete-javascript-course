@@ -18,13 +18,22 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJson(`${API_URL}${id}`);
-    const recipe = data.data.recipe;
+    let recipe;
+    if (state.bookmarks.some(bookmark => bookmark.id === id)) {
+      recipe = state.bookmarks.find(
+        bookmarkedRecipe => bookmarkedRecipe.id === id
+      );
+      console.log(recipe);
+    } else {
+      const data = await getJson(`${API_URL}${id}`);
+      recipe = data.data.recipe;
+    }
     const alreadyBookmarked = this.state.bookmarks.find(
       bookmark => bookmark.id === recipe.id
     );
     state.recipe = alreadyBookmarked ? alreadyBookmarked : recipe;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -65,13 +74,22 @@ export const updateServings = function (changeAmount) {
 };
 
 export const switchBookmark = function () {
+  this.state.recipe.bookmark = this.state.recipe.bookmark ? false : true;
   const indexOfBookmark = this.state.bookmarks.indexOf(this.state.recipe);
   this.state.recipe.bookmark
-    ? this.state.bookmarks.splice(indexOfBookmark, 1)
-    : this.state.bookmarks.push(this.state.recipe);
+    ? this.state.bookmarks.push(this.state.recipe)
+    : this.state.bookmarks.splice(indexOfBookmark, 1);
+  saveBookmarksToLocal();
   this.state.search.results.forEach(storedRecipe => {
     if (storedRecipe.id === this.state.recipe.id)
       storedRecipe.bookmark = storedRecipe.bookmark ? false : true;
   });
-  this.state.recipe.bookmark = this.state.recipe.bookmark ? false : true;
+};
+
+const saveBookmarksToLocal = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
+export const getBookmarksFromLocal = function () {
+  state.bookmarks = [...JSON.parse(localStorage.getItem('bookmarks'))];
 };

@@ -67,6 +67,7 @@ const controlBookmark = function () {
 };
 
 const init = function () {
+  model.getBookmarksFromLocal();
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerServings(controlServings);
   recipeView.addHandlerBookmark(controlBookmark);
