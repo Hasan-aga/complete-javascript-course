@@ -23,4 +23,28 @@ export class ApiTools {
       throw error;
     }
   };
+
+  static sendJson = async function (url, uploadData) {
+    try {
+      const fetcher = fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(uploadData),
+      });
+
+      const res = await Promise.race([
+        fetcher,
+        ApiTools.timeout(TIMEOUT_SECONDS),
+      ]);
+      const data = await res.json();
+      if (!res.ok)
+        throw new Error(`failed to send data: ${data.message}, ${res.status}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
 }
