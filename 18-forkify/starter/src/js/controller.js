@@ -24,6 +24,7 @@ const controlRecipes = async function () {
     await model.loadRecipe(id);
     recipeView.render(model.state.recipe);
     resultsView.update(model.getResultsOfPage());
+    bookmarksView.render(model.state.bookmarks);
   } catch (error) {
     console.error(`failed to get recipe: (${error})`);
     recipeView.renderError();
@@ -59,7 +60,7 @@ const controlServings = function (changeAmount) {
   recipeView.update(model.state.recipe);
 };
 
-const controlSetBookmark = function () {
+const controlBookmark = function () {
   model.switchBookmark();
   recipeView.update(model.state.recipe);
   bookmarksView.render(model.state.bookmarks);
@@ -68,7 +69,7 @@ const controlSetBookmark = function () {
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerServings(controlServings);
-  recipeView.addHandlerBookmark(controlSetBookmark);
+  recipeView.addHandlerBookmark(controlBookmark);
   searchValue.addSearchHandler(controlSearchResults);
   paginationView.addHandlerPagination(controlPagination);
 };
