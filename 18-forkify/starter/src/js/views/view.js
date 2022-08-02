@@ -2,6 +2,9 @@
 import icons from 'url:../../img/icons.svg';
 
 export default class View {
+  _parentElement = document.querySelector('.recipe');
+  _data;
+
   renderSpinner() {
     const htmlMarkup = `
         <div class="spinner">
@@ -50,6 +53,11 @@ export default class View {
     this._parentElement.innerHTML = '';
   }
 
+  /**
+   *
+   * @param {Object | Object[]} state the data to be rendered (e.g. recipe)
+   * @description renders input as html element that is child of the class's _parentElement prop
+   */
   render(state) {
     this._data = state;
     const recipeHtml = this._generateMarkup();
