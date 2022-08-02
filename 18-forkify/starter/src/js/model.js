@@ -1,5 +1,5 @@
 import { API_URL, SEARCH_URL, API_KEY, RESULTS_PER_PAGE } from './config';
-import { getJson } from './helper';
+import { ApiTools } from './helper';
 
 export const state = {
   recipe: {},
@@ -25,7 +25,7 @@ export const loadRecipe = async function (id) {
         bookmarkedRecipe => bookmarkedRecipe.id === id
       );
     } else {
-      const data = await getJson(`${API_URL}${id}`);
+      const data = await ApiTools.getJson(`${API_URL}${id}`);
       recipe = data.data.recipe;
     }
     const alreadyBookmarked = this.state.bookmarks.find(
@@ -40,7 +40,7 @@ export const loadRecipe = async function (id) {
 
 export const loadSearchResults = async function (query) {
   try {
-    const data = await getJson(`${SEARCH_URL}${query}`);
+    const data = await ApiTools.getJson(`${SEARCH_URL}${query}`);
     state.search.currentPage = 1;
     state.search.query = query;
     state.search.count = data.results;
