@@ -2,17 +2,10 @@
 import View from './view';
 
 class BookmarksView extends View {
-  _grandparentElement = document.querySelector('.nav__btn--bookmarks');
-  _parentElement = document.querySelector('.bookmarks');
+  _parentElement = document.querySelector('.bookmarks__list');
   _data;
   _errorMessage = `¯\\_(ツ)_/ <br>can't find any bookmarks!`;
   _successMessage = '';
-
-  addShowBookmarkHandler = function (handler) {
-    this._grandparentElement.addEventListener('mouseover', function (e) {
-      handler();
-    });
-  };
 
   _generateMarkup() {
     const id = window.location.hash.slice(1);

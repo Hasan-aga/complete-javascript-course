@@ -62,10 +62,6 @@ const controlServings = function (changeAmount) {
 const controlSetBookmark = function () {
   model.switchBookmark();
   recipeView.update(model.state.recipe);
-};
-
-const controlShowBookmarks = function () {
-  bookmarksView.renderSpinner();
   bookmarksView.render(model.state.bookmarks);
 };
 
@@ -75,7 +71,6 @@ const init = function () {
   recipeView.addHandlerBookmark(controlSetBookmark);
   searchValue.addSearchHandler(controlSearchResults);
   paginationView.addHandlerPagination(controlPagination);
-  bookmarksView.addShowBookmarkHandler(controlShowBookmarks);
 };
 
 init();
