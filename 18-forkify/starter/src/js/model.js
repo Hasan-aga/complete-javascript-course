@@ -65,10 +65,24 @@ export const updateServings = function (changeAmount) {
 };
 
 export const setBookmark = function () {
-  this.state.recipe.bookmark = true;
-  this.state.bookmarks.push(this.state.recipe);
+  const indexOfBookmark = this.state.bookmarks.indexOf(this.state.recipe);
+  this.state.recipe.bookmark
+    ? this.state.bookmarks.splice(indexOfBookmark, 1)
+    : this.state.bookmarks.push(this.state.recipe);
   this.state.search.results.forEach(storedRecipe => {
-    if (storedRecipe.id === this.state.recipe.id) storedRecipe.bookmark = true;
+    if (storedRecipe.id === this.state.recipe.id)
+      storedRecipe.bookmark = storedRecipe.bookmark ? false : true;
+  });
+  this.state.recipe.bookmark = this.state.recipe.bookmark ? false : true;
+};
+
+export const removeBookmark = function () {
+  this.state.recipe.bookmark = false;
+  this.state.bookmarks = this.state.bookmarks.filter(
+    bookmarked => bookmarked != this.state.recipe
+  );
+  this.state.search.results.forEach(storedRecipe => {
+    if (storedRecipe.id === this.state.recipe.id) storedRecipe.bookmark = false;
   });
   console.log(this.state);
 };
