@@ -91,7 +91,10 @@ const saveBookmarksToLocal = function () {
 };
 
 export const getBookmarksFromLocal = function () {
-  state.bookmarks = [...JSON.parse(localStorage.getItem('bookmarks'))];
+  state.bookmarks =
+    localStorage.getItem('bookmarks') === null
+      ? []
+      : [...JSON.parse(localStorage.getItem('bookmarks'))];
 };
 
 export const uploadRecipe = async function (newRecipe) {

@@ -70,8 +70,10 @@ const controlBookmark = function () {
 const controlUploadRecipe = async function (data) {
   try {
     const uploadedRecipe = await model.uploadRecipe(data);
-    recipeView.render(uploadedRecipe);
+    model.state.recipe = uploadedRecipe;
     window.location.hash = uploadedRecipe.id;
+    controlBookmark();
+    uploadRecipeView.switchFormAndOverlay();
   } catch (error) {
     uploadRecipeView.renderError(`Error, ${error}`);
   }
