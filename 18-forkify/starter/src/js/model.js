@@ -3,6 +3,7 @@ import { getJson } from './helper';
 
 export const state = {
   recipe: {},
+  bookmarks: [],
   search: {
     query: '',
     count: undefined,
@@ -18,7 +19,11 @@ export const state = {
 export const loadRecipe = async function (id) {
   try {
     const data = await getJson(`${API_URL}${id}`);
-    state.recipe = data.data.recipe;
+    const recipe = data.data.recipe;
+    const alreadyBookmarked = this.state.bookmarks.find(
+      bookmark => bookmark.id === recipe.id
+    );
+    state.recipe = alreadyBookmarked ? alreadyBookmarked : recipe;
   } catch (error) {
     throw error;
   }
@@ -57,4 +62,13 @@ export const updateServings = function (changeAmount) {
     ingredient => (ingredient.quantity *= newServing / state.recipe.servings)
   );
   state.recipe.servings = newServing;
+};
+
+export const setBookmark = function () {
+  this.state.recipe.bookmark = true;
+  this.state.bookmarks.push(this.state.recipe);
+  this.state.search.results.forEach(storedRecipe => {
+    if (storedRecipe.id === this.state.recipe.id) storedRecipe.bookmark = true;
+  });
+  console.log(this.state);
 };

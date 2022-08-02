@@ -58,9 +58,15 @@ const controlServings = function (changeAmount) {
   recipeView.update(model.state.recipe);
 };
 
+const controlSetBookmark = function () {
+  model.setBookmark();
+  recipeView.update(model.state.recipe);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerServings(controlServings);
+  recipeView.addHandlerBookmark(controlSetBookmark);
   searchValue.addSearchHandler(controlSearchResults);
   paginationView.addHandlerPagination(controlPagination);
 };
