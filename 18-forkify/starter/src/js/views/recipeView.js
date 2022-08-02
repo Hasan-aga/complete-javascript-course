@@ -6,6 +6,7 @@ import fracty from 'fracty';
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _data;
+  b;
   _errorMessage = `¯\\_(ツ)_/ <br>Oh oh! something went wrong, try again!`;
   _successMessage = '';
 
@@ -72,8 +73,13 @@ class RecipeView extends View {
             </svg>
           </button>
         </div>
+        
       </div>
-
+      <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
+      <svg>
+        <use href="${icons}.svg#icon-user"></use>
+      </svg>
+    </div>
       
       <button class="btn--round btn--bookmark">
         <svg class="">
