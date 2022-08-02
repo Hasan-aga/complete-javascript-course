@@ -57,7 +57,7 @@
   &__data {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 2rem;
+    grid-template-rows: 1fr 1fr;
     row-gap: 0.1rem;
     align-items: center;
   }
