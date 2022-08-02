@@ -19,11 +19,11 @@ export const state = {
 export const loadRecipe = async function (id) {
   try {
     let recipe;
+    //if recipe to be loaded exists in bookmarks -> load it from bookmarks instead of api call
     if (state.bookmarks.some(bookmark => bookmark.id === id)) {
       recipe = state.bookmarks.find(
         bookmarkedRecipe => bookmarkedRecipe.id === id
       );
-      console.log(recipe);
     } else {
       const data = await getJson(`${API_URL}${id}`);
       recipe = data.data.recipe;
