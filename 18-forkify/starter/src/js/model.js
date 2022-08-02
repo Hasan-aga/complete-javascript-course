@@ -126,6 +126,7 @@ export const uploadRecipe = async function (newRecipe) {
     const data = await ApiTools.sendJson(`${API_URL}?key=${API_KEY}`, recipe);
 
     console.log(data);
+    return await data.data.recipe;
   } catch (error) {
     throw error;
   }

@@ -69,7 +69,9 @@ const controlBookmark = function () {
 
 const controlUploadRecipe = async function (data) {
   try {
-    await model.uploadRecipe(data);
+    const uploadedRecipe = await model.uploadRecipe(data);
+    recipeView.render(uploadedRecipe);
+    window.location.hash = uploadedRecipe.id;
   } catch (error) {
     uploadRecipeView.renderError(`Error, ${error}`);
   }
