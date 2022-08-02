@@ -122,7 +122,10 @@ export const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients,
     };
-    console.log(recipe);
+
+    const data = await ApiTools.sendJson(`${API_URL}?key=${API_KEY}`, recipe);
+
+    console.log(data);
   } catch (error) {
     throw error;
   }
