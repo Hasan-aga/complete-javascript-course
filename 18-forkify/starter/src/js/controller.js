@@ -59,7 +59,7 @@ const controlServings = function (changeAmount) {
 };
 
 const controlSetBookmark = function () {
-  model.setBookmark();
+  model.switchBookmark();
   recipeView.update(model.state.recipe);
 };
 
