@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "food app",
   "source": "index.html",
+  "default": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ",
-    "build": "parcel build"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "hasan",
   "license": "ISC",
